@@ -3,7 +3,7 @@
 
 
 """
-Onfly_mapping_dna_sra.py
+bowtie1Mapping.py
 """
 
 
