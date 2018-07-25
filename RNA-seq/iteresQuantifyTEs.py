@@ -140,10 +140,22 @@ def getCountsMatrix(reps, pre="TL_TEs"):
     print "finished!"
 
 
+def filterCountsMatrix(f,readsCut=10,sampleCut=10):
+    mat = pd.read_table(f,sep="\t",index_col=0,header=0)
+    for t in mat.itertuples():
+        s = np.array(t[1:])
+        s = s[s>readsCut]
+        if len(s) < sampleCut:
+            ns.append(t[0])
+    mat = mat.drop(ns,axis=0)
+    mat.to_csv(f.replace(".txt","_filter.txt"),sep="\t")
+ 
+
 def main():
-    pipeline()
-    reps = getReps()
-    getCountsMatrix(reps)
+    #pipeline()
+    #reps = getReps()
+    #getCountsMatrix(reps)
+    filterCountsMatrix("TL_TEs_counts.txt")
 
 
 if __name__ == '__main__':
