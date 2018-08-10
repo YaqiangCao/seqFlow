@@ -1,14 +1,13 @@
 #!/usr/bin/env python2.7
 #--coding:utf-8--
 """
-logger.py
+utils.py
 """
 import time, logging, sys, os
 from datetime import datetime
 
 __author__ = "CAO Yaqiang"
-__date__ = "2013-07-29"
-__version__ = "0.1"
+__date__ = "2018-07-12"
 __email__ = "caoyaqiang0410@gmail.com"
 
 
@@ -29,3 +28,15 @@ def getlogger(fn=os.getcwd() + "/" + os.path.basename(__file__) + ".log"):
     logger.addHandler(handler)
     logger.setLevel(logging.NOTSET)
     return logger
+
+
+def call_sys(cmds):
+    """
+    Call systematic commands without return.
+    """
+    for c in cmds:
+        logger.info(c)
+        try:
+            os.system(c)
+        except:
+            logger.error(c)
