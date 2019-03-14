@@ -15,6 +15,7 @@ from datetime import datetime
 
 #3rd library
 import pysam, HTSeq
+from tqdm import tqdm
 import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
@@ -83,34 +84,51 @@ def getReps():
     return reps
 
 
-def getFPKMMatrix(reps, pre="TL_TEs"):
-    fs = glob.glob("2.filter/*/*.loci")
-    data = {}
+def getFPKMMatrix( reps,pre="HeLa" ):
+    fs = glob.glob( "2.filter/*/*.loci" )
+    fs.sort()
+    ns = set()
+    data = {  }
     for f in fs:
-        fn = f.split("/")[-2]
-        print fn, " being processing."
-        data[fn] = {}
-        for line in open(f).read().split("\n")[1:]:
-            line = line.split("\n")[0].split("\t")
-            if len(line) < 3:
+        fn = f.split( "/" )[ -2 ]
+        print(fn, " being processing.")
+        for line in tqdm(open( f ).read(  ).split( "\n" )[ 1: ]):
+            line = line.split( "\n" )[ 0 ].split( "\t" ) 
+            if len( line ) < 3:
                 continue
-            key = (line[0], str(int(line[1]) + 1), line[2])
+            key = ( line[ 0 ],str(int(line[ 1 ])+1) ,line[ 2 ])
             if key not in reps:
                 continue
-            fpkm = float(line[8])
-            if fpkm > 0:
-                data[fn][reps[key]] = fpkm
-    print "building matrix"
-    data = pd.DataFrame(data)
-    data = data.fillna(0)
-    print data.shape
-    """
-    nis = [ t[0] for t in mat.itertuples() if np.sum(t[1:]) == 0]
+            ns.add( reps[key] )
+    ns = list(ns)
+    print(len(ns))
+    for key in ns:
+        data[key] = [0.0] * len(fs)
+    fns = []
+    for i, f in enumerate(fs):
+        fn = f.split( "/" )[ -2 ]
+        fns.append(fn)
+        print(fn, " being processing.")
+        for line in tqdm(open( f ).read(  ).split( "\n" )[ 1: ]):
+            line = line.split( "\n" )[ 0 ].split( "\t" ) 
+            if len( line ) < 3:
+                continue
+            key = ( line[ 0 ],str(int(line[ 1 ])+1) ,line[ 2 ])
+            if key not in reps:
+                continue
+            key = reps[key] 
+            fpkm = float(line[ 8 ])
+            data[key][i] = fpkm
+    #data = pd.DataFrame(data,columns = fns)
+    data = pd.DataFrame(data).T
+    data.columns = fns
+    nis = [  ]
+    for t in tqdm(list(data.itertuples())):
+        if np.sum(t[1:]) == 0:
+            nis.append( i )
     data = data.drop( nis )
-    print data.shape
-    """
-    fn = pre + "_FPKM.txt"
-    data.to_csv(fn, sep="\t", index_label="rep")
+    fn = pre +"_FPKM.txt"
+    data.to_csv( fn,sep="\t",index_label="rep" )
     print "finished!"
 
 
