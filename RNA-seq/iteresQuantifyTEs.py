@@ -84,6 +84,7 @@ def getReps():
     return reps
 
 
+
 def getFPKMMatrix( reps,pre="HeLa" ):
     fs = glob.glob( "2.filter/*/*.loci" )
     fs.sort()
@@ -121,11 +122,12 @@ def getFPKMMatrix( reps,pre="HeLa" ):
             data[key][i] = fpkm
     #data = pd.DataFrame(data,columns = fns)
     data = pd.DataFrame(data).T
+    print(data)
     data.columns = fns
     nis = [  ]
     for t in tqdm(list(data.itertuples())):
-        if np.sum(t[1:]) == 0:
-            nis.append( i )
+        if np.sum(t[1:]) < 1:
+            nis.append( t[0] )
     data = data.drop( nis )
     fn = pre +"_FPKM.txt"
     data.to_csv( fn,sep="\t",index_label="rep" )
@@ -156,6 +158,7 @@ def getCountsMatrix(reps, pre="TL_TEs"):
     fn = pre + "_counts.txt"
     data.to_csv(fn, sep="\t", index_label="rep")
     print "finished!"
+
 
 
 def filterCountsMatrix(f,readsCut=10,sampleCut=10):
