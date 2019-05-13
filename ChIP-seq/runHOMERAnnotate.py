@@ -1,60 +1,44 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3.6
 #--coding:utf-8 --
 """
-run_HOMER_annotePeak.py
-Annotating peaks with HOMER and get peaks-genes relations
-2015-10-08: modified.
+runHomerAnnotate.py
+2019-05-13: updated
 """
 
-#
-import glob, os, time, subprocess, copy
+#sys
+import os, subprocess
+from glob import glob
 from datetime import datetime
 
-#
-from joblib import Parallel, delayed
+#3rd
 import pandas as pd
-import numpy as np
-
-#
-from Biolibs.rel.General.logger import getlogger
-from Biolibs.rel.General.countLines import count_lines
-date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
-logger = getlogger(fn=os.getcwd() + "/" + date.strip() + "_" +
-                   os.path.basename(__file__) + ".log")
-
-__author__ = "CAO Yaqiang"
-__date__ = ""
-__modified__ = "2015-09-21"
-__license__ = "GPL"
-__version__ = "0.1"
-__email__ = "caoyaqiang0410@gmail.com"
+from joblib import Parallel, delayed
 
 
-def runHOMER(bed, genome="hg38"):
+def runHOMER(bed, genome="mm10"):
     name = bed.split("/")[-1].split(".")[0]
-    stat = name + ".stat"
-    anobed = name + "_ano.bed"
-    if os.path.exists(anobed):
-        print anobed, "generated, return."
+    stat = name + "_stat.txt"
+    ano = name + "_ano.txt"
+    if os.path.exists(ano):
+        print(ano, "generated, return.")
         return
-    cmd = "annotatePeaks.pl {bed} {genome} -go {go_dir} > {anobed}".format(
+    cmd = "annotatePeaks.pl {bed} {genome} -go {go_dir} -annStats {stat} > {ano}".format(
         bed=bed,
         genome=genome,
         stat=stat,
-        genome_dir="genome_" + name,
         go_dir="go_" + name,
-        anobed=anobed)
+        ano=ano)
     try:
-        logger.info(cmd)
+        print(cmd)
         subprocess.call(cmd, shell=True)
     except:
         return
 
 
 def parseTarget():
-    fs = glob.glob("*ano.bed")
+    fs = glob("*ano.txt")
     for f in fs:
-        print f
+        print(f)
         pre = f.split(".")[0]
         mat = pd.read_table(f, index_col=0)
         gs = {}
@@ -70,14 +54,14 @@ def parseTarget():
 
 
 def main():
-    beds = glob.glob("../../3.Modules/*.bed")
-    map(runHOMER, beds)
-    parseTarget()
+    beds = glob("../../1.peaks/*.narrowPeak")
+    Parallel( n_jobs=1 )( delayed( runHOMER )( f, "mm10") for f in beds )
+    #parseTarget()
 
 
 if __name__ == "__main__":
     startTime = datetime.now()
     main()
     elapsed = datetime.now() - startTime
-    print "The process is done."
-    print "Time used:", elapsed
+    print("The process is done.")
+    print("Time used:", elapsed)
