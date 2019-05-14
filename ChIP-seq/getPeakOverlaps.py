@@ -12,6 +12,7 @@ from glob import glob
 #3rd
 import pylab
 import brewer2mpl
+import numpy as np
 import pandas as pd
 import seaborn as sns
 from tqdm import tqdm
@@ -39,11 +40,13 @@ def getJIs(fs, fnOut):
     """
     ds = {}
     for fi in tqdm(fs):
-        ni = fi.split("/")[-1].split(".")[0]
+        #ni = fi.split("/")[-1].split(".")[0]
+        ni = fi.split("/")[-2]
         ds[ni] = {}
         ci = getN(fi)
         for fj in fs:
-            nj = fj.split("/")[-1].split(".")[0]
+            #nj = fj.split("/")[-1].split(".")[0]
+            nj = fj.split("/")[-2]
             cj = getN(fj)
             cmd = "intersectBed -a %s -b %s -u > ./tmp.bed" % (
                 fi, fj)
@@ -80,6 +83,7 @@ def evulateReps(fin, fout):
     mat = pd.read_csv(fin, index_col=0, sep="\t")
     ds = {}
     ns = list(mat.index)
+    jis = []
     for i in range(len(ns)):
         ni = "_".join(ns[i].split("_")[:-1])
         #if ni == "WT_6_Th2_Neg":
@@ -88,6 +92,8 @@ def evulateReps(fin, fout):
             nj = "_".join(ns[j].split("_")[:-1])
             if ni == nj:
                 ds[ni] = mat.loc[ns[i], ns[j]]
+            else:
+                jis.append( mat.loc[ns[i],ns[j]] )
     ds = pd.Series(ds)
     ss = list(ds.index)
     ss.sort()
@@ -101,17 +107,17 @@ def evulateReps(fin, fout):
     ax.set_xticks(x)
     ax.set_xticklabels(ds.index, rotation=45, fontsize=6, ha="right")
     fig.tight_layout()
-    ax.set_title("Median JI: %f" % ds.median())
+    ax.set_title("Mean JI for reps: %f \n Mean JI for non-reps: %f " % (ds.mean(),np.mean(jis)))
     pylab.savefig(fout + ".pdf")
 
 
 def main():
-    fs = glob("../1.peaks/*narrowPeak")
-    getJIs(fs, "./peakOverlaps_summary.txt")
-    plotJIClusters("./peakOverlaps_summary.txt","./peakOverlaps")
-    """
-    #evulateReps("./3.peaksOverlaps/3_peakOverlaps_summary.txt","./3.peaksOverlaps/3_peakOverlaps_reps") 
+    #fs = glob("../../2.peaks/*/*narrowPeak")
+    #getJIs(fs, "./peakOverlaps_summary.txt")
+    #plotJIClusters("./peakOverlaps_summary.txt","./peakOverlaps")
+    evulateReps("./peakOverlaps_summary.txt","./peakOverlaps_reps") 
     #screen for better cutoffs
+    """
     rfs = glob("../3.peaks/*.narrowPeak")
     for i in range(2,3):
         nfs = []

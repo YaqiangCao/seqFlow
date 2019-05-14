@@ -68,12 +68,14 @@ def getFRiPCounts(readF, peakF, fnOut):
 
 
 def getAllFRiPCounts():
-    for f in glob("../3.peaks/*.narrowPeak"):
-        pre = f.split("/")[-1].split(".")[0]
-        bed = "../1.beds/" + pre + ".bed.gz"
+    for f in glob("../../2.peaks/*/*.narrowPeak"):
+        print(f)
+        #pre = f.split("/")[-1].split(".")[0]
+        pre = f.split("/")[-2]
+        bed = "../../1.beds/" + pre + ".bed.gz"
         if not os.path.isfile(bed):
             continue
-        fnOut = "1.FRiP_counts_RPM/%s_peaksQuant.txt" % pre
+        fnOut = "./FRiP/%s_peaksQuant.txt" % pre
         if os.path.isfile(fnOut):
             continue  #has been generated
         print(bed, f, fnOut)
@@ -81,7 +83,7 @@ def getAllFRiPCounts():
 
 
 def summaryFRiP():
-    fs = glob("./1.FRiP_counts_RPM/*.txt")
+    fs = glob("./FRiP/*.txt")
     ds = {}
     for f in fs:
         n = "_".join(f.split("/")[-1].split("_")[:-1])
@@ -100,11 +102,11 @@ def summaryFRiP():
     s = list(ds.index)
     s.sort()
     ds = ds.loc[s]
-    ds.to_csv("1_FRiP_summary.txt", sep="\t", index_label="Sample")
+    ds.to_csv("./FRiP_summary.txt", sep="\t", index_label="Sample")
 
 
 def plotFRiP():
-    ds = pd.read_csv("1_FRiP_summary.txt", sep="\t", index_col=0)
+    ds = pd.read_csv("FRiP_summary.txt", sep="\t", index_col=0)
     fig, axs = pylab.subplots(1, 3, figsize=(12, 3), sharey=True)
     #for i, time in enumerate(list(set(ds["timeStamp"]))):
     for i, time in enumerate([-6,6,24]):
@@ -138,13 +140,13 @@ def plotFRiP():
             axs[i].set_ylabel("FRiP")
     fig.tight_layout()
     pylab.subplots_adjust(wspace=0.05)
-    pylab.savefig("1_FRiP.pdf")
-    pylab.savefig("1_FRiP.png")
+    pylab.savefig("FRiP.pdf")
+    pylab.savefig("FRiP.png")
 
 
 def main():
     #getAllFRiPCounts()
-    #summaryFRiP()
+    summaryFRiP()
     plotFRiP()
 
 
