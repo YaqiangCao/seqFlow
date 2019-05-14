@@ -1,8 +1,9 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3.6
 #--coding:utf-8--
 """
-HOMER_GO_Pathway.py
+plotHomerPathway.py
 2016-02-27: modified plot type
+2019-05-13: updated
 """
 
 __author__ = "CAO Yaqiang"
@@ -71,7 +72,7 @@ def furthurparse(root_dir="1.Parsed_GO"):
         s.to_csv(d + "/terms.terms", sep="\t")
 
 
-def termBarh(numbercut=20,
+def termBarh(numbercut=10,
              root_dir="1.Parsed_GO",
              plot_dir="2.Barh_Plots",
              x="-log10(p), HOMER Hypergeometric Test",
@@ -81,7 +82,7 @@ def termBarh(numbercut=20,
         os.mkdir(plot_dir)
     fs = glob.glob(root_dir + "/*/*.terms")
     for f in fs:
-        print f
+        print(f)
         sample = f.split("/")[-2]
         s = pd.Series.from_csv(f, sep="\t")
         if s.shape[0] > numbercut:
@@ -97,14 +98,13 @@ def termBarh(numbercut=20,
         pylab.xlabel(x)
         pylab.title(title)
         ax.set_yticks([])
-        ax.set_ylim([0, ns])
+        #ax.set_ylim([0, ns])
         sns.despine()
         pylab.savefig(plot_dir + "/" + sample + ".pdf")
 
 
-root = "../1.GO/*/"
-#root = "../3.HOMER_all_repeats/*/"
+root = "../../1.HOMER/go_*/"
 fs = glob.glob(root + "biological_process.txt")
 preprocess(fs=fs)
 furthurparse()
-#termBarh( )
+termBarh( )
