@@ -1,6 +1,7 @@
 #--coding:utf-8--
 """
 getSeqPeakSaturation.py
+Due to MACS require python2.7, so the programme should be run with python2.7.
 """
 
 #sys
@@ -111,9 +112,16 @@ def plotSummary(f):
 
 
 def main():
-    #for ratio in np.arange(0.05,1.0,0.05):
-    #    callSamplingPeaks("AID1_6_Th2_Pos_Rep2.bed.gz",ratio)
-    #summaryOverlaps("AID1_6_Th2_Pos_Rep2.narrowPeak","AID1_6_Th2_Pos_Rep2_stat")
+    for peakf in glob("../2.1.peaks/*.narrowPeak"):
+        pre = peakf.split("/")[-1].split(".narrowPeak")[0]
+        print(pre)
+        bed = "../1.beds/" + pre + ".bed.gz"
+        if not os.path.isfile(bed):
+            continue
+        for ratio in np.arange(0.1,1.0,0.1):
+            callSamplingPeaks(bed,ratio)
+        summaryOverlaps(peakf,"%s_stat"%pre)
+        callSys(["rm samplingBeds/*","rm samplingPeaks/*"])
     for f in glob("*.txt"):
         plotSummary(f)
 
