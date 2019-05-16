@@ -53,14 +53,13 @@ def getFRiPCounts(readF, peakF, fnOut):
         c = list(c)
         ds["|".join(line[:3])] = {
             "count": len(c),
-            "RPM": len(c) / 1.0 / t * 10**6,
             "macsQ": line[8]
         }
     with open(fnOut, "w") as fo:
         line = "#TotalReads\t%s\n#ReadsInPeaks\t%s\n#FRiP\t%s\n" % (
             t, len(r), len(r) / 1.0 / t)
         fo.write(line)
-        line = "\t".join(["peak", "count", "RPM", "macsQ"]) + "\n"
+        line = "\t".join(["peak", "count", "macsQ"]) + "\n"
         fo.write(line)
         for k, v in ds.items():
             line = k + "\t" + "\t".join(list(map(str, v.values()))) + "\n"
@@ -145,9 +144,9 @@ def plotFRiP():
 
 
 def main():
-    #getAllFRiPCounts()
-    summaryFRiP()
-    plotFRiP()
+    getAllFRiPCounts()
+    #summaryFRiP()
+    #plotFRiP()
 
 
 if __name__ == "__main__":
