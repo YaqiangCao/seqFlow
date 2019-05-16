@@ -112,10 +112,12 @@ def plotSummary(f):
 
 
 def main():
-    for peakf in glob("../2.1.peaks/*.narrowPeak"):
+    for peakf in glob("../../2.1.peaks/*.narrowPeak"):
         pre = peakf.split("/")[-1].split(".narrowPeak")[0]
+        if os.path.isfile(pre+"_stat_JI.txt") and os.path.isfile(pre+"_stat_ratios.txt"):
+            continue
         print(pre)
-        bed = "../1.beds/" + pre + ".bed.gz"
+        bed = "../../1.beds/" + pre + ".bed.gz"
         if not os.path.isfile(bed):
             continue
         for ratio in np.arange(0.1,1.0,0.1):
