@@ -70,7 +70,7 @@ def getN(f):
     return c
 
 
-def summaryOverlaps(ref,pre="test"):
+def summaryOverlaps(ref, pre="test"):
     jis = {}
     rs = {}
     fs = glob("./samplingPeaks/*.narrowPeak")
@@ -93,9 +93,9 @@ def summaryOverlaps(ref,pre="test"):
         jis[ratio][rep] = ji
         rs[ratio][rep] = r
     jis = pd.DataFrame(jis)
-    jis.to_csv("%s_JI.txt"%pre, sep="\t", index_label="sample")
+    jis.to_csv("%s_JI.txt" % pre, sep="\t", index_label="sample")
     rs = pd.DataFrame(rs)
-    rs.to_csv("%s_ratios.txt"%pre, sep="\t", index_label="sample")
+    rs.to_csv("%s_ratios.txt" % pre, sep="\t", index_label="sample")
 
 
 def plotSummary(f):
@@ -108,22 +108,20 @@ def plotSummary(f):
     ax.errorbar(x, y, yerr=yerr, fmt='--o')
     ax.set_xlabel("reads re-sampling ratio")
     ax.set_ylabel(f.split("/")[-1].split("_")[-1].split(".")[0])
+    ax.set_title(f.split("_stat")[0])
+    pylab.tight_layout()
     pylab.savefig(f.replace(".txt", ".pdf"))
 
 
 def main():
-    for peakf in glob("../../2.1.peaks/*.narrowPeak"):
-        pre = peakf.split("/")[-1].split(".narrowPeak")[0]
-        if os.path.isfile(pre+"_stat_JI.txt") and os.path.isfile(pre+"_stat_ratios.txt"):
-            continue
-        print(pre)
-        bed = "../../1.beds/" + pre + ".bed.gz"
-        if not os.path.isfile(bed):
-            continue
-        for ratio in np.arange(0.1,1.0,0.1):
-            callSamplingPeaks(bed,ratio)
-        summaryOverlaps(peakf,"%s_stat"%pre)
-        callSys(["rm samplingBeds/*","rm samplingPeaks/*"])
+    """
+    peakf = "./bedsPeaks/AID1_24_Th2_Neg_peaks.narrowPeak"
+    bed = "./bedsPeaks/AID1_24_Th2_Neg.bed.gz"
+    for ratio in np.arange(0.1,1.0,0.1):
+        callSamplingPeaks(bed,ratio)
+    summaryOverlaps(peakf,"AID1_24_Th2_Neg_stat")
+    callSys(["rm samplingBeds/*","rm samplingPeaks/*"])
+    """
     for f in glob("*.txt"):
         plotSummary(f)
 

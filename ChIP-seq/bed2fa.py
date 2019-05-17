@@ -14,7 +14,7 @@ __email__ = "caoyaqiang0410@gmail.com"
 import os, random
 from glob import glob
 
-#3rd 
+#3rd
 import pandas as pd
 import numpy as np
 

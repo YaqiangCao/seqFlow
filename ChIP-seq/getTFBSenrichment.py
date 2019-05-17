@@ -65,8 +65,9 @@ def sgST(reps, repM, reptfs, tf):
 def repST(reps, repM, f, pre):
     mat = pd.read_table(f, index_col=0)
     mat = mat.loc[mat.index.intersection(repM.index)]
-    ds = Parallel(n_jobs=20)(delayed(sgST)(reps, repM, copy.deepcopy(mat[c]),
-                                           c) for c in mat.columns)
+    ds = Parallel(n_jobs=20)(
+        delayed(sgST)(reps, repM, copy.deepcopy(mat[c]), c)
+        for c in mat.columns)
     data = {}
     for i, d in enumerate(ds):
         try:

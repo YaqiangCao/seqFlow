@@ -51,10 +51,7 @@ def getFRiPCounts(readF, peakF, fnOut):
                 continue
         r.update(list(c))
         c = list(c)
-        ds["|".join(line[:3])] = {
-            "count": len(c),
-            "macsQ": line[8]
-        }
+        ds["|".join(line[:3])] = {"count": len(c), "macsQ": line[8]}
     with open(fnOut, "w") as fo:
         line = "#TotalReads\t%s\n#ReadsInPeaks\t%s\n#FRiP\t%s\n" % (
             t, len(r), len(r) / 1.0 / t)
@@ -108,7 +105,7 @@ def plotFRiP():
     ds = pd.read_csv("FRiP_summary.txt", sep="\t", index_col=0)
     fig, axs = pylab.subplots(1, 3, figsize=(12, 3), sharey=True)
     #for i, time in enumerate(list(set(ds["timeStamp"]))):
-    for i, time in enumerate([-6,6,24]):
+    for i, time in enumerate([-6, 6, 24]):
         s = ds["timeStamp"]
         s = s[s == time].index
         nd = ds.loc[s, ]

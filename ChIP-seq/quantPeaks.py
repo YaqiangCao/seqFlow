@@ -57,50 +57,50 @@ def quantify(readF, peakF, fnOut):
         ds["|".join(line[:3])] = {
             "count": len(c),
             "RPKM": len(c) / 1.0 / iv.length / t * 10**9,
-            "TPM": len(c)/1.0 /iv.length * 10**3,
+            "TPM": len(c) / 1.0 / iv.length * 10**3,
             "length": iv.length
         }
     ds = pd.DataFrame(ds).T
     ds["TPM"] = ds["TPM"] / ds["TPM"].sum() * 10**6
-    ds.to_csv(fnOut,sep="\t",index_label="peakId")
+    ds.to_csv(fnOut, sep="\t", index_label="peakId")
 
 
 def getAllCountsRPKM():
     for peakf in glob("../7.refinePeaks/*_filter_merged.bed"):
-        n = peakf.split("/")[-1].replace("_filter_merged.bed","")
-        for bed in glob("../../1.beds/*%s*.bed.gz"%n):
-            nn = bed.split("/")[-1].replace(".bed.gz","")
+        n = peakf.split("/")[-1].replace("_filter_merged.bed", "")
+        for bed in glob("../../1.beds/*%s*.bed.gz" % n):
+            nn = bed.split("/")[-1].replace(".bed.gz", "")
             fnOut = "./quant/%s_peaksQuant.txt" % nn
             if os.path.isfile(fnOut):
                 continue  #has been generated
             print(peakf, bed, fnOut)
-            quantify(bed,peakf,fnOut)
-   
+            quantify(bed, peakf, fnOut)
+
 
 def summaryCountsRPKM(p):
-    fs = glob("./quant/*%s*.txt"%p)
+    fs = glob("./quant/*%s*.txt" % p)
     fs.sort()
     fs.reverse()
     countDs = {}
     RPKMDs = {}
     TPMDs = {}
     for f in fs:
-        mat = pd.read_csv(f,index_col=0,sep="\t")
-        n = f.split("/")[-1].replace("_peaksQuant.txt","")
+        mat = pd.read_csv(f, index_col=0, sep="\t")
+        n = f.split("/")[-1].replace("_peaksQuant.txt", "")
         countDs[n] = mat["count"]
         RPKMDs[n] = mat["RPKM"]
         TPMDs[n] = mat["TPM"]
-    countDs = pd.DataFrame( countDs )
-    RPKMDs = pd.DataFrame( RPKMDs )
-    TPMDs = pd.DataFrame( TPMDs )
-    countDs.to_csv( p + "_count.txt",sep="\t",index_label="peakId")
-    RPKMDs.to_csv( p + "_RPKM.txt",sep="\t",index_label="peakId")
-    TPMDs.to_csv( p + "_TPM.txt",sep="\t",index_label="peakId")
+    countDs = pd.DataFrame(countDs)
+    RPKMDs = pd.DataFrame(RPKMDs)
+    TPMDs = pd.DataFrame(TPMDs)
+    countDs.to_csv(p + "_count.txt", sep="\t", index_label="peakId")
+    RPKMDs.to_csv(p + "_RPKM.txt", sep="\t", index_label="peakId")
+    TPMDs.to_csv(p + "_TPM.txt", sep="\t", index_label="peakId")
 
 
 def main():
     #getAllCountsRPKM()
-    for p in ["_-6_CD4","6_Th1","6_Th2","24_Th1","24_Th2"]:
+    for p in ["_-6_CD4", "6_Th1", "6_Th2", "24_Th1", "24_Th2"]:
         summaryCountsRPKM(p)
 
 

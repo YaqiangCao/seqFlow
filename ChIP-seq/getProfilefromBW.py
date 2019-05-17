@@ -92,7 +92,8 @@ def getProfile(bed, bw, pre=None, ext=5000, shift=0, bins=200):
     x = np.arange(ext * 2) - ext
     x = x.reshape(
         -1,
-        bins, ).mean(axis=1)
+        bins,
+    ).mean(axis=1)
     for line in open(bed):
         line = line.split("\n")[0].split("\t")
         submit = int(line[1]) + shift
@@ -107,7 +108,8 @@ def getProfile(bed, bw, pre=None, ext=5000, shift=0, bins=200):
         #get bins
         nd = d.reshape(
             -1,
-            bins, ).mean(axis=1)
+            bins,
+        ).mean(axis=1)
         data[line[-1]] = nd
     data = pd.DataFrame(data).T
     data.columns = x
@@ -125,8 +127,8 @@ def plotProfile(pre):
         x = map(float, x)
         y = mat.mean(axis=0)
         y = smooth(y)
-        x = np.arange(
-            np.min(x), np.max(x), (np.max(x) - np.min(x)) / float(len(y)))
+        x = np.arange(np.min(x), np.max(x),
+                      (np.max(x) - np.min(x)) / float(len(y)))
         ax.plot(x, y, label=label, color=colors[i], lw=3)
     leg = ax.legend(loc="upper left", fancybox=True, bbox_to_anchor=(1, 1))
     ax.set_xlabel("Distance to TSS (bp)")
@@ -159,8 +161,8 @@ def plotProfile2(pre):
         x = ds[key]["T"][0]
         y = ds[key]["T"][1] - ds[key]["I"][1]
         y = smooth(y)
-        x = np.arange(
-            np.min(x), np.max(x), (np.max(x) - np.min(x)) / float(len(y)))
+        x = np.arange(np.min(x), np.max(x),
+                      (np.max(x) - np.min(x)) / float(len(y)))
         label = key + "_" + ds[key]["S"]
         ax.plot(x, y, label=label, color=colors[i], lw=3)
     leg = ax.legend(loc="upper left", fancybox=True, bbox_to_anchor=(1, 1))

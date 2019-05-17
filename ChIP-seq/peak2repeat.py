@@ -29,8 +29,10 @@ def read_rep_locus(shift=[0, 0]):
             continue
         locus = [line[0], line[1], line[2], line[3]]
         rep = "|".join(line)
-        iv = HTSeq.GenomicInterval(
-            locus[0], int(locus[1]), int(locus[2]), strand=locus[3])
+        iv = HTSeq.GenomicInterval(locus[0],
+                                   int(locus[1]),
+                                   int(locus[2]),
+                                   strand=locus[3])
         if iv.start - shift[0] < 0:
             iv.start = 0
         else:

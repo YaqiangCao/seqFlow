@@ -108,8 +108,8 @@ def plotProfile(pre):
         x = map(int, x)
         y = mat.mean(axis=0)
         y = smooth(y)
-        x = np.arange(
-            np.min(x), np.max(x), (np.max(x) - np.min(x)) / float(len(y)))
+        x = np.arange(np.min(x), np.max(x),
+                      (np.max(x) - np.min(x)) / float(len(y)))
         ax.plot(x, y, label=label, color=colors[i], lw=3)
     leg = ax.legend(loc="upper left", fancybox=True, bbox_to_anchor=(1, 1))
     ax.set_xlabel("Distance to TSS (bp)")
@@ -142,8 +142,8 @@ def plotProfile2(pre):
         x = ds[key]["T"][0]
         y = ds[key]["T"][1] - ds[key]["I"][1]
         y = smooth(y)
-        x = np.arange(
-            np.min(x), np.max(x), (np.max(x) - np.min(x)) / float(len(y)))
+        x = np.arange(np.min(x), np.max(x),
+                      (np.max(x) - np.min(x)) / float(len(y)))
         label = key + "_" + ds[key]["S"]
         ax.plot(x, y, label=label, color=colors[i], lw=3)
     #leg = ax.legend( loc="upper left",fancybox=True,bbox_to_anchor=( 1,1 ) )

@@ -65,8 +65,8 @@ def extendBed_to_bed(f):
         if len(line) < 3:
             continue
         try:
-            iv = HTSeq.GenomicInterval(line[0],
-                                       int(line[1]), int(line[2]), "+")
+            iv = HTSeq.GenomicInterval(line[0], int(line[1]), int(line[2]),
+                                       "+")
         except:
             continue
         peak_name = line[3]

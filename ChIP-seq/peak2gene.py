@@ -74,7 +74,7 @@ def get_gene_model(gtf=None, shift=[2000, 2000]):
     regions = shift_TSS_TES(regions, shift=shift)
     for key, iv in regions.items():
         if iv.start > iv.end:
-            # here the model is nonstranded 
+            # here the model is nonstranded
             iv.start, iv.end = iv.end, iv.start
         bgmodel[iv] += key
     return bgmodel

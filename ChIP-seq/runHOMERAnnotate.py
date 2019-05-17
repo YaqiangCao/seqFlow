@@ -23,11 +23,7 @@ def runHOMER(bed, genome="mm10"):
         print(ano, "generated, return.")
         return
     cmd = "annotatePeaks.pl {bed} {genome} -go {go_dir} -annStats {stat} > {ano}".format(
-        bed=bed,
-        genome=genome,
-        stat=stat,
-        go_dir="go_" + name,
-        ano=ano)
+        bed=bed, genome=genome, stat=stat, go_dir="go_" + name, ano=ano)
     try:
         print(cmd)
         subprocess.call(cmd, shell=True)
@@ -55,7 +51,7 @@ def parseTarget():
 
 def main():
     beds = glob("../../1.peaks/*.narrowPeak")
-    Parallel( n_jobs=1 )( delayed( runHOMER )( f, "mm10") for f in beds )
+    Parallel(n_jobs=1)(delayed(runHOMER)(f, "mm10") for f in beds)
     #parseTarget()
 
 

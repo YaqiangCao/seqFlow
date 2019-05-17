@@ -240,12 +240,12 @@ def getNCIS(t, c, fr=150, pre=None, board=True, quant=0.85):
         (PI, binSize, usedCount),  #reduce_C_function=np.median,
         reduce_C_function=np.max,
         bins="log")
-    ax.plot(
-        [0, np.max(cs)], [0, depthRatio * np.max(cs)],
-        label="DR:%.3f" % depthRatio,
-        c="k")
-    ax.plot(
-        [0, np.max(cs)], [0, est * np.max(cs)], label="estR:%.3f" % est, c="b")
+    ax.plot([0, np.max(cs)], [0, depthRatio * np.max(cs)],
+            label="DR:%.3f" % depthRatio,
+            c="k")
+    ax.plot([0, np.max(cs)], [0, est * np.max(cs)],
+            label="estR:%.3f" % est,
+            c="b")
     ax.legend(loc="best")
     pylab.savefig(tname + "_est.pdf")
     return tname, binSize, usedCount, est, PI, depthRatio
@@ -320,8 +320,10 @@ def minputCorr(input, chips, pre, fr=150, board=True, quant=0.9):
             print "%s has been generated, return" % fout2
             continue
         t = bed2GModel(chip, fr)
-        tname, binSize, usedCount, estR, PI, depthRatio = getNCIS(
-            t, c, board=board, quant=quant)
+        tname, binSize, usedCount, estR, PI, depthRatio = getNCIS(t,
+                                                                  c,
+                                                                  board=board,
+                                                                  quant=quant)
         tmodel = getInputCorr(t[0], c[0], t[-1], c[-1], estR)
         writeBg(fout2, tmodel)
         data[tname] = {
@@ -340,9 +342,9 @@ def main():
     beds = glob.glob(
         "../../../1.ProcessedTagAlign/2.BEDhg38/1.Consolidated/*.bed.gz")
     ds = preDs(beds)
-    Parallel(n_jobs=25)(delayed(minputCorr)(ds[cell]["input"],
-                                            ds[cell]["chip"], cell)
-                        for cell in ds.keys())
+    Parallel(n_jobs=25)(
+        delayed(minputCorr)(ds[cell]["input"], ds[cell]["chip"], cell)
+        for cell in ds.keys())
 
 
 if __name__ == '__main__':

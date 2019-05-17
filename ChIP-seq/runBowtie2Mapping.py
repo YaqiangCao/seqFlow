@@ -250,18 +250,16 @@ def plotStat(data, pre="MappingStat"):
     ax2 = ax.twinx()
     umr = data.loc[:, "UniqueMapRatio"].values
     mmr = data.loc[:, "MultipleMapRatio"].values
-    ax2.plot(
-        ind + width / 2,
-        umr,
-        color="b",
-        marker="s",
-        label="Unique Mapping Ratio ")
-    ax2.plot(
-        ind + width / 2,
-        mmr,
-        color="r",
-        marker="h",
-        label="Multiple Mapping Ratio")
+    ax2.plot(ind + width / 2,
+             umr,
+             color="b",
+             marker="s",
+             label="Unique Mapping Ratio ")
+    ax2.plot(ind + width / 2,
+             mmr,
+             color="r",
+             marker="h",
+             label="Multiple Mapping Ratio")
     for t in ax2.get_yticklabels():
         t.set_color("r")
     ax2.set_ylim([0, 100])

@@ -107,4 +107,4 @@ root = "../../1.HOMER/go_*/"
 fs = glob.glob(root + "biological_process.txt")
 preprocess(fs=fs)
 furthurparse()
-termBarh( )
+termBarh()

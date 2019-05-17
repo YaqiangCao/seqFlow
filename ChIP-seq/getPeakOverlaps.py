@@ -1,12 +1,11 @@
 #!/usr/bin/env python3.6
 #--coding:utf-8 --
-
 """
 getPeakOverlaps.py
 2019-05-13:
 """
 
-import os,subprocess
+import os, subprocess
 from glob import glob
 
 #3rd
@@ -48,8 +47,7 @@ def getJIs(fs, fnOut):
             #nj = fj.split("/")[-1].split(".")[0]
             nj = fj.split("/")[-2]
             cj = getN(fj)
-            cmd = "intersectBed -a %s -b %s -u > ./tmp.bed" % (
-                fi, fj)
+            cmd = "intersectBed -a %s -b %s -u > ./tmp.bed" % (fi, fj)
             #print(cmd)
             subprocess.call(cmd, shell=True)
             cij = getN("./tmp.bed")
@@ -93,7 +91,7 @@ def evulateReps(fin, fout):
             if ni == nj:
                 ds[ni] = mat.loc[ns[i], ns[j]]
             else:
-                jis.append( mat.loc[ns[i],ns[j]] )
+                jis.append(mat.loc[ns[i], ns[j]])
     ds = pd.Series(ds)
     ss = list(ds.index)
     ss.sort()
@@ -107,7 +105,8 @@ def evulateReps(fin, fout):
     ax.set_xticks(x)
     ax.set_xticklabels(ds.index, rotation=45, fontsize=6, ha="right")
     fig.tight_layout()
-    ax.set_title("Mean JI for reps: %f \n Mean JI for non-reps: %f " % (ds.mean(),np.mean(jis)))
+    ax.set_title("Mean JI for reps: %f \n Mean JI for non-reps: %f " %
+                 (ds.mean(), np.mean(jis)))
     pylab.savefig(fout + ".pdf")
 
 
@@ -115,7 +114,7 @@ def main():
     #fs = glob("../../2.peaks/*/*narrowPeak")
     #getJIs(fs, "./peakOverlaps_summary.txt")
     #plotJIClusters("./peakOverlaps_summary.txt","./peakOverlaps")
-    evulateReps("./peakOverlaps_summary.txt","./peakOverlaps_reps") 
+    evulateReps("./peakOverlaps_summary.txt", "./peakOverlaps_reps")
     #screen for better cutoffs
     """
     rfs = glob("../3.peaks/*.narrowPeak")

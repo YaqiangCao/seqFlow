@@ -1,11 +1,12 @@
 #!/usr/bin/env python2.7
 #--coding:utf-8--
 """
-selJSD.py
+getJSD.py
 2016-01-19: caculating jessen-shannon divergence 
 2016-07-14: modified JSD caculating and multiple processing
 2016-07-18: lncRNA TSS used as comparasion. 
 2017-10-30: ELRs, PLRs, non-TE promoters, non-TE enhancers
+2019-05-17: slightly modified, to set the pre-defined patterns, make modifications to defineTS
 """
 
 __author__ = "CAO Yaqiang"
@@ -14,11 +15,11 @@ __modified__ = ""
 __email__ = "caoyaqiang0410@gmail.com"
 
 #systematic library
-import os, time, string
+import os
 from glob import glob
-from datetime import datetime
 
 #3rd library
+from tqdm import tqdm
 import numpy as np
 import matplotlib as mpl
 mpl.use("pdf")
@@ -47,43 +48,51 @@ def calcJSD(P, Q):
     return 1 - 0.5 * (entropy(_P, _M) + entropy(_Q, _M))
 
 
-def defineTs(grp, f):
-    ncs = pd.read_table(f, index_col=0).columns
-    ss = pd.Series.from_csv(grp, sep="=")
-    ncs = ss.index.intersection(ncs)
-    ss = ss[ncs]
+def defineTs(f):
+    """
+    Define the target pattern. 
+    sa: 0 0 0 ... 1 1, which specificy the gain activity in AID, key is -1
+    sb: 1 1 1 ... 0 0, which specificy the loss activity in AID, key is 1
+    """
+    cs = pd.read_table(f, index_col=0).columns
+    sa = []
+    for c in cs:
+        if ("AID" in c) and ("Pos" in c):
+            sa.append(0)
+        else:
+            sa.append(1)
+    sa = np.array(sa)
+    sb = 1 - sa
     ts = {}
-    for s in set(ss.values):
-        ns = pd.Series(np.zeros(ss.shape[0]), index=ss.index)
-        ns[ss == s] = 1
-        ts[s] = ns
-    return ts, ss.index
+    ts[-1] = sa
+    ts[1] = sb
+    return ts
 
 
 def sJSD(ns, ts):
+    """
+    Caculating JSD for all pre-designed patterns.
+    """
     ns = np.array(ns[1:])
-    tmp = 0
-    for nt in ts.values():
+    ss = {}
+    for key, nt in ts.items():
         d = calcJSD(ns, nt)
-        if d > tmp:
-            tmp = d
-    return tmp
+        ss[key] = d
+    return ss
 
 
-def evualSpecific(f, cs, ts, fout):
-    print f
+def evualSpecific(f, ts, fout):
     mat = pd.read_table(f, index_col=0, sep="\t")
-    mat = mat[cs]
-    print mat.index[:10]
-    print mat.shape
-    ns = [t[0] for t in mat.itertuples() if np.sum(t[1:]) <= 1]
-    mat = mat.drop(ns)
-    print mat.shape
-    ss = Parallel(n_jobs=1)(delayed(sJSD)(ns, ts) for ns in mat.itertuples())
-    ss = pd.Series(ss, index=mat.index)
-    ss.to_csv(fout + ".jsd", sep="\t")
+    ss = Parallel(n_jobs=1)(delayed(sJSD)(ns, ts)
+                            for ns in tqdm(list(mat.itertuples())))
+    ds = {}
+    for i, n in enumerate(mat.index):
+        ds[n] = ss[i]
+    ds = pd.DataFrame(ds).T
+    ds.to_csv(fout + "_jsd.txt", sep="\t", index_label="peakId")
 
 
+"""
 def plotSpecific(fs):
     fig, ax = pylab.subplots()
     for f in fs:
@@ -96,21 +105,16 @@ def plotSpecific(fs):
     ax.set_ylabel("Cumulative Density")
     ax.set_xlim([0.3, 1.0])
     pylab.savefig("jsd.pdf")
+"""
 
 
 def main():
-    """
-    grp = "ELRs.grp"
-    ts,cs = defineTs(grp,"../11.ELRs_PLRs_Binary_Sets/2.ELRs/ELRs.txt")
-    
-    evualSpecific("../11.ELRs_PLRs_Binary_Sets/2.ELRs/ELRs.txt",cs,ts,"ELRs")
-    evualSpecific("../11.ELRs_PLRs_Binary_Sets/1.PLRs/PLRs.txt",cs,ts,"PLRs")
-    evualSpecific("../11.ELRs_PLRs_Binary_Sets/5.Non-TEs_TypicalPromoters/2.BinarySet/promoters.mat",cs,ts,"noTEPromoters")
-    evualSpecific("../11.ELRs_PLRs_Binary_Sets/6.Non-TEs_TypicalEnhancers/2.BinarySet/enhancers.mat",cs,ts,"noTEEnhancers")
-    evualSpecific("../11.ELRs_PLRs_Binary_Sets/3.TypicalPromoters/2.BinarySet/promoters.mat",cs,ts,"typicalPromoters")
-    evualSpecific("../11.ELRs_PLRs_Binary_Sets/4.TypicalEnhancers/2.BinarySet/enhancers.mat",cs,ts,"typicalEnhancers")
-    """
-    plotSpecific(glob("*.jsd"))
+    for f in glob("../10.getNoiseFilter/*.txt"):
+        n = f.split("/")[-1].split("_TPM")[0]
+        print(n)
+        ts = defineTs(f)
+        evualSpecific(f, ts, n)
+    #plotSpecific(glob("*.jsd"))
 
 
 main()

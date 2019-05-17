@@ -116,7 +116,8 @@ def plotMotifs(
         ts=[
             "ZBTB33_GSE32465_Homer",
             "Smad2_GSE29422_Homer",
-        ], ):
+        ],
+):
     pre = f.split("_")[0]
     mat = pd.read_table(f, index_col=0)
     x = map(int, mat.index)
@@ -124,8 +125,8 @@ def plotMotifs(
     for i, t in enumerate(ts):
         y = mat[t].values
         y = smooth(y)
-        x = np.arange(
-            np.min(x), np.max(x), (np.max(x) - np.min(x)) / (float(len(y))))
+        x = np.arange(np.min(x), np.max(x),
+                      (np.max(x) - np.min(x)) / (float(len(y))))
         label = t.split("_")[0]
         ax.plot(x, y, label=label, color=colors[i], lw=2)
     #leg = ax.legend( loc="upper left",fancybox=True,bbox_to_anchor=( 1,1 ) )
@@ -134,6 +135,7 @@ def plotMotifs(
     ax.set_ylabel("Motifs Density")
     ax.set_title(pre)
     pylab.savefig(pre + ".pdf", bbox_inches="tight")
+
 
 #beds = glob.glob( "../1.summits/*SMAD2*" )
 #beds.extend( glob.glob( "../1.summits/*b-catenin*" ) )

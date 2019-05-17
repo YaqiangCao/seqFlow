@@ -86,12 +86,11 @@ def ck(f, pre, k):
     pca = PCA(n_components=k).fit(mat)
     ns = [t[0] for t in mat.itertuples() if np.sum(t[1:]) <= 1]
     mat = mat.drop(ns)
-    c = KMeans(
-        n_clusters=k,
-        init=pca.components_,
-        n_init=1,
-        n_jobs=20,
-        random_state=123).fit(mat)
+    c = KMeans(n_clusters=k,
+               init=pca.components_,
+               n_init=1,
+               n_jobs=20,
+               random_state=123).fit(mat)
     c.fit(mat)
     ds = pd.Series(c.labels_, index=mat.index)
     cs = []

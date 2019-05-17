@@ -69,8 +69,9 @@ def pairReads(bed):
         #columns = ["chr_1","start_1","end_1","chr_2","start_2","end_2","rid","-", "strand_1","strand_2" ]
         if rid not in data:
             nr = [
-                line[0], int(line[1]), int(line[2]), False, False, False, rid,
-                "-", line[5], False
+                line[0],
+                int(line[1]),
+                int(line[2]), False, False, False, rid, "-", line[5], False
             ]
             data[rid] = nr
         else:
