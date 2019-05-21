@@ -11,7 +11,7 @@ __date__ = "2018-07-12"
 __email__ = "caoyaqiang0410@gmail.com"
 
 
-def getlogger(fn=os.getcwd() + "/" + os.path.basename(__file__) + ".log"):
+def getLogger(fn=os.getcwd() + "/" + os.path.basename(__file__) + ".log"):
     #get the current time
     date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
     #set up logging, both write log info to console and log file
@@ -30,7 +30,7 @@ def getlogger(fn=os.getcwd() + "/" + os.path.basename(__file__) + ".log"):
     return logger
 
 
-def callSys(cmds):
+def callSys(cmds, logger):
     """
     Call systematic commands without return.
     """
@@ -40,3 +40,11 @@ def callSys(cmds):
             os.system(c)
         except:
             logger.error(c)
+
+
+def cFlush(r):
+    """
+    One line flush.
+    """
+    sys.stdout.write("\r%s" % r)
+    sys.stdout.flush()
