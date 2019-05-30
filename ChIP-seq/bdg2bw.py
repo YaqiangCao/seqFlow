@@ -13,7 +13,7 @@ from datetime import datetime
 from tqdm import tqdm
 from joblib import Parallel, delayed
 
-CHROM = "/Users/caoyaqiang/Projects/2.AID_GangRen/0.packages/homer/data/genomes/mm10/chrom.sizes"
+CHROM = "/mnt/data/tangq/Projects/0.Reference/1.hg38/1.fa/hg38.chrom.sizes"
 
 
 def callSys(cmds):
@@ -44,6 +44,8 @@ def validateBdg(bdg):
             line = line.split("\n")[0].split("\t")
             if len(line) < 4:
                 continue
+            if line[0] not in chrs:
+                continue
             if int(line[1]) >= chrs[line[0]] or int(line[2]) > chrs[line[0]]:
                 continue
             line = "\t".join(line) + "\n"
@@ -66,7 +68,7 @@ def bdg2bw(f):
 
 def main():
     fs = glob("../2.peaks/*/*.bdg")
-    Parallel(n_jobs=3)(delayed(bdg2bw)(f) for f in fs)
+    Parallel(n_jobs=len(fs))(delayed(bdg2bw)(f) for f in fs)
 
 
 if __name__ == "__main__":
