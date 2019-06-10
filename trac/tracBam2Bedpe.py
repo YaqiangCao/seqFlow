@@ -2,6 +2,7 @@
 #--coding:utf-8--
 """
 tracPreBam.py
+2019-05-23
 """
 
 __author__ = "CAO Yaqiang"
@@ -41,21 +42,34 @@ def thinBedpe(f):
     callSys(cmds, logger)
 
 
-def bam2bedpe(bam):
-    bedpe = bam.split("/")[-1].replace(".bam", ".bedpe")
-    if os.path.isfile(bedpe):
-        logger.info("%s has been generated! return" % bedpe)
-        return
-    cmd = "bamToBed -bedpe -i {bam} > {bedpe}".format(bam=bam, bedpe=bedpe)
-    logger.info(cmd)
-    status, output = commands.getstatusoutput(cmd)
+def bam2Bedpe(bam, bedpe, mapq=10):
+    fd = os.path.splitext(bedpe)[0]
+    d = os.path.dirname(bedpe)
+    if not os.path.exists(d):
+        os.mkdir(d)
+    tmpbam = fd + "2.bam"
+    rmunmaped = "samtools view -q 10 -b -F 4 {} >> {}".format(bam, tmpbam)
+    callSys([rmunmaped], logger)
+    bam2bedpe = "bamToBed -bedpe -i {bam} > {bedpe}".format(bam=tmpbam,
+                                                            bedpe=bedpe)
+    logger.info(bam2bedpe)
+    status, output = commands.getstatusoutput(bam2bedpe)
+    rmbam = "rm {}".format(tmpbam)
+    callSys([rmbam], logger)
 
 
 def main():
-    bams = glob("../1.bams/*.bam")
-    Parallel(n_jobs=len(bams))(delayed(bam2bedpe)(f) for f in bams)
+    bams = glob("../3.mapping/*/*.bam")
+    ds = []
+    for bam in bams:
+        nb = "./" + bam.split("/")[-1].replace(".bam", ".bedpe")
+        if os.path.isfile(nb):
+            logger.info("%s has been generated. return." % nb)
+            continue
+        ds.append([bam, nb])
+    Parallel(n_jobs=5)(delayed(bam2Bedpe)(t[0], t[1]) for t in ds[:1])
     fs = glob("*.bedpe")
-    Parallel(n_jobs=len(fs))(delayed(thinBedpe)(f) for f in fs)
+    Parallel(n_jobs=5)(delayed(thinBedpe)(f) for f in fs)
 
 
 if __name__ == '__main__':

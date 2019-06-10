@@ -20,16 +20,14 @@ import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
 
-#my own
-from utils import getLogger,callSys
+#trac
+from utils import getLogger, callSys
 
 #global settings
 #logger
 date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
 logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
-
-
 
 
 def prepare_fastq(Fastq_Root="../2.reid/"):
@@ -68,10 +66,10 @@ def sam2bam(sam, bam):
                                                        ".bam", ".bai"))
     rmsam = "rm %s" % (sam)
     cmds = [samview, samsort, samindex, rmsam]
-    callSys(cmds,logger)
+    callSys(cmds, logger)
 
 
-def tracMapping(sample, fqs, ref,cpus=10):
+def tracMapping(sample, fqs, ref, cpus=10):
     logger.info("Start mapping %s.\n" % sample)
     if not os.path.exists(sample):
         os.mkdir(sample)
@@ -81,9 +79,11 @@ def tracMapping(sample, fqs, ref,cpus=10):
         logger.info("%s:%s exists! return." % (sample, bam))
         return
     if len(fqs) == 1:
-        doBowtie = "bowtie2 -p {cpus} -q -N 1 --local --very-sensitive -k 1 --no-devetail --no-contain --no-overlap -x {ref} {fq} -S {sam}".format(cpus=cpus,ref=ref,fq=fqs[0],sam=sam)
+        doBowtie = "bowtie2 -p {cpus} -q -N 1 --local --very-sensitive -k 1 -x {ref} {fq} -S {sam}".format(
+            cpus=cpus, ref=ref, fq=fqs[0], sam=sam)
     else:
-        doBowtie = "bowtie2 -p {cpus} -q -N 1 --local --very-sensitive -k 1 --no-dovetail --no-contain --no-overlap -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(cpus=cpus,ref=ref,fq1=fqs[0],fq2=fqs[1],sam=sam)
+        doBowtie = "bowtie2 -p {cpus} -q -N 1 --local --very-sensitive -k 1 -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(
+            cpus=cpus, ref=ref, fq1=fqs[0], fq2=fqs[1], sam=sam)
     logger.info(doBowtie)
     status, output = commands.getstatusoutput(doBowtie)
     #trim with "Warning"
@@ -107,11 +107,12 @@ def sParseBowtie(lines):
     conUniqueMappedReads = int(d1[0])
     d2 = lines[8].strip().split()
     unconUniqueMappedReads = int(d2[0])
-    mapRatio = float(lines[15].split("%")[0])
+    #mapRatio = float(lines[15].split("%")[0])
+    mapRatio = float(lines[-2].split("%")[0])
     d = {
         "TotalReads": totalReads,
-        "ConcordantlyUniqueMapReads": conUniqueMappedReads,
-        "DisconcordantlyUniqueMapReads": unconUniqueMappedReads,
+        #"ConcordantlyUniqueMapReads": conUniqueMappedReads,
+        #"DisconcordantlyUniqueMapReads": unconUniqueMappedReads,
         "MappingRatio(%s)": mapRatio
         #"MultipleMapReads": multipleMappedReads,
         #"MultipleMapRatio": multipleMappedRatio,
@@ -134,12 +135,12 @@ def parseBowtielog(logs=None):
     return data
 
 
-
 def main():
-    data = prepare_fastq("../../2.reid/")
+    data = prepare_fastq(
+        "../2.reid/")  #N501 & N502 has been cut with the target 18bp
     ref = "/home/tangq/tangq/Projects/0.Reference/1.hg38/3.index/2.bowtie2/hg38"
-    #Parallel(n_jobs=5)(delayed(tracMapping)(sample, fqs, ref)
-    #                   for sample, fqs in data.items())
+    Parallel(n_jobs=5)(delayed(tracMapping)(sample, fqs, ref)
+                       for sample, fqs in data.items())
     data = parseBowtielog()
     data.to_csv("MappingStat.txt", sep="\t", index_label="samples")
 

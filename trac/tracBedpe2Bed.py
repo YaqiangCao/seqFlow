@@ -17,16 +17,13 @@ from glob import glob
 from joblib import Parallel, delayed
 
 #trac
-from utils import getLogger,callSys,cFlush
+from utils import getLogger, callSys, cFlush
 
 #global settings
 #logger
 date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
 logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
-
-
-
 
 
 def bedpe2bed(bedpe):
@@ -51,12 +48,13 @@ def bedpe2bed(bedpe):
     c2 = "mv %s %s" % (tmp, bed)
     c3 = "bgzip %s" % bed
     c4 = "tabix -p bed %s" % bedgz
-    callSys([c1, c2, c3, c4],logger)
+    callSys([c1, c2, c3, c4], logger)
 
 
 def main():
     fs = glob("../../4.uniqueNonRedudantBEDPE/2.bedpe/*.bedpe")
     data = Parallel(n_jobs=len(fs))(delayed(bedpe2bed)(f) for f in fs)
+
 
 if __name__ == "__main__":
     main()

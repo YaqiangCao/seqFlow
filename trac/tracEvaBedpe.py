@@ -61,10 +61,13 @@ def evaBedpe(f):
     cis = 0  #cis PETs
     close = 0  #distance < 150
     mid = 0  #distance > 150 < 1000
-    far = 0  #distance > 20k
+    far = 0  #distance > 1k < 10k
+    extrame = 0  #distance > 20k
     fr = 0  #one mapped to postive and another mapped to negative strand
     ff = 0
     rr = 0
+    uniques = 0
+    reds = set()  #redundancy PETs
     for i, line in enumerate(open(f)):
         if i % 100000 == 0:
             cFlush("%s PETs processed from %s" % (i, f))
@@ -73,29 +76,41 @@ def evaBedpe(f):
             continue
         total += 1
         pet = PET(line)
-        if pet.cis:
-            cis += 1
-            if pet.distance <= 150:
-                close += 1
-            if 150 < pet.distance < 1000:
-                mid += 1
-            if pet.distance > 200000:
-                far += 1
-            if pet.strandA == "+" and pet.strandB == "-":
-                fr += 1
-            if pet.strandA == "-" and pet.strandB == "+":
-                fr += 1
-            if pet.strandA == "+" and pet.strandB == "+":
-                ff += 1
-            if pet.strandA == "-" and pet.strandB == "-":
-                rr += 1
+        t = (pet.chromA, pet.chromB, pet.startA, pet.endA, pet.startB,
+             pet.endB, pet.strandA, pet.strandB)
+        if t not in reds:
+            reds.add(t)
+        else:
+            continue
+        if pet.cis != True:
+            continue
+        #only counting intra-chromosomal interaction PETs
+        cis += 1
+        if pet.distance <= 150:
+            close += 1
+        if 150 < pet.distance <= 1000:
+            mid += 1
+        if 1000 < pet.distance <= 10000:
+            far += 1
+        if pet.distance > 20000:
+            extrame += 1
+        if pet.strandA == "+" and pet.strandB == "-":
+            fr += 1
+        if pet.strandA == "-" and pet.strandB == "+":
+            fr += 1
+        if pet.strandA == "+" and pet.strandB == "+":
+            ff += 1
+        if pet.strandA == "-" and pet.strandB == "-":
+            rr += 1
+
     sample = f.split("/")[-1].split(".")[0]
     s = {
-        "totalPETs": total,
-        "cisPETs": cis,
+        "PETs": total,
+        "uniqueIntraPETs": cis,
         "distance<=150bp": close,
         "150<=distance<=1000bp": mid,
-        "distance>20kb": far,
+        "1kb<distance<=10k": far,
+        "distance>20kb": extrame,
         "forward/reverse": fr,
         "forward/forward": ff,
         "reverse/reverse": rr,
@@ -104,10 +119,11 @@ def evaBedpe(f):
 
 
 def main():
-    fs = glob("*.bedpe")
+    fs = glob("../2.bedpe/*.bedpe")
+    data = Parallel(n_jobs=len(fs))(delayed(evaBedpe)(f) for f in fs)
     ds = {}
-    for f in fs:
-        sample, stat = evaBedpe(f)
+    for t in data:
+        sample, stat = t[0], t[1]
         ds[sample] = stat
     ds = pd.DataFrame(ds).T
     ds.to_csv("bedpe_quality_stat.txt", sep="\t", index_label="sample")

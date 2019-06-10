@@ -13,7 +13,7 @@ from datetime import datetime
 from tqdm import tqdm
 from joblib import Parallel, delayed
 
-CHROM = "/mnt/data/tangq/Projects/0.Reference/1.hg38/1.fa/hg38.chrom.sizes"
+CHROM = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/1.fa/mm10.chrom.sizes"
 
 
 def callSys(cmds):
@@ -55,6 +55,7 @@ def validateBdg(bdg):
 
 
 def bdg2bw(f):
+    #n = f.split("/")[-1].replace(".bdg", "")
     n = f.split("/")[-2]
     cmd1 = "bedSort {bdg} {sbdg}".format(bdg=f, sbdg=n + ".bdg")
     callSys([cmd1])
@@ -67,7 +68,7 @@ def bdg2bw(f):
 
 
 def main():
-    fs = glob("../2.peaks/*/*.bdg")
+    fs = glob("../3.peaks/*/*.bdg")
     Parallel(n_jobs=len(fs))(delayed(bdg2bw)(f) for f in fs)
 
 

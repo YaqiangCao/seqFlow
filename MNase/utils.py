@@ -1,13 +1,24 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 #--coding:utf-8--
 """
 utils.py
 """
 import time, logging, sys, os
 from datetime import datetime
+#global settings
+import matplotlib as mpl
+mpl.use("pdf")
+mpl.rcParams["pdf.fonttype"] = 42
+mpl.rcParams["figure.figsize"] = (4, 2.75)
+mpl.rcParams["font.size"] = 10.0
+import seaborn as sns
+sns.set_style("white")
+import pylab
+import brewer2mpl
+colors = brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors
 
 __author__ = "CAO Yaqiang"
-__date__ = "2018-07-12"
+__date__ = "2019-05-28"
 __email__ = "caoyaqiang0410@gmail.com"
 
 
