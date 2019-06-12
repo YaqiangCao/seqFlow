@@ -48,9 +48,14 @@ def bed2model(bg):
             report = "%s lines genome signal read." % i
             cFlush(report)
         line = line.split("\n")[0].split("\t")
-        chrom = line[0]
-        s = int(line[1])
-        e = int(line[2])
+        if len(line) < 3:
+            continue
+        try:
+            chrom = line[0]
+            s = int(line[1])
+            e = int(line[2])
+        except:
+            continue
         m = (s+e)/2
         #r = (chrom,m,m+1)
         r = (chrom,s,e)
@@ -83,7 +88,7 @@ def bed2bdg(f):
 
 
 def main():
-    fs = glob("../3.mm10Bed/*.bed")
+    fs = glob("../4.mm10Bed/*.bed")
     Parallel(n_jobs=len(fs))(delayed(bed2bdg)(f) for f in fs)
 
 

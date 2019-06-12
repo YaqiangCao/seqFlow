@@ -53,6 +53,9 @@ def prepare_fastq(Fastq_Root="../2.reid/"):
             data[sample][1] = fq
         if not s.endswith("_R1") and not s.endswith("_R2"):
             data[s] = [fq]
+    for key in data.keys():
+        if 0 in data[key] or len(data[key])!=2:
+            del data[key]
     return data
 
 
@@ -61,8 +64,7 @@ def sam2bam(sam, bam):
     SAM to BAM file 
     """
     samview = "samtools view -S %s -b -o %s" % (sam, bam)
-    samsort = "samtools sort -@ 2 {bam} -T {pre} -o {bam}".format(
-        bam=bam, pre=bam.replace(".bam", ""))
+    samsort = "samtools sort -@ 2 {bam} -T {pre} -o {bam}".format( bam=bam, pre=bam.replace(".bam", ""))
     samindex = "samtools index {bam} {bai}".format(bam=bam,
                                                    bai=bam.replace(
                                                        ".bam", ".bai"))
@@ -72,18 +74,20 @@ def sam2bam(sam, bam):
 
 
 def mapping(sample, fqs, ref,cpus=5):
-    logger.info("Start mapping %s.\n" % sample)
-    if not os.path.exists(sample):
+    if os.path.exists(sample):
+        return
+    else:
         os.mkdir(sample)
+    logger.info("Start mapping %s.\n" % sample)
     sam = sample + "/" + sample + ".sam"
     bam = sample + "/" + sample + ".bam"
     if os.path.isfile(bam) or os.path.isfile(sam):
         logger.info("%s:%s exists! return." % (sample, bam))
         return
     if len(fqs) == 1:
-        doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q -N 1 --local --very-sensitive -k 1 -x {ref} {fq} -S {sam}".format(cpus=cpus,ref=ref,fq=fqs[0],sam=sam)
+        doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} {fq} -S {sam}".format(cpus=cpus,ref=ref,fq=fqs[0],sam=sam)
     else:
-        doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q -N 1 --local --very-sensitive -k 1 -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(cpus=cpus,ref=ref,fq1=fqs[0],fq2=fqs[1],sam=sam)
+        doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(cpus=cpus,ref=ref,fq1=fqs[0],fq2=fqs[1],sam=sam)
     logger.info(doBowtie)
     status, output = commands.getstatusoutput(doBowtie)
     #trim with "Warning"
@@ -138,8 +142,8 @@ def parseBowtielog(logs=None):
 
 def main():
     data = prepare_fastq("../2.fastq/") 
-    ref = "/mnt/data/tangq/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10"
-    Parallel(n_jobs=5)(delayed(mapping)(sample, fqs, ref)
+    ref = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10"
+    Parallel(n_jobs=30)(delayed(mapping)(sample, fqs, ref,2)
                        for sample, fqs in data.items())
     data = parseBowtielog()
     data.to_csv("MappingStat.txt", sep="\t", index_label="samples")

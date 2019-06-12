@@ -32,7 +32,7 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
 
 
 
-def bedpe2model(bg):
+def bedpe2model(bg,mapq=1):
     """
     BedGraph format, gzip or not into HTSeq.GenomicArray 
     """
@@ -43,24 +43,30 @@ def bedpe2model(bg):
         f = open(bg)
     print(datetime.now(), "Start building model for %s" % bg)
     model = HTSeq.GenomicArray("auto", stranded=False)
+    t = 0
     for i, line in enumerate(f):
         if i % 10000 == 0:
             report = "%s lines genome signal read." % i
             cFlush(report)
         line = line.split("\n")[0].split("\t")
-        if len(line) < 6:
+        if len(line) < 9:
             continue
+        if line[0] != line[3] or "_" in line[0]:
+            continue
+        if int(line[7]) < mapq:
+            continue
+        t += 1
         chrom = line[0]
         s = min(int(line[1]), int(line[4]))
         e = max(int(line[2]), int(line[5]))
         m = (s+e)/2
         r = (chrom,m,m+1)
         if r not in rs:
-            iv = HTSeq.GenomicInterval(chrom, m, m+1)
+            iv = HTSeq.GenomicInterval(chrom, s, e)
             model[iv] += 1
             rs.add(r)
-    print("%s:totalReads:%s;nonRedudant:%s"%(f,i,len(rs)))
-    logger.info("%s:totalReads:%s;nonRedudant:%s"%(f,i,len(rs)))
+    print("%s:totalReads:%s;nonRedudant:%s"%(f,t,len(rs)))
+    logger.info("%s:totalReads:%s;nonRedudant:%s"%(f,t,len(rs)))
     return len(rs), model
 
 
@@ -83,7 +89,7 @@ def bedpe2bdg(f):
 
 
 def main():
-    fs = glob("../../5.sepNcSpOther/*.bedpe.gz")
+    fs = glob("../1.bedpe/*.gz")
     Parallel(n_jobs=len(fs))(delayed(bedpe2bdg)(f) for f in fs)
 
 
