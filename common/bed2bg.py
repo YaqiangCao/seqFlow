@@ -31,8 +31,7 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
 
-
-def bedpe2model(bg,mapq=1):
+def bed2model(bg):
     """
     BedGraph format, gzip or not into HTSeq.GenomicArray 
     """
@@ -43,30 +42,29 @@ def bedpe2model(bg,mapq=1):
         f = open(bg)
     print(datetime.now(), "Start building model for %s" % bg)
     model = HTSeq.GenomicArray("auto", stranded=False)
-    t = 0
     for i, line in enumerate(f):
         if i % 10000 == 0:
             report = "%s lines genome signal read." % i
             cFlush(report)
         line = line.split("\n")[0].split("\t")
-        if len(line) < 9:
+        if len(line) < 3:
             continue
-        if line[0] != line[3] or "_" in line[0]:
+        try:
+            chrom = line[0]
+            s = int(line[1])
+            e = int(line[2])
+        except:
             continue
-        if int(line[7]) < mapq:
-            continue
-        t += 1
-        chrom = line[0]
-        s = min(int(line[1]), int(line[4]))
-        e = max(int(line[2]), int(line[5]))
-        m = (s+e)/2
-        r = (chrom,m,m+1)
+        m = (s + e) / 2
+        #r = (chrom,m,m+1)
+        r = (chrom, s, e)
         if r not in rs:
+            #iv = HTSeq.GenomicInterval(chrom, m, m+1)
             iv = HTSeq.GenomicInterval(chrom, s, e)
             model[iv] += 1
             rs.add(r)
-    print("%s:totalReads:%s;nonRedudant:%s"%(f,t,len(rs)))
-    logger.info("%s:totalReads:%s;nonRedudant:%s"%(f,t,len(rs)))
+    print("%s:totalReads:%s;nonRedudant:%s" % (f, i, len(rs)))
+    logger.info("%s:totalReads:%s;nonRedudant:%s" % (f, i, len(rs)))
     return len(rs), model
 
 
@@ -80,17 +78,17 @@ def model2bedgraph(t, model, fout):
                 fo.write("\t".join(line) + "\n")
 
 
-def bedpe2bdg(f):
-    fo = f.split("/")[-1].replace(".bedpe.gz", ".bdg")
+def bed2bdg(f):
+    fo = f.split("/")[-1].replace(".bed", ".bdg")
     if os.path.isfile(fo):
         return
-    t, model = bedpe2model(f)
+    t, model = bed2model(f)
     model2bedgraph(t, model, fo)
 
 
 def main():
-    fs = glob("../1.bedpe/*.gz")
-    Parallel(n_jobs=len(fs))(delayed(bedpe2bdg)(f) for f in fs)
+    fs = glob("../4.mm10Bed/*.bed")
+    Parallel(n_jobs=len(fs))(delayed(bed2bdg)(f) for f in fs)
 
 
 if __name__ == '__main__':
@@ -98,5 +96,5 @@ if __name__ == '__main__':
     main()
     elapsed = datetime.now() - start_time
     fn = os.path.basename(__file__)
-    print datetime.now(), "The process is done for %s,time used:%s" % (fn,
-                                                                       elapsed)
+    print(datetime.now(),
+          "The process is done for %s,time used:%s" % (fn, elapsed))

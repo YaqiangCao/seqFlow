@@ -2,6 +2,7 @@
 #--coding:utf-8--
 """
 bedpeStat.py
+2019-06-13: modified as add more stats, such as how many cn and sp PETs.
 """
 
 __author__ = "CAO Yaqiang"
@@ -31,30 +32,7 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
 
-def thinBedpe(f):
-    redus = set()
-    with open(f + ".2", "w") as fo:
-        for i, line in enumerate(open(f)):
-            line = line.split("\n")[0].split("\t")
-            #remove redudant PETs
-            t = line[:6]
-            t.extend([line[8], line[9]])
-            t = tuple(t)
-            if t in redus:
-                continue
-            redus.add(t)
-            #remove the chr1_, chr2_dask
-            if "_" in line[0] or "_" in line[3]:
-                continue
-            #shroten the name
-            line[6] = str(i)
-            fo.write("\t".join(line) + "\n")
-    cmds = ["mv %s %s" % (f + ".2", f), "gzip %s" % f]
-    callSys(cmds, logger)
-
-
-
-def getStat(f):
+def getStat(f, dfilter=[80, 140, 180]):
     """
     Get the name, redundancy, total PETs, PETs distance mean, distance std for a bedpe file.
     """
@@ -68,6 +46,7 @@ def getStat(f):
     uniques = set()
     ds = []
     t = 0
+    cn, sp, other = 0, 0, 0
     for i, line in enumerate(of):
         line = line.split("\n")[0].split("\t")
         if line[0] != line[3] or "_" in line[0]:
@@ -75,28 +54,40 @@ def getStat(f):
         t += 1
         s = min(int(line[1]), int(line[4]))
         e = max(int(line[2]), int(line[5]))
-        r = (line[0],s,e)
+        r = (line[0], s, e)
         if r not in uniques:
             uniques.add(r)
-            d = e -s
+            d = e - s
             ds.append(d)
+            if d <= dfilter[0]:  #subnucleosome-sized particles
+                sp += 1
+            elif dfilter[1] <= d <= dfilter[2]:  #canonical nucleosomes
+                cn += 1
+            else:
+                other += 1
     ds = np.array(ds)
-    redundancy = 1.0 - len(uniques)/1.0/t
-    return n, t, len(uniques), redundancy, ds.mean(), ds.std()
-
+    redundancy = 1.0 - len(uniques) / 1.0 / t
+    return n, t, len(uniques), redundancy, cn, sp, other, ds.mean(), ds.std()
 
 
 def main():
-    fs = glob("*.bedpe.gz") 
+    fs = glob("*.bedpe.gz")
     fs.extend(glob("*.bedpe"))
-    data = Parallel(n_jobs=len(fs))(delayed(getStat)(f) for f in fs)
+    data = Parallel(n_jobs=len(fs))(delayed(getStat)(f) for f in fs[:5])
     ds = {}
     for d in data:
-        ds[d[0]] = {"totalPETs": d[1],"uniquePETs":d[2],"redundancy":d[3], "distance mean": d[4], "distance std": d[5]}
+        ds[d[0]] = {
+            "totalMappedPETs": d[1],
+            "uniquePETs": d[2],
+            "redundancy": d[3],
+            "canonicalNucleosomePETs": d[4],
+            "subnucleosomeSizeParticlesPETs": d[5],
+            "otherPETs": d[6],
+            "fragmentLengthMean": d[7],
+            "fragmentLengthStd": d[8]
+        }
     ds = pd.DataFrame(ds).T
     ds.to_csv("stat.txt", sep="\t")
-
-
 
 
 if __name__ == '__main__':

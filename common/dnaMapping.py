@@ -1,8 +1,8 @@
 #!/usr/bin/env python2.7
 #--coding:utf-8--
 """
-tracMapping.py
-2019-05-20
+dnaMapping.py
+2019-06-13
 """
 
 __author__ = "CAO Yaqiang"
@@ -21,15 +21,13 @@ import pandas as pd
 from joblib import Parallel, delayed
 
 #trac
-from utils import getLogger,callSys
+from utils import getLogger, callSys
 
 #global settings
 #logger
 date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
 logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
-
-
 
 
 def prepare_fastq(Fastq_Root="../2.reid/"):
@@ -54,7 +52,7 @@ def prepare_fastq(Fastq_Root="../2.reid/"):
         if not s.endswith("_R1") and not s.endswith("_R2"):
             data[s] = [fq]
     for key in data.keys():
-        if 0 in data[key] or len(data[key])!=2:
+        if 0 in data[key] or len(data[key]) != 2:
             del data[key]
     return data
 
@@ -64,16 +62,17 @@ def sam2bam(sam, bam):
     SAM to BAM file 
     """
     samview = "samtools view -S %s -b -o %s" % (sam, bam)
-    samsort = "samtools sort -@ 2 {bam} -T {pre} -o {bam}".format( bam=bam, pre=bam.replace(".bam", ""))
+    samsort = "samtools sort -@ 2 {bam} -T {pre} -o {bam}".format(
+        bam=bam, pre=bam.replace(".bam", ""))
     samindex = "samtools index {bam} {bai}".format(bam=bam,
                                                    bai=bam.replace(
                                                        ".bam", ".bai"))
     rmsam = "rm %s" % (sam)
     cmds = [samview, samsort, samindex, rmsam]
-    callSys(cmds,logger)
+    callSys(cmds, logger)
 
 
-def mapping(sample, fqs, ref,cpus=5):
+def mapping(sample, fqs, ref, cpus=5):
     if os.path.exists(sample):
         return
     else:
@@ -85,9 +84,11 @@ def mapping(sample, fqs, ref,cpus=5):
         logger.info("%s:%s exists! return." % (sample, bam))
         return
     if len(fqs) == 1:
-        doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} {fq} -S {sam}".format(cpus=cpus,ref=ref,fq=fqs[0],sam=sam)
+        doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} {fq} -S {sam}".format(
+            cpus=cpus, ref=ref, fq=fqs[0], sam=sam)
     else:
-        doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(cpus=cpus,ref=ref,fq1=fqs[0],fq2=fqs[1],sam=sam)
+        doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(
+            cpus=cpus, ref=ref, fq1=fqs[0], fq2=fqs[1], sam=sam)
     logger.info(doBowtie)
     status, output = commands.getstatusoutput(doBowtie)
     #trim with "Warning"
@@ -139,12 +140,11 @@ def parseBowtielog(logs=None):
     return data
 
 
-
 def main():
-    data = prepare_fastq("../2.fastq/") 
+    data = prepare_fastq("../2.fastq/")
     ref = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10"
-    Parallel(n_jobs=30)(delayed(mapping)(sample, fqs, ref,2)
-                       for sample, fqs in data.items())
+    Parallel(n_jobs=30)(delayed(mapping)(sample, fqs, ref, 2)
+                        for sample, fqs in data.items())
     data = parseBowtielog()
     data.to_csv("MappingStat.txt", sep="\t", index_label="samples")
 

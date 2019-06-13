@@ -1,13 +1,24 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 #--coding:utf-8--
 """
 utils.py
 """
 import time, logging, sys, os
 from datetime import datetime
+#global settings
+import matplotlib as mpl
+mpl.use("pdf")
+mpl.rcParams["pdf.fonttype"] = 42
+mpl.rcParams["figure.figsize"] = (4, 2.75)
+mpl.rcParams["font.size"] = 10.0
+import seaborn as sns
+sns.set_style("white")
+import pylab
+import brewer2mpl
+colors = brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors
 
 __author__ = "CAO Yaqiang"
-__date__ = "2018-07-12"
+__date__ = "2019-05-28"
 __email__ = "caoyaqiang0410@gmail.com"
 
 
@@ -48,3 +59,30 @@ def cFlush(r):
     """
     sys.stdout.write("\r%s" % r)
     sys.stdout.flush()
+
+
+class PET(object):
+    #cA is the center of left read
+    __slots__ = [
+        "chromA", "chromB", "startA", "startB", "endA", "endB", "strandA",
+        "strandB", "cA", "cB", "distance", "cis"
+    ]
+
+    def __init__(self, d):
+        """
+        d is line = line.split( "\n" )[ 0 ].split( "\t" ) from BEDPE file 
+        """
+        self.chromA = d[0]
+        self.startA = int(d[1])
+        self.endA = int(d[2])
+        self.strandA = d[8]
+        self.chromB = d[3]
+        self.startB = int(d[4])
+        self.endB = int(d[5])
+        self.strandB = d[9]
+        self.cis = False
+        if self.chromA == self.chromB:
+            self.cis = True
+            self.cA = (self.startA + self.endA) / 2
+            self.cB = (self.startB + self.endB) / 2
+            self.distance = abs(self.cB - self.cA)

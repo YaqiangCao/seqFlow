@@ -25,33 +25,48 @@ from joblib import Parallel, delayed
 from utils import *
 
 #global setting
+#logger
+date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
+logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
+                   os.path.basename(__file__) + ".log")
 
 
-def bedpe2model(bg):
+def bedpe2model(bg, mapq=1):
     """
     BedGraph format, gzip or not into HTSeq.GenomicArray 
     """
+    rs = set()
     if bg.endswith(".gz"):
-        f = gzip.open(bG, "rb")
+        f = gzip.open(bg, "rb")
     else:
         f = open(bg)
     print(datetime.now(), "Start building model for %s" % bg)
     model = HTSeq.GenomicArray("auto", stranded=False)
+    t = 0
     for i, line in enumerate(f):
         if i % 10000 == 0:
             report = "%s lines genome signal read." % i
             cFlush(report)
         line = line.split("\n")[0].split("\t")
-        if len(line) < 6:
+        if len(line) < 9:
             continue
+        if line[0] != line[3] or "_" in line[0]:
+            continue
+        if int(line[7]) < mapq:
+            continue
+        t += 1
         chrom = line[0]
         s = min(int(line[1]), int(line[4]))
         e = max(int(line[2]), int(line[5]))
-        iv = HTSeq.GenomicInterval(chrom, s, e)
-        model[iv] += 1
-    print()
-    print(datetime.now(), "Model built for %s" % bg)
-    return i, model
+        m = (s + e) / 2
+        r = (chrom, m, m + 1)
+        if r not in rs:
+            iv = HTSeq.GenomicInterval(chrom, s, e)
+            model[iv] += 1
+            rs.add(r)
+    print("%s:totalReads:%s;nonRedudant:%s" % (f, t, len(rs)))
+    logger.info("%s:totalReads:%s;nonRedudant:%s" % (f, t, len(rs)))
+    return len(rs), model
 
 
 def model2bedgraph(t, model, fout):
@@ -65,7 +80,7 @@ def model2bedgraph(t, model, fout):
 
 
 def bedpe2bdg(f):
-    fo = f.split("/")[-1].replace(".bedpe", ".bdg")
+    fo = f.split("/")[-1].replace(".bedpe.gz", ".bdg")
     if os.path.isfile(fo):
         return
     t, model = bedpe2model(f)
@@ -73,7 +88,7 @@ def bedpe2bdg(f):
 
 
 def main():
-    fs = glob("../7.seperated/*.bedpe")
+    fs = glob("../1.bedpe/*.gz")
     Parallel(n_jobs=len(fs))(delayed(bedpe2bdg)(f) for f in fs)
 
 

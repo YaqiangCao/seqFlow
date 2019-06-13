@@ -1,1 +1,0 @@
-/picb/molsysbio/usr/caoyaqiang/4.ENV/SG/sage-7.3-cyq/upstream/bio/HiC-Pro-2.10.0/bin/HiC-Pro -i /home/caoyaqiang/caoyaqiang_han/1.Projects/21.cLoops/3.HiC/9.K562_HiC/1.1.Fastq_K562 -o hicpro -c config_human.txt
