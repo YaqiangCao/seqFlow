@@ -34,7 +34,13 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
 
-def bam2Bedpe(bam, bedpe):
+def bam2Bedpe(bam, bedpe,mapq=0):
+    """
+    Converting BAM file to BED file. 
+    bam: bam file path
+    bedpe: bedpe file path
+    mapq: mapq cutoff to remove bad qulity reads.
+    """
     fd = os.path.splitext(bedpe)[0]
     d = os.path.dirname(bedpe)
     if not os.path.exists(d):
@@ -44,7 +50,7 @@ def bam2Bedpe(bam, bedpe):
     #important for paired end reads!!
     samsort = "samtools sort -n -@ 2 {bam} -T {pre} -o {tmpbam}".format(
         bam=bam, tmpbam=nb, pre=nb.replace(".bam", ""))
-    rmunmaped = "samtools view -b -q 0 -F 4 {} >> {}".format(nb, tmpbam)
+    rmunmaped = "samtools view -b -q {} -F 4 {} >> {}".format(mapq,nb, tmpbam)
     callSys([samsort, rmunmaped], logger)
     bam2bedpe = "bamToBed -bedpe -i {bam} > {bedpe}".format(bam=tmpbam,
                                                             bedpe=bedpe)

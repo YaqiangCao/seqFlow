@@ -34,17 +34,23 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
 
 
 
-def bam2Bed(bam, bed, mapq=10):
+def bam2Bed(bam, bed, mapq=0):
+    """
+    Converting BAM file to BED file. 
+    bam: bam file path
+    bed: bed file path
+    mapq: mapq cutoff to remove bad qulity reads.
+    """
     fd = os.path.splitext(bed)[0]
     d = os.path.dirname(bed)
     if not os.path.exists(d):
         os.mkdir(d)
     nb = bam.split("/")[-1]
     tmpbam = fd + ".2.bam"
-    #important for paired end reads!!
+    #important for paired end reads, do it all for all kinds of files.
     samsort = "samtools sort -n -@ 2 {bam} -T {pre} -o {tmpbam}".format(
         bam=bam, tmpbam=nb, pre=nb.replace(".bam", ""))
-    rmunmaped = "samtools view -b -q 0 -F 4 {} >> {}".format(nb, tmpbam)
+    rmunmaped = "samtools view -b -q {} -F 4 {} >> {}".format(mapq,nb, tmpbam)
     callSys([samsort, rmunmaped], logger)
     bam2bed = "bamToBed -i {bam} > {bed}".format(bam=tmpbam, bed=bed)
     logger.info(bam2bed)
@@ -72,8 +78,6 @@ def main():
             continue
         ds.append([bam, nb])
     Parallel(n_jobs=10)(delayed(bam2Bed)(t[0], t[1]) for t in ds)
-
-
 
 
 if __name__ == '__main__':
