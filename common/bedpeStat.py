@@ -32,7 +32,9 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
 
-def getStat(f, dfilter=[80, 140, 180]):
+
+
+def getStat(f,dfilter=[80,140,180]):
     """
     Get the name, redundancy, total PETs, PETs distance mean, distance std for a bedpe file.
     """
@@ -46,7 +48,7 @@ def getStat(f, dfilter=[80, 140, 180]):
     uniques = set()
     ds = []
     t = 0
-    cn, sp, other = 0, 0, 0
+    cn,sp,other=0,0,0
     for i, line in enumerate(of):
         line = line.split("\n")[0].split("\t")
         if line[0] != line[3] or "_" in line[0]:
@@ -54,40 +56,41 @@ def getStat(f, dfilter=[80, 140, 180]):
         t += 1
         s = min(int(line[1]), int(line[4]))
         e = max(int(line[2]), int(line[5]))
-        r = (line[0], s, e)
+        r = (line[0],s,e)
         if r not in uniques:
             uniques.add(r)
-            d = e - s
+            d = e -s
             ds.append(d)
-            if d <= dfilter[0]:  #subnucleosome-sized particles
+            if d <= dfilter[0]: #subnucleosome-sized particles
                 sp += 1
-            elif dfilter[1] <= d <= dfilter[2]:  #canonical nucleosomes
+            elif dfilter[1] <= d <= dfilter[2]: #canonical nucleosomes
                 cn += 1
             else:
                 other += 1
     ds = np.array(ds)
-    redundancy = 1.0 - len(uniques) / 1.0 / t
-    return n, t, len(uniques), redundancy, cn, sp, other, ds.mean(), ds.std()
+    redundancy = 1.0 - len(uniques)/1.0/t
+    return n, t, len(uniques), redundancy, cn,sp,other, ds.mean(), ds.std()
+
 
 
 def main():
-    fs = glob("*.bedpe.gz")
+    fs = glob("*.bedpe.gz") 
     fs.extend(glob("*.bedpe"))
-    data = Parallel(n_jobs=len(fs))(delayed(getStat)(f) for f in fs[:5])
+    data = Parallel(n_jobs=10)(delayed(getStat)(f) for f in fs)
     ds = {}
     for d in data:
-        ds[d[0]] = {
-            "totalMappedPETs": d[1],
-            "uniquePETs": d[2],
-            "redundancy": d[3],
-            "canonicalNucleosomePETs": d[4],
-            "subnucleosomeSizeParticlesPETs": d[5],
-            "otherPETs": d[6],
-            "fragmentLengthMean": d[7],
-            "fragmentLengthStd": d[8]
-        }
+        ds[d[0]] = {"totalMappedPETs": d[1],
+        "uniquePETs":d[2],
+        "redundancy":d[3],
+        "canonicalNucleosomePETs":d[4],
+        "subnucleosomeSizeParticlesPETs":d[5],
+        "otherPETs":d[6],
+        "fragmentLengthMean": d[7], 
+        "fragmentLengthStd": d[8]}
     ds = pd.DataFrame(ds).T
     ds.to_csv("stat.txt", sep="\t")
+
+
 
 
 if __name__ == '__main__':

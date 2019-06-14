@@ -48,11 +48,11 @@ def bam2Bedpe(bam, bedpe,mapq=0):
     nb = bam.split("/")[-1]
     tmpbam = fd + ".2.bam"
     #important for paired end reads!!
+    rmunmaped = "samtools view -b -q {} -F 4 {} >> {}".format(mapq, bam, tmpbam)
     samsort = "samtools sort -n -@ 2 {bam} -T {pre} -o {tmpbam}".format(
-        bam=bam, tmpbam=nb, pre=nb.replace(".bam", ""))
-    rmunmaped = "samtools view -b -q {} -F 4 {} >> {}".format(mapq,nb, tmpbam)
-    callSys([samsort, rmunmaped], logger)
-    bam2bedpe = "bamToBed -bedpe -i {bam} > {bedpe}".format(bam=tmpbam,
+        bam=tmpbam, tmpbam=nb, pre=nb.replace(".bam", ""))
+    callSys([rmunmaped,samsort], logger)
+    bam2bedpe = "bamToBed -bedpe -i {bam} > {bedpe}".format(bam=nb,
                                                             bedpe=bedpe)
     logger.info(bam2bedpe)
     status, output = commands.getstatusoutput(bam2bedpe)
@@ -78,7 +78,7 @@ def main():
             logger.info("%s has been generated. return." % (nb + ".gz"))
             continue
         ds.append([bam, nb])
-    Parallel(n_jobs=20)(delayed(bam2Bedpe)(t[0], t[1]) for t in ds)
+    Parallel(n_jobs=20)(delayed(bam2Bedpe)(t[0], t[1]) for t in ds[:5])
 
 
 if __name__ == '__main__':

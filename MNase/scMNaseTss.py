@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 #--coding:utf-8--
 """
-scMnaseTss.py
+scMNaseTss.py
 2019-06-12: remove redundancy added.
 """
 
@@ -227,12 +227,9 @@ def plotProfile(fcn, fsp, fout):
 
 
 def main():
-    fs = glob("../1.bedpe/*local*.bedpe.gz")
+    fs = glob("./*.bedpe.gz")
     Parallel(n_jobs=len(fs))(delayed(getCnSpProfiles)(f) for f in fs)
-    plotProfile("data/GB4650_local_cn.txt", "data/GB4650_local_sp.txt",
-                "data/GB4650_local")
-    plotProfile("data/GB4651_local_cn.txt", "data/GB4651_local_sp.txt",
-                "data/GB4651_local")
+    plotProfile("data/test_cn.txt","data/test_sp.txt","test")
 
 
 if __name__ == '__main__':
