@@ -68,7 +68,10 @@ def getStat(f,dfilter=[80,140,180]):
             else:
                 other += 1
     ds = np.array(ds)
-    redundancy = 1.0 - len(uniques)/1.0/t
+    if t > 0:
+        redundancy = 1.0 - len(uniques)/1.0/t
+    else:
+        redundancy = 0.0
     return n, t, len(uniques), redundancy, cn,sp,other, ds.mean(), ds.std()
 
 
@@ -76,7 +79,7 @@ def getStat(f,dfilter=[80,140,180]):
 def main():
     fs = glob("*.bedpe.gz") 
     fs.extend(glob("*.bedpe"))
-    data = Parallel(n_jobs=10)(delayed(getStat)(f) for f in fs)
+    data = Parallel(n_jobs=40)(delayed(getStat)(f) for f in fs)
     ds = {}
     for d in data:
         ds[d[0]] = {"totalMappedPETs": d[1],
