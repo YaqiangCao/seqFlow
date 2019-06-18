@@ -69,21 +69,17 @@ def getFeatureCount(f,todir="./data",mode="cN"):
         if mode == "cN" and 140 <= d <= 180:
             #iv = HTSeq.GenomicInterval(line[0], s, e)
             iv = HTSeq.GenomicInterval(line[0], m, m+1)
-            try:
-                for niv, nv in model[iv].steps():
-                    if nv != set([]):
-                        ss.add(nv)
-            except:
-                continue
+            for niv, nv in model[iv].steps():
+                if nv != set([]):
+                    ss.add(nv)
+                    #ss.update(nv)
         elif mode == "sP" and d <= 80: 
             #iv = HTSeq.GenomicInterval(line[0], s, e)
-            try:
-                iv = HTSeq.GenomicInterval(line[0], m, m+1)
-                for niv, nv in model[iv].steps():
-                    if nv != set([]):
-                        ss.add(nv)
-            except:
-                continue
+            iv = HTSeq.GenomicInterval(line[0], m, m+1)
+            for niv, nv in model[iv].steps():
+                if nv != set([]):
+                    #ss.update(nv)
+                    ss.add( nv )
         else:
             continue
     print()
@@ -93,65 +89,60 @@ def getFeatureCount(f,todir="./data",mode="cN"):
     logger.info("file:%s,mode:%s,features:%s"%(f,mode,len(ss)))
 
 
-def summary(pre="conN"):
-    fs = {}
+def summary(pre="pcRNA",suffix="cN",todir="./data"):
     ns = set()
     cs = []
-    fs = glob("data/*.txt")
+    fs = glob("%s/*%s.txt"%(todir,suffix))
     fs.sort()
     for f in fs:
-        n = f.split("/")[-1].split(".txt")[0]
+        n = f.split("/")[-1].split("_%s.txt"%suffix)[0]
         rs = open(f).read().split("\n")
         ns.update(rs)
         cs.append(n)
     ds = np.zeros([len(ns), len(cs)])
     ds = pd.DataFrame(ds, index=ns, columns=cs)
     for f in fs:
-        n = f.split("/")[-1].split(".txt")[0]
+        n = f.split("/")[-1].split("_%s.txt"%suffix)[0]
         rs = open(f).read().split("\n")
         ds[n][rs] = 1.0
         print(ds[n][rs])
-    ds.to_csv("%s_binary.txt"%pre, index_label="nue", sep="\t")
+    ds.to_csv("%s_%s_binary.txt"%(pre,suffix), index_label="pos", sep="\t")
 
 
 def filterMat(f,cut=20):
-    ds = pd.read_csv(f,index_col=0,sep='\t') 
-    ns = []
-    for t in ds.itertuples():
-        if np.sum(t[1:]) < cut:
-            ns.append( t[0] )
-    ds = ds.drop(ns)
-    ds.to_csv(f.replace(".txt","_filter.txt"),index_label="nue",sep="\t")
-
-
-def filterMat2(f,cut=20):
-    ds = pd.read_csv(f,index_col=0,sep='\t') 
-    cs = [c for c in ds.columns if "KO" not in c]
-    ds = ds[cs]
-    ns = []
-    for t in ds.itertuples():
-        if np.sum(t[1:]) < cut:
-            ns.append( t[0] )
-    ds = ds.drop(ns)
-    ds.to_csv(f.replace(".txt","_noKO.txt"),index_label="nue",sep="\t")
+    with open(f.replace(".txt","_filter.txt"),"w") as fo:
+        for i, line in enumerate(open(f)):
+            if i == 0:
+                fo.write(line)
+                continue
+            if i % 1000000 == 0:
+                cFlush("%s read from %s"%(i,f))
+            line = line.split("\n")[0].split("\t")
+            ns = np.array( map(float,line[1:]))
+            if np.sum(ns) >= cut:
+                fo.write("\t".join(line)+"\n")
 
 
 
 def main():
+    """
     todir = "./data"
     if not os.path.exists(todir):
         os.mkdir(todir)
     global model
-    modelf = "../../../8.SetsForClustering/gencode_vM21_lincRNA_TSS_TES_TSS_ext_wins.bed" 
+    modelf = "../../../8.SetsForClustering/mm10_whole_genome_wins.bed" 
     model = getModel(modelf)
-    #only use cell that pass quality control
     fs = glob("../../../5.reduBedpe/*.bedpe.gz")
     ds = pd.read_table("../../../4.bedpe/stat_filter2.txt",index_col=0,sep="\t").index
     fs = [f for f in fs if f.split("/")[-1].split(".bedpe")[0] in ds]
     fs.sort()
-    Parallel(n_jobs=5)(delayed(getFeatureCount)(f,todir,"cN") for f in fs)
-    Parallel(n_jobs=5)(delayed(getFeatureCount)(f,todir,"sP") for f in fs)
-    #summary()
+    Parallel(n_jobs=10)(delayed(getFeatureCount)(f,todir,"cN") for f in fs)
+    Parallel(n_jobs=10)(delayed(getFeatureCount)(f,todir,"sP") for f in fs)
+    summary("pcRNA","cN",todir)
+    summary("pcRNA","sP",todir)
+    """
+    for f in glob("*.txt"):
+        filterMat(f)
 
 
 if __name__ == '__main__':
