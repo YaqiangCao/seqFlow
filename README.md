@@ -6,8 +6,8 @@ Major design idea: one folder one file type, 1.fastq -> 2.bam -> 3.bedpe -> 4.bw
 ## Common
 Non-specific scripts for propressing NGS data.    
 
-0. Utilites, small useful code such as logging setting: [utils.py](https://github.com/YaqiangCao/ngsPipes/blob/master/common/utils.py)
-1. Mapping DNA sequenes to genome: [dnaMapping](https://github.com/YaqiangCao/ngsPipes/blob/master/common/dnaMapping.py)
+0. Utilites, small useful code such as logging setting: [utils.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/utils.py)
+1. Mapping DNA sequenes to genome: [dnaMapping](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/dnaMapping.py)
 
 ---
 ## MNase
