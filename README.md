@@ -2,7 +2,9 @@
 My Linux (CentOS and Ubuntu) computating enviroment and pipelines for NGS data analysis, some scripts were mixed with plot functions, designed with Python, [conda](https://docs.conda.io/en/latest/), [bioconda](https://bioconda.github.io/) and parallel computating. 
 Not stable yet and quite offen updated, hope not outdate.
 
-Major design idea:
+<details><summary>Major design ideas</summary>
+<p>
+
 - if 3rd depedent is missing, install through conda 
 - one folder one file type, 1.fastq -> 2.bam -> 3.bedpe -> 4.bw, for example bam2bedpe.py can work for 2.bam->3.bedpe.
 - except utils.py, majority of them are independent
@@ -10,6 +12,11 @@ Major design idea:
 - only not one-time-usage script
 - modifiy the main funciton is enough to customize specific requriement
 - not mixed with other language like R
+
+</p>
+</details>
+
+
 
 <details><summary>Example of folders organizations</summary>
 <p>
