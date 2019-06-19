@@ -8,6 +8,7 @@ Major design idea:
 - except utils.py, majority of them are independent
 - well documented logging 
 - modifiy the main funciton is enough to customize specific requriement
+- try to maintain stylized and well orgainzed code
 
 ---
 ## Enviroment settings
@@ -34,10 +35,15 @@ Based on [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) and [s
 - [dnaMapping.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/dnaMapping.py)
 
 2. BAM files to BED files conversion
+Based on [bedtools](https://bedtools.readthedocs.io/en/latest/), single end sequencing can be converted to BED file to save disk and easy parsing. 
 - [bam2bed.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bed.py) 
 
 3. BAM files to BEDPE files conversion
+Based on [bedtools](https://bedtools.readthedocs.io/en/latest/), paired end sequencing can be converted to BEDPE file to save disk and easy parsing. 
 - [bam2bedpe.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bedpe.py)
+
+3. BED files to BEDGRAPH files conversion
+Based on 
 
 ---
 ## Peaks 
