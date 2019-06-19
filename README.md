@@ -12,7 +12,7 @@ Major design idea:
 - not mixed with other language like R
 
 Example folders organizations:
-<details><summary>Project1</summary>
+- Project1
     - 1.fastq 
         - a_R1.fastq.gz
         - a_R2.fastq.gz
@@ -20,7 +20,6 @@ Example folders organizations:
         - b_R2.fastq.gz
         - ...
     - 2.mapping
-</details>
 
 ---
 ## Enviroment settings
