@@ -12,7 +12,6 @@ Major design idea:
 - not mixed with other language like R
 
 Example folders organizations:
-```
 - Project1
     1.fastq 
         - a_R1.fastq.gz
@@ -21,7 +20,20 @@ Example folders organizations:
         - b_R2.fastq.gz
         - ...
     2.mapping
-```
+        - a/a.bam
+        - a/a.bai
+        - b/b.bam
+        - b/b.bai
+        - ...
+        - MappingStat.txt
+        - 2019-06-19_dnaMapping.py.log
+    3.bed
+        - a.bed.gz
+        - b.bed.gz
+        - ...
+        - bedStat.txt
+        - 2019-06-19_bedStat.py.log
+
 
 ---
 ## Enviroment settings
