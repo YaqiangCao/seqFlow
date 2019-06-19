@@ -59,12 +59,14 @@ Not stable yet and quite offen updated, hope not outdate.
 
 ---
 ## Enviroment settings
-Mainly based on [conda](https://docs.conda.io/en/latest/) and [bioconda](https://bioconda.github.io/).
+Mainly based on [conda](https://docs.conda.io/en/latest/) and [bioconda](https://bioconda.github.io/).     
+
 The envrioment was generated with latest system settings:
 ```
 conda env export --name ngs > ngs_conda.yaml
 ```
-To obtain the settings
+
+To obtain the settings:
 ```
 conda env create --name ngs --file ngs_conda.yaml
 ```
