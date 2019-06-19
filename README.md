@@ -114,3 +114,7 @@ Specific scripts for analysis of MNase-seq data.
 ---
 ## Plot
 
+---
+## Notebook
+Some analysis tutorials and steps example and explanation, copy the idea from [HOMER](http://homer.ucsd.edu/homer/ngs/).  
+
