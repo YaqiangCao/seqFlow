@@ -25,7 +25,7 @@ date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
 logger = getlogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
-#global 
+#global
 giremi = "/picb/molsysbio2/caoyaqiang/2.WWX_RNA-seq/0.Tools/giremi-0.2.1/giremi"
 FA = "/home/caoyaqiang/cyq_m2/2.WWX_RNA-seq/1.Reference/1.FAs/hg38.fa"
 
@@ -75,9 +75,9 @@ def runGerimi(key, fl, bam):
 
 def main():
     ds = preds()
-    Parallel(n_jobs=10)(delayed(runGerimi)(key,
-                                           ds[key]["giremi"], ds[key]["bam"])
-                        for key in ds.keys())
+    Parallel(n_jobs=10)(
+        delayed(runGerimi)(key, ds[key]["giremi"], ds[key]["bam"])
+        for key in ds.keys())
 
 
 main()

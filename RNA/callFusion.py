@@ -87,9 +87,8 @@ def summaryFusion(cut=5, ncs=5):
 
 #based on ERCC
 def normalizeFusion():
-    ercc = pd.read_table(
-        "../3.ReadsCount/TL_ERCC_counts.txt.summary",
-        index_col=0).loc["Assigned", ]
+    ercc = pd.read_table("../3.ReadsCount/TL_ERCC_counts.txt.summary",
+                         index_col=0).loc["Assigned", ]
     ercc.index = [i.split("/")[-1].split("_")[0] for i in ercc.index]
     mat = pd.read_table("fusions.txt", index_col=0)
     for c in mat.columns:

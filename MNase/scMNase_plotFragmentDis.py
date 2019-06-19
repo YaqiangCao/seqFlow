@@ -34,29 +34,29 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
 
 
 def plotDis():
-    fig,ax = pylab.subplots()
+    fig, ax = pylab.subplots()
     for f in glob("*.bedpe.gz"):
         n = f.split(".bedpe.gz")[0]
         ds = []
-        for i,line in enumerate(gzip.open(f)):
+        for i, line in enumerate(gzip.open(f)):
             if i % 10000 == 0:
-                cFlush("%s read from %s"%(i,f))
+                cFlush("%s read from %s" % (i, f))
             line = line.split("\n")[0].split("\t")
             s = min(int(line[1]), int(line[4]))
             e = max(int(line[2]), int(line[5]))
-            d = e -s
+            d = e - s
             ds.append(d)
         ds = np.array(ds)
-        sns.kdeplot(ds,label=n,ax=ax)
-    ax.axvline(x=80,linewidth=1,linestyle="--",color="gray")
-    ax.text(80,0.001,"80bp")
-    ax.axvline(x=120,linewidth=1,linestyle="--",color="gray")
-    ax.text(120,0.001,"120bp")
-    ax.axvline(x=140,linewidth=1,linestyle="--",color="gray")
-    ax.text(140,0.001,"140bp")
-    ax.axvline(x=180,linewidth=1,linestyle="--",color="gray")
-    ax.text(180,0.001,"180bp")
-    ax.set_xlim([0,300])
+        sns.kdeplot(ds, label=n, ax=ax)
+    ax.axvline(x=80, linewidth=1, linestyle="--", color="gray")
+    ax.text(80, 0.001, "80bp")
+    ax.axvline(x=120, linewidth=1, linestyle="--", color="gray")
+    ax.text(120, 0.001, "120bp")
+    ax.axvline(x=140, linewidth=1, linestyle="--", color="gray")
+    ax.text(140, 0.001, "140bp")
+    ax.axvline(x=180, linewidth=1, linestyle="--", color="gray")
+    ax.text(180, 0.001, "180bp")
+    ax.set_xlim([0, 300])
     ax.set_title("fragment length")
     ax.set_xlabel("length")
     ax.set_ylabel("density")

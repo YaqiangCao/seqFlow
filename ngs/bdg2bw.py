@@ -15,6 +15,7 @@ from joblib import Parallel, delayed
 
 CHROM = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/1.fa/mm10.chrom.sizes"
 
+
 def callSys(cmds):
     """
     Call systematic commands without return.
@@ -55,7 +56,7 @@ def validateBdg(bdg):
 
 def bdg2bw(f):
     n = f.split("/")[-1].replace(".bdg", "")
-    if os.path.isfile(n+".bw"):
+    if os.path.isfile(n + ".bw"):
         return
     cmd1 = "bedSort {bdg} {sbdg}".format(bdg=f, sbdg=n + ".bdg2")
     callSys([cmd1])

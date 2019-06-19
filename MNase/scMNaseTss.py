@@ -229,7 +229,7 @@ def plotProfile(fcn, fsp, fout):
 def main():
     fs = glob("./*.bedpe.gz")
     Parallel(n_jobs=len(fs))(delayed(getCnSpProfiles)(f) for f in fs)
-    plotProfile("data/test_cn.txt","data/test_sp.txt","test")
+    plotProfile("data/test_cn.txt", "data/test_sp.txt", "test")
 
 
 if __name__ == '__main__':

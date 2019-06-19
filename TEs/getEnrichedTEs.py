@@ -84,29 +84,29 @@ def countTEs(f, repf, fout, psedo=1, ext=2):
             "down_count": downc,
             "down_RPKM": downrpkm,
             #"ES": c / 1.0 / ( upc+downc+psedo) * 2, #psedo count to avoid divid zero
-            "ES": rpkm / 1.0 /
-            (uprpkm + downrpkm + psedo) * 2,  #psedo count to avoid divid zero
+            "ES": rpkm / 1.0 / (uprpkm + downrpkm + psedo) *
+            2,  #psedo count to avoid divid zero
         }
     ds = pd.DataFrame(ds).T
     ds.to_csv(fout + ".txt", sep="\t")
 
 
-def filterTEs(escut=2.0,lencut=1000):
+def filterTEs(escut=2.0, lencut=1000):
     ds = set()
     for f in glob("*.txt"):
-        mat = pd.read_table(f,index_col=0)
+        mat = pd.read_table(f, index_col=0)
         es = mat["ES"]
-        es = es[es>=escut]
-        length = mat.loc[es.index,"length"]
-        length = length[length>=lencut]
-        ds.update( length.index)
+        es = es[es >= escut]
+        length = mat.loc[es.index, "length"]
+        length = length[length >= lencut]
+        ds.update(length.index)
     print(ds)
-    with open("enrichedTEs.bed","w") as fo:
+    with open("enrichedTEs.bed", "w") as fo:
         for d in ds:
             nd = d.split("|")
-            line = [nd[0],nd[1],nd[2],d]
-            fo.write( "\t".join(line)+"\n")
-            
+            line = [nd[0], nd[1], nd[2], d]
+            fo.write("\t".join(line) + "\n")
+
 
 def main():
     """
@@ -114,8 +114,11 @@ def main():
     """
     repf = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/5.repeats/mm10Reps.txt"
     fs = glob("../3.sepNcSpBedpe/*cN.bedpe.gz")
-    Parallel(n_jobs=len(fs))(delayed(countTEs)(f,repf,f.split("/")[-1].split(".bedpe")[0]+"_reps") for f in fs)
+    Parallel(n_jobs=len(fs))(
+        delayed(countTEs)(f, repf, f.split("/")[-1].split(".bedpe")[0] +
+                          "_reps") for f in fs)
     filterTEs()
+
 
 if __name__ == '__main__':
     start_time = datetime.now()

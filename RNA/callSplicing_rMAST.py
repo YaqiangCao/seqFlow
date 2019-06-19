@@ -81,13 +81,13 @@ def summarySplicing(r_cut=20):
     """
     using files with suffix as JCEC,IncLevel could be used,also filtering reads numbers
     """
-    terms = ["SE","RI","MXE","A3SS","A5SS"]
+    terms = ["SE", "RI", "MXE", "A3SS", "A5SS"]
     suffix = ".MATS.JCEC.txt"
     for term in terms:
         fout = term + "_summary.txt"
         if os.path.isfile(fout):
             continue
-        fs = glob("*/%s"%(term+suffix))
+        fs = glob("*/%s" % (term + suffix))
         ds = {}
         for f in fs:
             print(f)
@@ -96,11 +96,11 @@ def summarySplicing(r_cut=20):
             nb = n + "T"
             sa = {}
             sb = {}
-            mat = pd.read_table(f,index_col=0)
+            mat = pd.read_table(f, index_col=0)
             for t in mat.itertuples():
-                gid = "|".join(map(str,t[1:11]))
+                gid = "|".join(map(str, t[1:11]))
                 nt = np.array(t[12:16])
-                nt = nt[nt>r_cut]
+                nt = nt[nt > r_cut]
                 if len(nt) < 1:
                     continue
                 sa[gid] = t[20]
@@ -108,30 +108,30 @@ def summarySplicing(r_cut=20):
             ds[na] = sa
             ds[nb] = sb
         ds = pd.DataFrame(ds)
-        ds.to_csv(fout,sep="\t",index_label="id")
+        ds.to_csv(fout, sep="\t", index_label="id")
 
 
-def filterSummary(f,n_cut=50):
-    ds = pd.read_table(f,index_col=0)
+def filterSummary(f, n_cut=50):
+    ds = pd.read_table(f, index_col=0)
     print(ds.shape)
     ns = []
     for t in ds.itertuples():
         nt = pd.Series(t)
         nt = pd.isnull(nt)
-        nt = nt[nt==False]
+        nt = nt[nt == False]
         if len(nt) < n_cut:
             ns.append(t[0])
     ds = ds.drop(ns)
     print(ds.shape)
-    ds.to_csv(f,sep="\t")
- 
+    ds.to_csv(f, sep="\t")
+
 
 def main():
     fs = glob("../2.Mapping/*/*.bam")
     ds = preDs(fs)
     #Parallel(n_jobs=20)(delayed(callSplicing)(t) for t in ds)
     summarySplicing()
-    map(filterSummary,glob("*.txt"))
+    map(filterSummary, glob("*.txt"))
 
 
 main()

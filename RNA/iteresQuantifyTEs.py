@@ -84,53 +84,52 @@ def getReps():
     return reps
 
 
-
-def getFPKMMatrix( reps,pre="HeLa" ):
-    fs = glob.glob( "2.filter/*/*.loci" )
+def getFPKMMatrix(reps, pre="HeLa"):
+    fs = glob.glob("2.filter/*/*.loci")
     fs.sort()
     ns = set()
-    data = {  }
+    data = {}
     for f in fs:
-        fn = f.split( "/" )[ -2 ]
+        fn = f.split("/")[-2]
         print(fn, " being processing.")
-        for line in tqdm(open( f ).read(  ).split( "\n" )[ 1: ]):
-            line = line.split( "\n" )[ 0 ].split( "\t" ) 
-            if len( line ) < 3:
+        for line in tqdm(open(f).read().split("\n")[1:]):
+            line = line.split("\n")[0].split("\t")
+            if len(line) < 3:
                 continue
-            key = ( line[ 0 ],str(int(line[ 1 ])+1) ,line[ 2 ])
+            key = (line[0], str(int(line[1]) + 1), line[2])
             if key not in reps:
                 continue
-            ns.add( reps[key] )
+            ns.add(reps[key])
     ns = list(ns)
     print(len(ns))
     for key in ns:
         data[key] = [0.0] * len(fs)
     fns = []
     for i, f in enumerate(fs):
-        fn = f.split( "/" )[ -2 ]
+        fn = f.split("/")[-2]
         fns.append(fn)
         print(fn, " being processing.")
-        for line in tqdm(open( f ).read(  ).split( "\n" )[ 1: ]):
-            line = line.split( "\n" )[ 0 ].split( "\t" ) 
-            if len( line ) < 3:
+        for line in tqdm(open(f).read().split("\n")[1:]):
+            line = line.split("\n")[0].split("\t")
+            if len(line) < 3:
                 continue
-            key = ( line[ 0 ],str(int(line[ 1 ])+1) ,line[ 2 ])
+            key = (line[0], str(int(line[1]) + 1), line[2])
             if key not in reps:
                 continue
-            key = reps[key] 
-            fpkm = float(line[ 8 ])
+            key = reps[key]
+            fpkm = float(line[8])
             data[key][i] = fpkm
     #data = pd.DataFrame(data,columns = fns)
     data = pd.DataFrame(data).T
     print(data)
     data.columns = fns
-    nis = [  ]
+    nis = []
     for t in tqdm(list(data.itertuples())):
         if np.sum(t[1:]) < 1:
-            nis.append( t[0] )
-    data = data.drop( nis )
-    fn = pre +"_FPKM.txt"
-    data.to_csv( fn,sep="\t",index_label="rep" )
+            nis.append(t[0])
+    data = data.drop(nis)
+    fn = pre + "_FPKM.txt"
+    data.to_csv(fn, sep="\t", index_label="rep")
     print "finished!"
 
 
@@ -160,17 +159,16 @@ def getCountsMatrix(reps, pre="TL_TEs"):
     print "finished!"
 
 
-
-def filterCountsMatrix(f,readsCut=10,sampleCut=10):
-    mat = pd.read_table(f,sep="\t",index_col=0,header=0)
+def filterCountsMatrix(f, readsCut=10, sampleCut=10):
+    mat = pd.read_table(f, sep="\t", index_col=0, header=0)
     for t in mat.itertuples():
         s = np.array(t[1:])
-        s = s[s>readsCut]
+        s = s[s > readsCut]
         if len(s) < sampleCut:
             ns.append(t[0])
-    mat = mat.drop(ns,axis=0)
-    mat.to_csv(f.replace(".txt","_filter.txt"),sep="\t")
- 
+    mat = mat.drop(ns, axis=0)
+    mat.to_csv(f.replace(".txt", "_filter.txt"), sep="\t")
+
 
 def main():
     #pipeline()

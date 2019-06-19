@@ -33,7 +33,7 @@ import pandas as pd
 from joblib import Parallel, delayed
 import brewer2mpl
 
-#this 
+#this
 from utils import getLogger
 
 #global settings
@@ -208,12 +208,11 @@ def parse_STAR_log(logs=None, fOut="MappingStat.txt",
         unique_map_ratio = float(mat.iloc[8, 1].replace("%", ""))
         multiple_map_ratio = float(mat.iloc[23, 1].replace("%", ""))
         chimera_map_ratio = float(mat.iloc[32, 1].replace("%", ""))
-        data[sample] = pd.Series(
-            [
-                total_reads, unique_map_ratio, multiple_map_ratio,
-                chimera_map_ratio
-            ],
-            index=columns)
+        data[sample] = pd.Series([
+            total_reads, unique_map_ratio, multiple_map_ratio,
+            chimera_map_ratio
+        ],
+                                 index=columns)
     data = pd.DataFrame(data)
     data = data.T
     if fOut != None:
@@ -244,20 +243,18 @@ def plot_STAR_stat(data, pre="MappingStat"):
     ax2 = ax.twinx()
     umr = data.loc[:, "UniqueMapRatio"].values
     mmr = data.loc[:, "MultipleMapRatio"].values
-    ax2.plot(
-        ind + width / 2,
-        umr,
-        color="b",
-        marker="s",
-        ms=1,
-        label="Unique Mapping Ratio ")
-    ax2.plot(
-        ind + width / 2,
-        mmr,
-        color="r",
-        marker="h",
-        ms=1,
-        label="Multiple Mapping Ratio")
+    ax2.plot(ind + width / 2,
+             umr,
+             color="b",
+             marker="s",
+             ms=1,
+             label="Unique Mapping Ratio ")
+    ax2.plot(ind + width / 2,
+             mmr,
+             color="r",
+             marker="h",
+             ms=1,
+             label="Multiple Mapping Ratio")
     for t in ax2.get_yticklabels():
         t.set_color("r")
     ax2.set_ylim([0, 100])
@@ -295,15 +292,15 @@ def main():
     data = prepare_fastq(Fastq_Root)
     Parallel(n_jobs=6)(delayed(STAR_multiplemapping)(sample, fqs, mapping_Root)
                        for sample, fqs in data.items())
-    data = parse_STAR_log(
-        logs=None, fOut="MappingStat.txt", mapping_root=mapping_Root)
+    data = parse_STAR_log(logs=None,
+                          fOut="MappingStat.txt",
+                          mapping_root=mapping_Root)
     data = pd.read_table("MappingStat.txt", index_col=0)
     plot_STAR_stat(data, pre="MappingStat")
     #bams = glob("*/*out.bam")
     #Parallel(n_jobs=-1)(delayed(rm_dup_unmap)(bam) for bam in bams)
     bams = glob("*/*out.bam")
     Parallel(n_jobs=-1)(delayed(STAR_pileup)(bam) for bam in bams)
-
 
 
 if __name__ == '__main__':

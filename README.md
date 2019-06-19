@@ -8,7 +8,7 @@ Major design idea:
 - except utils.py, majority of them are independent
 - well documented logging 
 - modifiy the main funciton is enough to customize specific requriement
-- try to maintain stylized and well orgainzed code
+- try to maintain stylized and well orgainzed Python code [I am quite not like R].
 
 ---
 ## Enviroment settings

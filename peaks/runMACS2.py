@@ -23,11 +23,14 @@ def call_sys(cmds):
         except:
             logger.error(c)
 
+
 def callPeaks(bed):
     sample = bed.split("/")[-1].split(".")[0]
-    doMACS = "macs2 callpeak -t {bed} -n {sample} -B --SPMR -g mm --nomodel --shift 0 --extsize 75 --keep-dup 1 --outdir {out}".format( bed=bed, sample=sample, out="./" + sample)
+    doMACS = "macs2 callpeak -t {bed} -n {sample} -B --SPMR -g mm --nomodel --shift 0 --extsize 75 --keep-dup 1 --outdir {out}".format(
+        bed=bed, sample=sample, out="./" + sample)
     print(doMACS)
     os.system(doMACS)
+
 
 def main():
     fs = glob("../1.beds/*.bed.gz")

@@ -63,7 +63,7 @@ def bedpe2model(bg, mapq=1):
         #if r not in rs:
         iv = HTSeq.GenomicInterval(chrom, s, e)
         model[iv] += 1
-            #rs.add(r)
+        #rs.add(r)
     print("%s:totalReads:%s;nonRedudant:%s" % (f, t, len(rs)))
     logger.info("%s:totalReads:%s;nonRedudant:%s" % (f, t, len(rs)))
     return t, model
@@ -89,7 +89,7 @@ def bedpe2bdg(f):
 
 def main():
     fs = glob("../4.reduBedpe/*.gz")
-    fs.extend( glob("../4.1.reduBedpe_mapq10/*.gz"))
+    fs.extend(glob("../4.1.reduBedpe_mapq10/*.gz"))
     Parallel(n_jobs=len(fs))(delayed(bedpe2bdg)(f) for f in fs)
 
 

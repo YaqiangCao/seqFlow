@@ -9,7 +9,7 @@ __modified__ = ""
 __email__ = "caoyaqiang0410@gmail.com"
 
 #sys
-import os, json, gzip,time
+import os, json, gzip, time
 from glob import glob
 from itertools import izip
 from datetime import datetime
@@ -94,7 +94,7 @@ def sepFqs(fq1, fq2, pre):
             stats["PFV_TNP"][key] = 0
     #processing pairing fastqs
     #with open(fq1) as f1, open(fq2) as f2:
-    with gzip.open(fq1,"rb") as f1, gzip.open(fq2,"rb") as f2:
+    with gzip.open(fq1, "rb") as f1, gzip.open(fq2, "rb") as f2:
         i = 0
         #for r1,r2 in zip(SeqIO.parse(f1,"fastq"),SeqIO.parse(f2,"fastq")):
         for r1, r2 in izip(FastqGeneralIterator(f1), FastqGeneralIterator(f2)):
@@ -147,15 +147,16 @@ def main():
     sepFqs("test_R1.fastq.gz","test_R2.fastq.gz","test/test")
     """
     data = prepare_fastq("../1.fastq/")
-    #specific settings 
+    #specific settings
     ds = {}
-    for key,v in data.items():
+    for key, v in data.items():
         if not os.path.exists(key):
             os.mkdir(key)
-        nkey = key +"/" +key
+        nkey = key + "/" + key
         ds[nkey] = v
     data = ds
-    Parallel(n_jobs=len(data))(delayed(sepFqs)(fqs[0],fqs[1],sample) for sample, fqs in data.items())
+    Parallel(n_jobs=len(data))(delayed(sepFqs)(fqs[0], fqs[1], sample)
+                               for sample, fqs in data.items())
 
 
 if __name__ == '__main__':

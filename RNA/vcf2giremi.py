@@ -53,11 +53,10 @@ def getGeneModel():
     genes = getGenes()
     model = HTSeq.GenomicArrayOfSets("auto", stranded=False)
     for g in genes.keys():
-        iv = HTSeq.GenomicInterval(
-            genes[g]["chr"],
-            genes[g]["start"],
-            genes[g]["end"],
-            strand=genes[g]["strand"])
+        iv = HTSeq.GenomicInterval(genes[g]["chr"],
+                                   genes[g]["start"],
+                                   genes[g]["end"],
+                                   strand=genes[g]["strand"])
         model[iv] += g
     return model, genes
 
