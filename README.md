@@ -1,5 +1,6 @@
 ## Introduction
 My Linux (CentOS and Ubuntu) computating enviroment and pipelines for NGS data analysis, some scripts were mixed with plot functions, designed with Python, [conda](https://docs.conda.io/en/latest/), [bioconda](https://bioconda.github.io/) and parallel computating. 
+
 Not stable yet and quite offen updated, hope not outdate.
 
 <details><summary>Major design ideas</summary>
