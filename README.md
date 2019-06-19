@@ -11,7 +11,9 @@ Major design idea:
 - modifiy the main funciton is enough to customize specific requriement
 - not mixed with other language like R
 
-Example folders organizations:
+<details><summary>Example of folders organizations</summary>
+<p>
+
 ```
 - Project1   
     1.fastq    
@@ -42,8 +44,10 @@ Example folders organizations:
         - b.bdg 
         - ...
         - bed2bdg.py
-        
 ```
+
+</p>
+</details>
 
 ---
 ## Enviroment settings
