@@ -13,8 +13,13 @@ Major design idea:
 
 Example folders organizations:
 <details><summary>Project1</summary>
-    <details><summary> 1.fastq <summary>
-    </details>
+    - 1.fastq 
+        - a_R1.fastq.gz
+        - a_R2.fastq.gz
+        - b_R1.fastq.gz
+        - b_R2.fastq.gz
+        - ...
+    - 2.mapping
 </details>
 
 ---
