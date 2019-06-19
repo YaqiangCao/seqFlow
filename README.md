@@ -22,21 +22,22 @@ conda env create --name ngs --file ngs_conda.yaml
 ```
 
 ---
-## Common
+## ngs
 Non-specific scripts for propressing NGS data.    
 
 0. Utilites
 Usefule frequent used code including logging, call system funciton with logging, basic data structure, ploting settings, and only depends on python.      
-[utils.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/utils.py)   
+- [utils.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/utils.py)   
 
-1. Mapping DNA sequenes to genome (obtain BAM) and get mapping stats
-[dnaMapping.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/dnaMapping.py)
+1. Mapping DNA sequenes to genome (obtain BAM) and get mapping stats     
+Based on [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) and [samtools](http://samtools.sourceforge.net/). The mapping stats were parsed from Bowtie2 print logging.  
+- [dnaMapping.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/dnaMapping.py)
 
 2. BAM files to BED files conversion
-[bam2bed.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bed.py) 
+- [bam2bed.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bed.py) 
 
 3. BAM files to BEDPE files conversion
-[bam2bedpe.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bedpe.py)
+- [bam2bedpe.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bedpe.py)
 
 ---
 ## Peaks 
