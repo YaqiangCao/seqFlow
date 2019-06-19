@@ -1,5 +1,5 @@
 ## Introduction
-My computating enviroment and pipelines for NGS data analysis, some scripts were mixed with plot functions, designed with Python, [conda](https://docs.conda.io/en/latest/), [bioconda](https://bioconda.github.io/) and parallel computating. 
+My Linux (CentOS and Ubuntu) computating enviroment and pipelines for NGS data analysis, some scripts were mixed with plot functions, designed with Python, [conda](https://docs.conda.io/en/latest/), [bioconda](https://bioconda.github.io/) and parallel computating. 
 Not stable yet and quite updaetd, hope not out-dated.
 
 Major design idea:
@@ -25,8 +25,8 @@ conda env create --name ngs --file ngs_conda.yaml
 ## Common
 Non-specific scripts for propressing NGS data.    
 
-0. Utilites, small useful code such as logging setting
-Including logging, call system funciton with logging, basic data structure, ploting settings, and only depends on python.
+0. Utilites
+Usefule frequent used code including logging, call system funciton with logging, basic data structure, ploting settings, and only depends on python.      
 [utils.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/utils.py)   
 
 1. Mapping DNA sequenes to genome (obtain BAM) and get mapping stats
