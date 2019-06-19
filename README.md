@@ -13,8 +13,7 @@ Major design idea:
 
 Example folders organizations:
 <details><summary>Project1</summary>
-    <details> 
-    1.fastq
+    <details><summary> 1.fastq <summary>
     </details>
 </details>
 
