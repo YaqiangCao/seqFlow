@@ -11,6 +11,7 @@ Major design idea:
 Non-specific scripts for propressing NGS data.    
 
 0. Utilites, small useful code such as logging setting
+Including logging, call system funciton with logging, basic data structure, ploting settings, and only depends on python.
 [utils.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/utils.py)   
 
 1. Mapping DNA sequenes to genome (obtain BAM) and get mapping stats
@@ -20,7 +21,7 @@ Non-specific scripts for propressing NGS data.
 [bam2bed.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bed.py) 
 
 3. BAM files to BEDPE files conversion
-[]
+[bam2bedpe.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bedpe.py)
 
 ---
 ## Peaks 
