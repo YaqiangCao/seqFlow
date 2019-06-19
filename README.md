@@ -3,6 +3,7 @@ My computating enviroment and pipelines for NGS data analysis, some scripts were
 Not stable yet and quite updaetd, hope not out-dated.
 
 Major design idea:
+- if 3rd depedent is missing, install through conda 
 - one folder one file type, 1.fastq -> 2.bam -> 3.bedpe -> 4.bw, for example bam2bedpe.py can work for 2.bam->3.bedpe.
 - except utils.py, majority of them are independent
 - well documented logging 
@@ -10,7 +11,15 @@ Major design idea:
 
 ---
 ## Enviroment settings
-Mainly based on [conda]() and [bioconda]().
+Mainly based on [conda](https://docs.conda.io/en/latest/) and [bioconda](https://bioconda.github.io/).
+The envrioment was generated with latest system settings:
+```
+conda env export --name ngs > ngs_conda.yaml
+```
+To obtain the settings
+```
+conda env create --name ngs --file ngs_conda.yaml
+```
 
 ---
 ## Common
