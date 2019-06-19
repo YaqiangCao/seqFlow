@@ -11,6 +11,13 @@ Major design idea:
 - modifiy the main funciton is enough to customize specific requriement
 - not mixed with other language like R
 
+Example folders organizations:
+<details><summary>Project1</summary>
+    <details> 
+    1.fastq
+    </details>
+</details>
+
 ---
 ## Enviroment settings
 Mainly based on [conda](https://docs.conda.io/en/latest/) and [bioconda](https://bioconda.github.io/).
