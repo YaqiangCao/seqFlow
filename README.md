@@ -1,10 +1,17 @@
-My pipelines for commonly processed NGS data, some were mixed with plot functions, designed with Python and parallel computating. Maybe not stable and may need updates and modifications.
+---
+## Introduction
+My computating enviroment and pipelines for NGS data analysis, some scripts were mixed with plot functions, designed with Python, [conda](https://docs.conda.io/en/latest/), [bioconda](https://bioconda.github.io/) and parallel computating. 
+Not stable yet and quite updaetd, hope not out-dated.
 
 Major design idea:
 - one folder one file type, 1.fastq -> 2.bam -> 3.bedpe -> 4.bw, for example bam2bedpe.py can work for 2.bam->3.bedpe.
 - except utils.py, majority of them are independent
 - well documented logging 
 - modifiy the main funciton is enough to customize specific requriement
+
+---
+## Enviroment settings
+Mainly based on [conda]() and [bioconda]().
 
 ---
 ## Common
