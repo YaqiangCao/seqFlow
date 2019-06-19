@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 #--coding:utf-8--
 """
-bedpeStat.py
+scMNase_bedpeStat.py
 2019-06-13: modified as add more stats, such as how many cn and sp PETs.
 """
 

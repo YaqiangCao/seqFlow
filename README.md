@@ -9,7 +9,7 @@ Major design idea:
 - well documented logging 
 - only not one-time-usage script
 - modifiy the main funciton is enough to customize specific requriement
-- not mixed with other code language like R
+- not mixed with other language like R
 
 ---
 ## Enviroment settings
@@ -43,7 +43,10 @@ Based on [bedtools](https://bedtools.readthedocs.io/en/latest/), single end sequ
 Based on [bedtools](https://bedtools.readthedocs.io/en/latest/), paired end sequencing can be converted to BEDPE file to save disk and easy parsing. 
 - [bam2bedpe.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bedpe.py)
 
-3. BED files to BEDGRAPH files conversion
+4. BED files to BEDGRAPH files conversion
+Based on 
+
+5. BED files to BEDGRAPH files conversion
 Based on 
 
 ---
