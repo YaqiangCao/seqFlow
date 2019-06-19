@@ -26,14 +26,23 @@ Example folders organizations:
         - b/b.bam   
         - b/b.bai   
         - ...   
+        - dnaMapping.py
         - MappingStat.txt   
         - 2019-06-19_dnaMapping.py.log   
     3.bed       
         - a.bed.gz   
         - b.bed.gz   
         - ...     
+        - bam2bed.py
+        - bedStat.py
         - bedStat.txt       
         - 2019-06-19_bedStat.py.log   
+    4.bedgraph
+        - a.bdg
+        - b.bdg 
+        - ...
+        - bed2bdg.py
+        
 ```
 
 ---
