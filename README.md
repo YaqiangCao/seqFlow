@@ -12,14 +12,16 @@ Major design idea:
 - not mixed with other language like R
 
 Example folders organizations:
+```
 - Project1
-    - 1.fastq 
+    1.fastq 
         - a_R1.fastq.gz
         - a_R2.fastq.gz
         - b_R1.fastq.gz
         - b_R2.fastq.gz
         - ...
-    - 2.mapping
+    2.mapping
+```
 
 ---
 ## Enviroment settings
