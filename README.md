@@ -99,7 +99,7 @@ Based on
 
 ---
 ## Peaks 
-Specific scripts for analysis of peak-centric data, such as ChIP-seq, DNase-seq and etc. 
+Specific scripts for analysis of peak-centric data, such as ChIP-seq, ATAC-seq, DNase-seq and etc. 
 
 ---
 ## Loops 
@@ -118,5 +118,5 @@ Specific scripts for analysis of MNase-seq data.
 
 ---
 ## Notebook
-Some analysis tutorials and steps example and explanation, copy the idea from [HOMER](http://homer.ucsd.edu/homer/ngs/).  
+Some analysis tutorials and step examples and explanation, copy the idea from [HOMER](http://homer.ucsd.edu/homer/ngs/).  
 
