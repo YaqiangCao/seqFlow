@@ -7,8 +7,9 @@ Major design idea:
 - one folder one file type, 1.fastq -> 2.bam -> 3.bedpe -> 4.bw, for example bam2bedpe.py can work for 2.bam->3.bedpe.
 - except utils.py, majority of them are independent
 - well documented logging 
+- only not one-time-usage script
 - modifiy the main funciton is enough to customize specific requriement
-- try to maintain stylized and well orgainzed Python code [I am quite not like R].
+- not mixed with other code language like R
 
 ---
 ## Enviroment settings
