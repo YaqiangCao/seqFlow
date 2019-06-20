@@ -60,8 +60,8 @@ Not stable yet and quite offen updated, hope not outdate.
 <details><summary>Example main function</summary>
 <p>
 
+change main function should be enough, going to add [click](https://github.com/pallets/click/) for flow outside the script.
 ```python
-#change main function should be enough, going to add [click](https://github.com/pallets/click/) 
 def main():
     #last step directory
     data = prepare_fastq("../2.fastq/")
