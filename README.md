@@ -61,7 +61,7 @@ Not stable yet and quite offen updated, hope not outdate.
 <p>
 
 ```python
-#change main function should be enough 
+#change main function should be enough, going to add [click](https://github.com/pallets/click/) 
 def main():
     #last step directory
     data = prepare_fastq("../2.fastq/")
