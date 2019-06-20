@@ -93,10 +93,8 @@ def sepFqs(fq1, fq2, pre):
             }
             stats["PFV_TNP"][key] = 0
     #processing pairing fastqs
-    #with open(fq1) as f1, open(fq2) as f2:
     with gzip.open(fq1, "rb") as f1, gzip.open(fq2, "rb") as f2:
         i = 0
-        #for r1,r2 in zip(SeqIO.parse(f1,"fastq"),SeqIO.parse(f2,"fastq")):
         for r1, r2 in izip(FastqGeneralIterator(f1), FastqGeneralIterator(f2)):
             #r1 = (title,seq,qual)
             r1, r2 = list(r1), list(r2)
