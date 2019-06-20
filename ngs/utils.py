@@ -2,7 +2,7 @@
 #--coding:utf-8--
 """
 utils.py
-2019-06-19
+2019-06-19: function timer added 
 """
 import time, logging, sys, os
 from datetime import datetime
@@ -22,8 +22,24 @@ __author__ = "CAO Yaqiang"
 __date__ = "2019-05-28"
 __email__ = "caoyaqiang0410@gmail.com"
 
+def timer(func,REPEATS=5):
+    """
+    Timer as decorator
+    REPEATS: int, repeat time to run target function. 
+    """
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        for _ in range(REPEATS):
+            v = func(*args, **kwargs)
+        t = (time.time() - start ) / REPEATS
+        print("{} time elapsed: {}".format(func.__name__ , t))
+        return v
+    return wrapper
 
 def getLogger(fn=os.getcwd() + "/" + os.path.basename(__file__) + ".log"):
+    """
+    Return the logger with output to stdout and log file. 
+    """
     #get the current time
     date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
     #set up logging, both write log info to console and log file
