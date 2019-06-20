@@ -81,7 +81,20 @@ Usefule frequent used code including logging, call system funciton with logging,
 
 1. Mapping DNA sequenes to genome (obtain BAM) and get mapping stats     
 Based on [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) and [samtools](http://samtools.sourceforge.net/). The mapping stats were parsed from Bowtie2 print logging.  
-- [dnaMapping.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/dnaMapping.py)
+- [dnaMapping.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/dnaMapping.py) 
+For example, the main funciton part, modified the comment place, later, maybe changed to command line interface.
+```python
+def main():
+    #last step directory
+    data = prepare_fastq("../2.fastq/")
+    #bowtie2 index
+    ref = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10"
+    Parallel(n_jobs=30)(delayed(mapping)(sample, fqs, ref, 2)
+                        for sample, fqs in data.items())
+    data = parseBowtielog()
+    data.to_csv("MappingStat.txt", sep="\t", index_label="samples")
+
+```
 
 2. BAM files to BED files conversion
 Based on [bedtools](https://bedtools.readthedocs.io/en/latest/), single end sequencing can be converted to BED file to save disk and easy parsing. 
