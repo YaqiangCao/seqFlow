@@ -82,7 +82,8 @@ Usefule frequent used code including logging, call system funciton with logging,
 1. Mapping DNA sequenes to genome (obtain BAM) and get mapping stats     
 Based on [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) and [samtools](http://samtools.sourceforge.net/). The mapping stats were parsed from Bowtie2 print logging.  
 - [dnaMapping.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/dnaMapping.py)    
-<details><summary><Example main function></summary>
+
+<details><summary>Example main function</summary>
 <p>
 
 ```python
