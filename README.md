@@ -1,7 +1,7 @@
 ## Introduction
-ngsflow is my Linux (CentOS and Ubuntu) computating enviroment and pipelines for NGS data analysis, some scripts were mixed with plot functions, designed with Python, [conda](https://docs.conda.io/en/latest/), [bioconda](https://bioconda.github.io/) and parallel computating. The name copyed the idea of [tensorflow](https://www.tensorflow.org/).
+ngsflow is my Linux (CentOS and Ubuntu) computating enviroment and pipelines for NGS data analysis (especially pre-processing & quality control part), some scripts were mixed with plot functions, designed with Python, [conda](https://docs.conda.io/en/latest/), [bioconda](https://bioconda.github.io/) and parallel computating. The name copyed the idea of [tensorflow](https://www.tensorflow.org/).
 
-Not stable yet and quite offen updated, hope not outdate.
+Not stable yet and quite offen updated, hope not outdate, favor of contributions and collborators.
 
 <details><summary>Major design ideas</summary>
 <p>
@@ -134,12 +134,6 @@ Based on [bedtools](https://bedtools.readthedocs.io/en/latest/), single end sequ
 Based on [bedtools](https://bedtools.readthedocs.io/en/latest/), paired end sequencing can be converted to BEDPE file to save disk and easy parsing. 
 - [bam2bedpe.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bedpe.py)
 
-4. BED files to BEDGRAPH files conversion
-Based on 
-
-5. BED files to BEDGRAPH files conversion
-Based on 
-
 ---
 ## Peaks 
 Specific scripts for analysis of peak-centric data, such as ChIP-seq, ATAC-seq, DNase-seq and etc. 
@@ -158,6 +152,7 @@ Specific scripts for analysis of MNase-seq data.
 
 ---
 ## Plot
+Some usefule code to generate common shown figures in papers.
 
 ---
 ## Notebook
