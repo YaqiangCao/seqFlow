@@ -76,6 +76,29 @@ def main():
 </p>
 </details>
 
+<details><summary>Example of log</summary>
+<p>
+
+```
+2019-06-15 14:01:36 root   INFO     Start mapping KZ1374_GB3529_S49_L003.
+
+2019-06-15 14:01:36 root   INFO     bowtie2 --no-mixed --no-discordant -p 10 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../7.T_fastq/KZ1374_GB3529_S49_L003_R1_001.fastq.gz -2 ../7.T_fastq/KZ1374_GB3529_S49_L003_R2_001.fastq.gz -S KZ1374_GB3529_S49_L003/KZ1374_GB3529_S49_L003.sam
+2019-06-15 14:01:36 root   INFO     Start mapping KZ1377_GB3608_S128_L005.
+
+2019-06-15 14:01:44 root   INFO     FLAG_A:KZ1374_GB3529_S49_L003
+25566 reads; of these:
+  25566 (100.00%) were paired; of these:
+    11510 (45.02%) aligned concordantly 0 times
+    10716 (41.92%) aligned concordantly exactly 1 time
+    3340 (13.06%) aligned concordantly >1 times
+54.98% overall alignment rate
+FLAG_A
+
+
+```
+</p>
+</details>
+
 
 ---
 ## Enviroment settings
