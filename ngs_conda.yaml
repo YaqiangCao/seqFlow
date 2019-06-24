@@ -1,5 +1,6 @@
-name: cLoops
+name: ngs
 channels:
+  - anaconda
   - conda-forge
   - bioconda
   - defaults
@@ -14,7 +15,7 @@ dependencies:
   - bowtie2=2.3.5=py27he860b03_0
   - bzip2=1.0.6=h14c3975_1002
   - ca-certificates=2019.6.16=hecc5488_0
-  - certifi=2019.3.9=py27_0
+  - certifi=2019.6.16=py27_0
   - curl=7.64.1=hbc83047_0
   - cycler=0.10.0=py27hc7354d3_0
   - dbus=1.13.6=h746ee38_0
@@ -22,14 +23,13 @@ dependencies:
   - enum34=1.1.6=py27_1001
   - expat=2.2.6=he6710b0_0
   - fontconfig=2.13.0=h9420a91_0
-  - freetype=2.9.1=h8a8886c_1
+  - freetype=2.10.0=he983fc9_0
   - functools32=3.2.3.2=py27_1
   - futures=3.2.0=py27_0
   - glib=2.56.2=hd408876_0
   - gst-plugins-base=1.14.0=hbbd80ab_1
   - gstreamer=1.14.0=hb453b48_1
   - htop=2.2.0=hf8c457e_1000
-  - htseq=0.11.2=py27h637b7d7_1
   - htslib=1.9=ha228f0b_7
   - icu=58.2=h9c2bf20_1
   - intel-openmp=2019.3=199
@@ -48,7 +48,9 @@ dependencies:
   - libgcc=7.2.0=h69d50b8_2
   - libgcc-ng=8.2.0=hdf63c60_1
   - libgfortran-ng=7.3.0=hdf63c60_0
-  - libpng=1.6.37=hbc83047_0
+  - libpng=1.6.37=hed695b0_0
+  - libpng-cos6-x86_64=1.2.49=0
+  - libpng-devel-cos6-x86_64=1.2.49=0
   - libssh2=1.8.2=h22169c7_2
   - libstdcxx-ng=8.2.0=hdf63c60_1
   - libuuid=1.0.3=h1bed415_2
@@ -75,7 +77,7 @@ dependencies:
   - ptyprocess=0.6.0=py_1001
   - pygments=2.4.2=py_0
   - pyparsing=2.4.0=py_0
-  - pyqt=5.9.2=py27h05f1152_2
+  - pyqt=5.9.2=py27hcca6a23_0
   - pysam=0.15.2=py27h4b7d16d_3
   - python=2.7.16=h9bab390_0
   - python-dateutil=2.8.0=py27_0
@@ -86,7 +88,7 @@ dependencies:
   - scandir=1.10.0=py27h14c3975_0
   - scikit-learn=0.20.3=py27ha8026db_1
   - scipy=1.2.1=py27h7c811a0_0
-  - seaborn=0.9.0=py27_0
+  - seaborn=0.9.0=py_0
   - setuptools=41.0.1=py27_0
   - simplegeneric=0.8.1=py_1
   - singledispatch=3.4.0.3=py27_0
@@ -100,8 +102,6 @@ dependencies:
   - tornado=5.1.1=py27h7b6447c_0
   - tqdm=4.32.1=py_0
   - traitlets=4.3.2=py27_1000
-  - ucsc-bedgraphtobigwig=357=1
-  - ucsc-bedsort=357=1
   - wcwidth=0.1.7=py_1
   - wheel=0.33.4=py27_0
   - xz=5.2.4=h14c3975_4
@@ -109,5 +109,5 @@ dependencies:
   - zlib=1.2.11=h7b6447c_3
   - pip:
     - brewer2mpl==1.4.1
-prefix: /home/caoy7/anaconda2/envs/cLoops
+prefix: /home/caoy7/anaconda2/envs/ngs
 

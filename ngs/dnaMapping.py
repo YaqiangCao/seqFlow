@@ -51,9 +51,9 @@ def prepare_fastq(Fastq_Root="../2.reid/"):
             data[sample][1] = fq
         if not s.endswith("_R1") and not s.endswith("_R2"):
             data[s] = [fq]
-    for key in data.keys():
-        if 0 in data[key] or len(data[key]) != 2:
-            del data[key]
+    #for key in data.keys():
+    #    if 0 in data[key] or len(data[key]) != 2:
+    #        del data[key]
     return data
 
 
