@@ -11,7 +11,7 @@ __modified__ = ""
 __email__ = "caoyaqiang0410@gmail.com"
 
 #sys
-import os, gzip, sys, random,time
+import os, gzip, sys, random, time
 from datetime import datetime
 from glob import glob
 from collections import Counter
@@ -23,8 +23,8 @@ import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
 
-# this
-from utils import cFlush,getLogger,callSys,PET
+#seqFlow
+from utils import cFlush, getLogger, callSys, PET
 
 #global setting
 #logger
@@ -52,7 +52,8 @@ def bedpe2model(bg, mapq=1):
         fh = gzip.open(bg, "rb")
     else:
         fh = open(bg)
-    logger.info("Start building model for %s, with MAPQ cutoff >=%s" % (bg,mapq))
+    logger.info("Start building model for %s, with MAPQ cutoff >=%s" %
+                (bg, mapq))
     model = HTSeq.GenomicArray("auto", stranded=False)
     t = 0
     for i, line in enumerate(fh):
@@ -61,9 +62,9 @@ def bedpe2model(bg, mapq=1):
             cFlush(report)
         line = line.split("\n")[0].split("\t")
         try:
-            pet = PET(line) 
+            pet = PET(line)
         except:
-            logger.error("%s from %s is not a BEDPE record"%(line,bg))
+            logger.error("%s from %s is not a BEDPE record" % (line, bg))
         if not pet.cis or "_" in pet.chromA:
             continue
         if pet.mapq < mapq:
@@ -97,7 +98,7 @@ def model2bedgraph(t, model, fout):
                 fo.write("\t".join(line) + "\n")
 
 
-def bedpe2bdg(f,mapq=1):
+def bedpe2bdg(f, mapq=1):
     """
     Convert BEDPE file to BEDGRAPH file.
 
@@ -109,23 +110,30 @@ def bedpe2bdg(f,mapq=1):
     fo = f.split("/")[-1].replace(".bedpe.gz", ".bdg")
     if os.path.isfile(fo):
         return
-    t, model = bedpe2model(f,mapq)
+    t, model = bedpe2model(f, mapq)
     model2bedgraph(t, model, fo)
 
 
 @click.command()
-@click.option("-dir",required=True,help="Directory for the .bedpe.gz files.")
-@click.option("-mapq",default=1,help="MAPQ cutoff for filtering PETs.")
-@click.option("-cpu",default=10,help="Number of CPUs to finish the job, default is set to 10.")
-def main(dir,cpu,mapq):
+@click.option(
+    "-pattern",
+    required=True,
+    help=
+    "Directory and patterns for the .bedpe.gz files, for example ../2.bedpe/mouse*.bedpe.gz"
+)
+@click.option("-mapq", default=1, help="MAPQ cutoff for filtering PETs.")
+@click.option("-cpu",
+              default=10,
+              help="Number of CPUs to finish the job, default is set to 10.")
+def main(dir, cpu, mapq):
     """
     Converting .bedpe.gz files from other directory into this directory .bedgraph files.
     """
     if not os.path.exists(dir):
-        logger.error("%s not exists!"%dir)
-    fs = glob("%s/*.bedpe.gz"%dir)
-    cpu = min(cpu,len(fs))
-    Parallel(n_jobs=cpu)(delayed(bedpe2bdg)(f,mapq) for f in fs)
+        logger.error("%s not exists!" % dir)
+    fs = glob("%s/*.bedpe.gz" % dir)
+    cpu = min(cpu, len(fs))
+    Parallel(n_jobs=cpu)(delayed(bedpe2bdg)(f, mapq) for f in fs)
 
 
 if __name__ == '__main__':
@@ -133,4 +141,5 @@ if __name__ == '__main__':
     main()
     elapsed = datetime.now() - start_time
     fn = os.path.basename(__file__)
-    print(datetime.now(), "The process is done for %s,time used:%s" % (fn, elapsed))
+    print(datetime.now(),
+          "The process is done for %s,time used:%s" % (fn, elapsed))

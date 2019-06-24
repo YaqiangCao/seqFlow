@@ -11,7 +11,7 @@ from datetime import datetime
 import matplotlib as mpl
 mpl.use("pdf")
 mpl.rcParams["pdf.fonttype"] = 42
-mpl.rcParams["figure.figsize"] = (4*0.8, 2.75*0.8)
+mpl.rcParams["figure.figsize"] = (4 * 0.8, 2.75 * 0.8)
 mpl.rcParams["font.size"] = 8.0
 import seaborn as sns
 sns.set_style("white")
@@ -21,6 +21,25 @@ colors = brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors
 
 __author__ = "CAO Yaqiang"
 __email__ = "caoyaqiang0410@gmail.com"
+
+
+def isTool(name):
+    """
+    Check if a tool is on PATh and marked as executable.
+
+    Parameters
+    ---
+    name: str
+
+    Returns
+    ---
+    True or False
+    """
+    from distutils.spawn import find_executable
+    if find_executable(name) is not None:
+        return True
+    else:
+        return False
 
 
 def timer(func, REPEATS=5):
@@ -116,8 +135,23 @@ class PET(object):
     """
     #cA is the center of left read
     __slots__ = [
-        "chromA", "chromB", "startA", "startB", "endA", "endB", "strandA",
-        "strandB", "cA", "cB", "distance", "cis","length","mid","mapq","start","end",
+        "chromA",
+        "chromB",
+        "startA",
+        "startB",
+        "endA",
+        "endB",
+        "strandA",
+        "strandB",
+        "cA",
+        "cB",
+        "distance",
+        "cis",
+        "length",
+        "mid",
+        "mapq",
+        "start",
+        "end",
     ]
 
     def __init__(self, d):
@@ -143,8 +177,8 @@ class PET(object):
                 self.strandA, self.strandB = self.strandB, self.strandA
             self.cA = (self.startA + self.endA) / 2
             self.cB = (self.startB + self.endB) / 2
-            self.distance = abs(self.cB - self.cA) #used for long-range PETs
-            self.length =  self.endB - self.startA #fragment length, used for short-range PETs
-            self.mid = (self.startA + self.endB)/2 #middle of the fragment
+            self.distance = abs(self.cB - self.cA)  #used for long-range PETs
+            self.length = self.endB - self.startA  #fragment length, used for short-range PETs
+            self.mid = (self.startA + self.endB) / 2  #middle of the fragment
             self.start = self.startA
             self.end = self.endB

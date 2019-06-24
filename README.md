@@ -158,3 +158,7 @@ Some usefule code to generate common shown figures in papers.
 ## Notebook
 Some analysis tutorials and step examples and explanation, copy the idea from [HOMER](http://homer.ucsd.edu/homer/ngs/).  
 
+---
+## Data 
+Commonly used genomic data.
+
