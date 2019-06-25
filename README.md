@@ -152,7 +152,7 @@ Specific scripts for analysis of peak-centric data, such as ChIP-seq, ATAC-seq, 
 
 ---
 ## Loops 
-Specific scripts for analysis of loo-centric data, such as ChIA-PET, Trac-looping, HiChIP and etc. 
+Specific scripts for analysis of loop-centric data, such as ChIA-PET, Trac-looping, HiChIP and etc. 
 
 ---
 ## TE
