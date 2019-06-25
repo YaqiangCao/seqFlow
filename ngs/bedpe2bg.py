@@ -33,7 +33,7 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
 
-def bedpe2model(bg, mapq=1):
+def bedpe2model(bg, mapq=1,noRedu=True):
     """
     Convet BEDPE format file into HTSeq.GenomicArray to get the genomic coverage.
     Only non-redundant reads will be kept.
@@ -42,6 +42,7 @@ def bedpe2model(bg, mapq=1):
     ----
     bg: str, .bedpe or .bedpe.gz file
     mapq: int, Bowtie2 MAPQ cutoff to filter reads.
+    noRedu: bool, whether to keep redundant reads
 
     Returns
     ----
@@ -71,12 +72,19 @@ def bedpe2model(bg, mapq=1):
             continue
         t += 1
         r = (pet.chromA, pet.mid, pet.mid + 1)
-        if r not in rs:
+        if noRedu:
+            if r not in rs:
+                iv = HTSeq.GenomicInterval(pet.chromA, pet.start, pet.end)
+                model[iv] += 1
+                rs.add(r)
+        else:
             iv = HTSeq.GenomicInterval(pet.chromA, pet.start, pet.end)
             model[iv] += 1
-            rs.add(r)
     logger.info("%s:totalReads:%s;nonRedudant:%s" % (bg, t, len(rs)))
-    return len(rs), model
+    if noRedu:
+        return len(rs), model
+    else:
+        return t, model
 
 
 def model2bedgraph(t, model, fout):
@@ -119,19 +127,17 @@ def bedpe2bdg(f, mapq=1):
     "-pattern",
     required=True,
     help=
-    "Directory and patterns for the .bedpe.gz files, for example ../2.bedpe/mouse*.bedpe.gz"
+    "Directory and patterns for the .bedpe.gz files, for example '../2.bedpe/mouse*.bedpe.gz'"
 )
 @click.option("-mapq", default=1, help="MAPQ cutoff for filtering PETs.")
 @click.option("-cpu",
               default=10,
               help="Number of CPUs to finish the job, default is set to 10.")
-def main(dir, cpu, mapq):
+def main(pattern, cpu, mapq):
     """
     Converting .bedpe.gz files from other directory into this directory .bedgraph files.
     """
-    if not os.path.exists(dir):
-        logger.error("%s not exists!" % dir)
-    fs = glob("%s/*.bedpe.gz" % dir)
+    fs = glob(pattern)
     cpu = min(cpu, len(fs))
     Parallel(n_jobs=cpu)(delayed(bedpe2bdg)(f, mapq) for f in fs)
 

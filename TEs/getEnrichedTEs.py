@@ -21,6 +21,7 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from joblib import Parallel, delayed
+from scipy.stats import poisson
 
 #this
 #from utils import getLogger, callSys, PET
@@ -59,7 +60,10 @@ def getCount(t, model, iv):
     return c, rpkm
 
 
-def countTEs(f, repf, fout, psedo=1, ext=2):
+def countTEs(f, repf, fout, psedo=1, ext=5):
+    """
+    Count reads located in TEs and get their enrichment.
+    """
     t, model = getCov(f)
     reps = pd.read_table(repf, index_col=0, sep="\t")
     ds = {}
@@ -74,51 +78,62 @@ def countTEs(f, repf, fout, psedo=1, ext=2):
         downiv = HTSeq.GenomicInterval(rep[1], rep[3],
                                        rep[3] + iv.length * ext)
         downc, downrpkm = getCount(t, model, downiv)
-        #print(rid,c,upc,downc)
+        if upc+downc >0:
+            es = c / 1.0 / (upc+downc) * 2 * ext
+            p = max([1e-300, poisson.sf( c, (upc+downc) / 2.0/ext )])
+        else:
+            es = c /1.0 / psedo 
+            p - 1e-300
         ds[rid] = {
             "length": iv.length,
             "count": c,
             "RPKM": rpkm,
-            "up_count": upc,
-            "up_RPKM": uprpkm,
-            "down_count": downc,
-            "down_RPKM": downrpkm,
-            #"ES": c / 1.0 / ( upc+downc+psedo) * 2, #psedo count to avoid divid zero
-            "ES": rpkm / 1.0 / (uprpkm + downrpkm + psedo) *
-            2,  #psedo count to avoid divid zero
+            "up_count_ext%s"%ext: upc,
+            "up_RPKM_ext%s"%ext: uprpkm,
+            "down_count_ext%s"%ext: downc,
+            "down_RPKM_ext%s"%ext: downrpkm,
+            "ES": es,
+            "poisson_p-value":p,
+            #"ES": rpkm / 1.0 /
+            #(uprpkm + downrpkm + psedo) * 2,  #psedo count to avoid divid zero
         }
     ds = pd.DataFrame(ds).T
     ds.to_csv(fout + ".txt", sep="\t")
 
 
-def filterTEs(escut=2.0, lencut=1000):
+def filterTEs(escut=2.0,pcut=1e-3,lencut=1000):
     ds = set()
     for f in glob("*.txt"):
-        mat = pd.read_table(f, index_col=0)
+        mat = pd.read_table(f,index_col=0)
         es = mat["ES"]
-        es = es[es >= escut]
-        length = mat.loc[es.index, "length"]
-        length = length[length >= lencut]
-        ds.update(length.index)
-    print(ds)
-    with open("enrichedTEs.bed", "w") as fo:
+        es = es[es>=escut]
+        length = mat.loc[es.index,"length"]
+        length = length[length>=lencut]
+        p = mat.loc[length.index,"poisson_p-value"]
+        p = p[p<pcut]
+        #ds.update( length.index)
+        with open(f.replace(".txt",".bed"),"w") as fo:
+            for d in length.index:
+                nd = d.split("|")
+                line = [nd[0],nd[1],nd[2],d]
+                fo.write( "\t".join(line)+"\n")
+    #print(ds)
+    """
+    with open("enrichedTEs.bed","w") as fo:
         for d in ds:
             nd = d.split("|")
-            line = [nd[0], nd[1], nd[2], d]
-            fo.write("\t".join(line) + "\n")
-
+            line = [nd[0],nd[1],nd[2],d]
+            fo.write( "\t".join(line)+"\n")
+    """
+            
 
 def main():
-    """
-    countTEs( "test/test.bedpe.gz","test/testRep.txt","test")
-    """
-    repf = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/5.repeats/mm10Reps.txt"
-    fs = glob("../3.sepNcSpBedpe/*cN.bedpe.gz")
-    Parallel(n_jobs=len(fs))(
-        delayed(countTEs)(f, repf, f.split("/")[-1].split(".bedpe")[0] +
-                          "_reps") for f in fs)
+    countTEs("test/test.bedpe.gz","test/testRep.txt","test_p") 
     filterTEs()
-
+    #repf = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/5.repeats/mm10Reps.txt"
+    #fs = glob("../3.sepNcSpBedpe/*cN.bedpe.gz")
+    #Parallel(n_jobs=len(fs))(delayed(countTEs)(f,repf,f.split("/")[-1].split(".bedpe")[0]+"_reps") for f in fs)
+    #filterTEs()
 
 if __name__ == '__main__':
     start_time = datetime.now()
