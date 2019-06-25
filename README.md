@@ -60,19 +60,40 @@ Not stable yet and quite offen updated, hope not outdate, favor of contributions
 <details><summary>Example main function</summary>
 <p>
 
-change main function should be enough, going to add [click](https://github.com/pallets/click/) for flow outside the script.
-```python
-def main():
-    #last step directory
-    data = prepare_fastq("../2.fastq/")
-    #bowtie2 index
-    ref = "/data/bowtie2/mm10"
-    Parallel(n_jobs=30)(delayed(mapping)(sample, fqs, ref, 2)
-                        for sample, fqs in data.items())
-    data = parseBowtielog()
-    data.to_csv("MappingStat.txt", sep="\t", index_label="samples")
+change main function should be enough, [click](https://github.com/pallets/click/) is added to control flow outside the script. Related data should be designed through a config file.
+
+``` python
+@click.command()
+@click.option(
+    "-pattern",
+    required=True,
+    help="Directory and patterns for the .bg files, for example './mouse*.bdg'"
+)
+@click.option("-org",
+              required=True,
+              help="Organism for the data.",
+              type=click.Choice(["hg38", "mm10"]))
+@click.option("-cpu",
+              default=10,
+              help="Number of CPUs to finish the job, default is set to 10.")
+def main(pattern, org, cpu):
+    global CHROM
+    for t in ["bedSort", "bedGraphToBigWig"]:
+        if not isTool(t):
+            logger.error("%s not exits!" % t)
+            return
+    if org == "hg38":
+        CHROM = "/home/caoy7/code/seqFlow/data/hg38.chrom.sizes"
+    elif org == "mm10":
+        CHROM = "/home/caoy7/code/seqFlow/data/mm10.chrom.sizes"
+    else:
+        return
+    fs = glob(pattern)
+    cpu = min(cpu, len(fs))
+    Parallel(n_jobs=cpu)(delayed(bdg2bw)(f) for f in fs)
 
 ```
+
 </p>
 </details>
 

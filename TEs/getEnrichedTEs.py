@@ -101,7 +101,7 @@ def countTEs(f, repf, fout, psedo=1, ext=5):
     ds.to_csv(fout + ".txt", sep="\t")
 
 
-def filterTEs(escut=2.0,pcut=1e-3,lencut=1000):
+def filterTEs(escut=2.0,pcut=1e-2,lencut=1000):
     ds = set()
     for f in glob("*.txt"):
         mat = pd.read_table(f,index_col=0)
@@ -112,28 +112,27 @@ def filterTEs(escut=2.0,pcut=1e-3,lencut=1000):
         p = mat.loc[length.index,"poisson_p-value"]
         p = p[p<pcut]
         #ds.update( length.index)
+        ds.update( p.index )
         with open(f.replace(".txt",".bed"),"w") as fo:
-            for d in length.index:
+            for d in p.index:
                 nd = d.split("|")
                 line = [nd[0],nd[1],nd[2],d]
                 fo.write( "\t".join(line)+"\n")
     #print(ds)
-    """
     with open("enrichedTEs.bed","w") as fo:
         for d in ds:
             nd = d.split("|")
             line = [nd[0],nd[1],nd[2],d]
             fo.write( "\t".join(line)+"\n")
-    """
             
 
 def main():
-    countTEs("test/test.bedpe.gz","test/testRep.txt","test_p") 
-    filterTEs()
+    #countTEs("test/test.bedpe.gz","test/testRep.txt","test_p") 
+    #filterTEs()
     #repf = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/5.repeats/mm10Reps.txt"
     #fs = glob("../3.sepNcSpBedpe/*cN.bedpe.gz")
     #Parallel(n_jobs=len(fs))(delayed(countTEs)(f,repf,f.split("/")[-1].split(".bedpe")[0]+"_reps") for f in fs)
-    #filterTEs()
+    filterTEs()
 
 if __name__ == '__main__':
     start_time = datetime.now()

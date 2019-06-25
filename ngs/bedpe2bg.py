@@ -123,16 +123,9 @@ def bedpe2bdg(f, mapq=1):
 
 
 @click.command()
-@click.option(
-    "-pattern",
-    required=True,
-    help=
-    "Directory and patterns for the .bedpe.gz files, for example '../2.bedpe/mouse*.bedpe.gz'"
-)
+@click.option( "-pattern", required=True, help= "Directory and patterns for the .bedpe.gz files, for example '../2.bedpe/mouse*.bedpe.gz'")
 @click.option("-mapq", default=1, help="MAPQ cutoff for filtering PETs.")
-@click.option("-cpu",
-              default=10,
-              help="Number of CPUs to finish the job, default is set to 10.")
+@click.option("-cpu", default=10, help="Number of CPUs to finish the job, default is set to 10.")
 def main(pattern, cpu, mapq):
     """
     Converting .bedpe.gz files from other directory into this directory .bedgraph files.
