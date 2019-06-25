@@ -64,18 +64,9 @@ change main function should be enough, [click](https://github.com/pallets/click/
 
 ``` python
 @click.command()
-@click.option(
-    "-pattern",
-    required=True,
-    help="Directory and patterns for the .bg files, for example './mouse*.bdg'"
-)
-@click.option("-org",
-              required=True,
-              help="Organism for the data.",
-              type=click.Choice(["hg38", "mm10"]))
-@click.option("-cpu",
-              default=10,
-              help="Number of CPUs to finish the job, default is set to 10.")
+@click.option( "-pattern", required=True, help="Directory and patterns for the .bg files, for example './mouse*.bdg'")
+@click.option("-org", required=True, help="Organism for the data.", type=click.Choice(["hg38", "mm10"]))
+@click.option("-cpu", default=10, help="Number of CPUs to finish the job, default is set to 10.")
 def main(pattern, org, cpu):
     global CHROM
     for t in ["bedSort", "bedGraphToBigWig"]:
