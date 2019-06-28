@@ -3,6 +3,7 @@
 """
 globalCorrView.py
 2019-05-31: updated t-SNE
+2019-06-26: UMAP added
 """
 
 __author__ = "CAO Yaqiang"
@@ -28,10 +29,15 @@ mpl.rcParams["font.sans-serif"] = "Arial"
 mpl.rcParams["savefig.format"] = "pdf"
 import pylab
 sns.set_style("white")
+import umap
 import numpy as np
 import pandas as pd
 import brewer2mpl
 colors = brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors
+#colors = brewer2mpl.get_map('Set1', 'qualitative', 9).mpl_colors
+#colors.extend(brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors)
+#del colors[5]
+#del colors[10]
 from sklearn.decomposition import PCA
 from sklearn import manifold
 from joblib import Parallel, delayed
@@ -52,16 +58,15 @@ def plotEmbeding(mat, Y, title, xlabel, ylabel, pre):
     f, ax = pylab.subplots()
     for i, label in enumerate(list(mat.columns)):
         c = cs["_".join(label.split("_")[:-1])]
-        ax.scatter(Y[i, 0], Y[i, 1], color=colors[c], s=5)
+        ax.scatter(Y[i, 0], Y[i, 1], color=colors[c],s=5)
         #ax.text(Y[i,0],Y[i,1],label)
     for label, c in cs.items():
         ax.plot(1, 1, color=colors[c], label=label, markeredgecolor='none')
     #leg = ax.legend(loc="upper left",
-    leg = ax.legend(
-        loc="best",
-        fancybox=True,
-        #bbox_to_anchor=(1, 1),
-        fontsize="x-small")
+    leg = ax.legend(loc="best",
+                    fancybox=True,
+                    #bbox_to_anchor=(1, 1),
+                    fontsize="x-small")
     #pylab.setp(leg.get_texts())
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
@@ -88,16 +93,12 @@ def mds_plot(mat, pre="test"):
 
 
 def tsne_plot(mat, p=10, pre="test"):
-    tsne = manifold.TSNE(n_components=2,
-                         init="pca",
-                         perplexity=p,
-                         random_state=123)
-    #mat = pd.read_csv(f, index_col=0,sep="\t")
+    #tsne = manifold.TSNE(n_components=2, init="pca", perplexity=p,random_state=123)
     tsne = manifold.TSNE(n_components=2, perplexity=p)
     #embeding space normalization
     Y = tsne.fit_transform(mat.values.T)
-    y_min, y_max = Y.min(0), Y.max(0)
-    Y = (Y - y_min) / (y_max - y_min)
+    y_min,y_max = Y.min(0),Y.max(0)
+    Y = (Y - y_min)/(y_max-y_min)
     xlabel = "t-SNE-1"
     ylabel = "t-SNE-2"
     #title = "perplexity=%s,init=PCA" % p
@@ -105,20 +106,34 @@ def tsne_plot(mat, p=10, pre="test"):
     plotEmbeding(mat, Y, title, xlabel, ylabel, pre + "_tsne")
 
 
+def umap_plot(mat,n=5,pre="test"):
+    try:
+        Y = umap.UMAP(n_neighbors=n,n_components=2,metric="manhattan",random_state=123,n_epochs=500).fit_transform(mat.values.T) 
+        plotEmbeding(mat,Y,"UMAP","UMAP-1","UMAP-2",pre+"_umap")
+    except:
+        return
+
+def umap_plot_sup():
+    """
+    Supviszed UMAP dimension reduction.
+    """
+    pass
+
 def main():
-    ps = range(5, 60, 5)
-    to_remove = [
-        "WT_EILP_10", "KO_EILP_1196", "KO_EILP_169", "WT_EILP_10",
-        "KO_EILP_1184", "WT_EILP_10", "WT_EILP_8", "KO_EILP_680",
-        "KO_EILP_663", "KO_EILP_692", "WT_EILP_15", "WT_EILP_13"
-    ]
-    for f in glob("../enrichTEs*.txt"):
-        mat = pd.read_table(f, index_col=0, sep="\t")
-        mat = mat.drop(to_remove, axis=1)
+    ps = range(5,60,5) #parameters for tSNE
+    ns = [5,10,15,20,30]
+    for f in glob("../*.txt"):
+        print(f)
+        mat = pd.read_table(f, index_col=0,sep="\t")
         n = f.split("/")[-1].split(".txt")[0]
         pca_plot(mat, n)
-        #mds_plot(mat, n)
-        #Parallel(n_jobs=1)(delayed(tsne_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ps)
+        """
+        mds_plot(mat, n)
+        Parallel(n_jobs=1)(delayed(tsne_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ps)
+        umap_plot( mat, 5, n )
+        """
+        Parallel(n_jobs=5)(delayed(umap_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ns)
+ 
 
 
 main()
