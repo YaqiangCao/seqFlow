@@ -39,7 +39,7 @@ def bdg2washU(f):
     #bgzip 
     cmd2 = "bgzip %s"%(n+"_washU.txt")
     #tabix
-    cmd3 = "tabix %s"%(n+"_washU.txt.gz")
+    cmd3 = "tabix -p bed %s"%(n+"_washU.txt.gz")
     callSys([cmd1,cmd2,cmd3], logger)
     
 
@@ -53,15 +53,14 @@ def bdg2washU(f):
 @click.option("-cpu",
               default=10,
               help="Number of CPUs to finish the job, default is set to 10.")
-def main(pattern, org, cpu):
-    global CHROM
+def main(pattern, cpu):
     for t in ["bedSort","bgzip", "tabix"]:
         if not isTool(t):
             logger.error("%s not exits!" % t)
             return
     fs = glob(pattern)
     cpu = min(cpu, len(fs))
-    Parallel(n_jobs=cpu)(delayed(bdg2bw)(f) for f in fs)
+    Parallel(n_jobs=cpu)(delayed(bdg2washU)(f) for f in fs)
 
 
 if __name__ == "__main__":

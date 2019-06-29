@@ -65,7 +65,7 @@ def main():
     """
     Batch converting from bam to bedpe.
     """
-    bams = glob("../3.mapping/*/*.bam")
+    bams = glob("../2.mapping/*/*.bam")
     ds = []
     for bam in bams:
         bai = bam.replace(".bam", ".bai")
@@ -79,7 +79,7 @@ def main():
             logger.info("%s has been generated. return." % (nb + ".gz"))
             continue
         ds.append([bam, nb])
-    Parallel(n_jobs=20)(delayed(bam2Bedpe)(t[0], t[1]) for t in ds[:5])
+    Parallel(n_jobs=20)(delayed(bam2Bedpe)(t[0], t[1]) for t in ds)
 
 
 if __name__ == '__main__':
