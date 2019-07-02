@@ -1,31 +1,36 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 #--coding:utf-8--
 """
-getFPKMmatrixFromCuffnorm.py
 """
 
 __author__ = "CAO Yaqiang"
-__date__ = "2015-03-04"
+__date__ = "2019-07-01"
 __modified__ = ""
 __email__ = "caoyaqiang0410@gmail.com"
 
 #systematic library
+import os, time
+from glob import glob
 from datetime import datetime
-import glob, os, time
 
-#3rd library
-import matplotlib as mpl
-mpl.use("pdf")
-mpl.rcParams["pdf.fonttype"] = 42
-import pylab
-import numpy as np
+#3rd
+import click
 import pandas as pd
-import seaborn as sns
-sns.set_style("white")
+import numpy as np
+from joblib import Parallel, delayed
+
+#seqFlow
+from utils import isTool, getLogger, callSys
+
+#global setting
+#logger
+date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
+logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
+                   os.path.basename(__file__) + ".log")
 
 
-def getFPKMMatrix(fpkm_table, gene_attr,sample_info ,pre="test"):
-    mat = pd.read_table(fpkm_table, index_col=0)
+def getFPKMMatrix(fpkm_table, gene_attr, sample_info, pre="test"):
+    mat = pd.read_csv(fpkm_table, index_col=0)
     mat = mat.fillna(0.0)
     #filter all zeros
     nis = []
@@ -44,10 +49,10 @@ def getFPKMMatrix(fpkm_table, gene_attr,sample_info ,pre="test"):
     mat.index = ngs
     #assign columns
     ts = {}
-    for i,line in enumerate(open(sample_info)):
+    for i, line in enumerate(open(sample_info)):
         if i == 0:
             continue
-        line = line.split( "\n" )[ 0 ].split( "\t" )  
+        line = line.split("\n")[0].split("\t")
         ts[line[0]] = line[1].split("/")[-2]
     ts = pd.Series(ts)
     mat.columns = ts[mat.columns]
@@ -80,7 +85,7 @@ def getFPKMcutoff(f):
     ax = sns.kdeplot(data, shade=True)
     ylim = ax.get_ylim()
     cut = np.mean(data) + 3 * np.std(data)
-    print(np.mean(data),np.std(data))
+    print(np.mean(data), np.std(data))
     ax.vlines(cut, ylim[0], ylim[1])
     ncut = 2**cut
     #ncut = cut
@@ -93,15 +98,14 @@ def getFPKMcutoff(f):
     return ncut
 
 
-def getFilteredMatrix():
+def getFilteredMatrix(cut=1):
     fs = glob.glob("*.txt")
     for f in fs:
         mat = pd.read_table(f, index_col=0)
         #cut = getFPKMcutoff(f)
-        cut = 1
         nis = []
         for t in mat.itertuples():
-            s = np.array(t[1:]) 
+            s = np.array(t[1:])
             s = s[s > cut]
             if len(s) == 0:
                 nis.append(t[0])
@@ -114,16 +118,25 @@ def getFilteredMatrix():
 def getGenes(gtf):
     gs = set()
     for line in open(gtf):
-        line = line.split( "\n" )[ 0 ].split( "\t" )  
-        g = line[8].split(";")[0].split()[1].replace('"','')
+        line = line.split("\n")[0].split("\t")
+        g = line[8].split(";")[0].split()[1].replace('"', '')
         gs.add(g)
     return gs
 
 
+def callCuffnorm(fs, gtf, fo, cpu=40):
+    cmd = "cuffnorm --compatible-hits-norm {gtf} {fs} -o {fo} -p {cpu}".format(
+        gtf=gtf, fs=" ".join(fs), fo=fo, cpu=cpu)
+    callSys([cmd], logger)
+
 
 def main():
-    getFPKMMatrix( "cell/genes.fpkm_table","cell/genes.attr_table","cell/samples.table",pre="cell" )
-    #getFilteredMatrix()
+    fs = glob("../1.cuffquant/*/*.cxb")
+    fo = "AID1_WT"
+    GTF = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/2.annotations/gencode_v21_exons.gtf"
+    #callCuffnorm(fs,GTF,fo)
+    #getFPKMMatrix( "%s/genes.fpkm_table"%fo,"%s/genes.attr_table"%fo,"%s/samples.table"%fo,pre=fo )
+    getFilteredMatrix()
     #seperateRNAs()
 
 

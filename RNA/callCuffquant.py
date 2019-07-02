@@ -16,10 +16,10 @@ from datetime import datetime
 
 #3rd
 import click
-
-#utils
-from utils import isTool, getLogger, callSys
 from joblib import Parallel, delayed
+
+#seqFlow
+from utils import isTool, getLogger, callSys
 
 #global setting
 #logger

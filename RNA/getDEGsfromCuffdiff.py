@@ -1,3 +1,4 @@
+from glob import glob
 import pandas as pd
 
 
@@ -7,8 +8,7 @@ def getDegs(f, pre, pcut=1e-2, fccut=1):
         if i == 0:
             continue
         line = line.split("\n")[0].split("\t")
-        if float(line[11]) <= pcut and abs(float(
-                line[9])) >= fccut and float(line[7]) + float(line[8]) >= 1:
+        if float(line[11]) <= pcut and abs(float( line[9])) >= fccut and float(line[7]) + float(line[8]) >= 1:
             t = "%s|%s|%s" % (line[0], line[2], line[3])
             ds[t] = {
                 line[4]: float(line[7]),
@@ -19,7 +19,7 @@ def getDegs(f, pre, pcut=1e-2, fccut=1):
             }
     ds = pd.DataFrame(ds).T
     s = ds["log2(fold_change)"]
-    s = s.sort(inplace=0, ascending=1)
+    s = s.sort_values(inplace=False, ascending=True)
     ds = ds.loc[s.index, ]
     ds.to_csv("%s_degs.txt" % pre, sep="\t")
 
@@ -30,7 +30,7 @@ def getDegs(f, pre, pcut=1e-2, fccut=1):
     with open("%s_down.list" % pre, "w") as f:
         f.write("\n".join(kodown))
 
-
-getDegs("B1_vs_parent/gene_exp.diff", "B1")
-getDegs("B2_vs_parent/gene_exp.diff", "B2")
-getDegs("L1_vs_parent/gene_exp.diff", "L1")
+for f in glob("*/gene_exp.diff"):
+    n = f.split("/")[-2]
+    print(f,n)
+    getDegs(f, n)

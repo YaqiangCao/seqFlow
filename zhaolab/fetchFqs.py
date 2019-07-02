@@ -17,13 +17,16 @@ def main(f,cpu):
     ds = pd.read_csv(f,index_col=0,sep="\t")
     for t in ds.itertuples():
         gb = t[0]
-        fs = t[5].split(",")
+        sample = t[1]
+        fs = t[2].split(",")
+        #fs = t[5].split(",")
         if len(fs) == 1:
-            cmd = "rsync -aP caoy7@137.187.135.165:%s %s.fastq.gz"%(fs[0],gb)
+            #cmd = "rsync -aP caoy7@137.187.135.165:%s %s.fastq.gz"%(fs[0],gb)
+            cmd = "rsync -aP caoy7@137.187.135.165:%s %s.fastq.gz"%(fs[0],sample)
             cmds.append(cmd)
         elif len(fs) == 2:
-            cmd1 = "rsync -aP caoy7@137.187.135.165:%s %s_R1.fastq.gz"%(fs[0],gb)
-            cmd2 = "rsync -aP caoy7@137.187.135.165:%s %s_R2.fastq.gz"%(fs[1],gb)
+            cmd1 = "rsync -aP caoy7@137.187.135.165:%s %s_R1.fastq.gz"%(fs[0],sample)
+            cmd2 = "rsync -aP caoy7@137.187.135.165:%s %s_R2.fastq.gz"%(fs[1],sample)
             cmds.append(cmd1)
             cmds.append(cmd2)
         else:

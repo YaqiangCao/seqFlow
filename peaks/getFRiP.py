@@ -108,9 +108,9 @@ def main():
         if not os.path.isfile(bed):
             continue
         ds.append([bed, f])
-    cpu = min(20,len(ds))
-    #rs = Parallel(n_jobs=cpu)(delayed(countFeatures)(d[0],d[1],paired=True) for d in ds)
-    rs = Parallel(n_jobs=1)(delayed(countFeatures)(d[0],d[1],paired=True) for d in ds)
+    cpu = min(30,len(ds))
+    rs = Parallel(n_jobs=cpu)(delayed(countFeatures)(d[0],d[1],paired=True) for d in ds)
+    #rs = Parallel(n_jobs=1)(delayed(countFeatures)(d[0],d[1],paired=True) for d in ds)
     ds = {}
     for r in rs:
         ds[ r[0] ] = {

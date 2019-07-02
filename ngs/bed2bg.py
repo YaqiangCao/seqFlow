@@ -2,6 +2,7 @@
 #--coding:utf-8--
 """
 bedpe2bg.py
+2019-07-02: extension to 150 bp default added.
 """
 
 __author__ = "CAO Yaqiang"
@@ -31,8 +32,21 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
 
-def bed2model(bg):
+def bed2model(bg,mapq=1,noRedu=True,ext=150):
     """
+    Convet BED format file into HTSeq.GenomicArray to get the genomic coverage.
+    Only non-redundant reads will be kept.
+
+    Parameteres
+    ----
+    bg: str, .bed or .bed.gz file
+    mapq: int, Bowtie2 MAPQ cutoff to filter reads.
+    noRedu: bool, whether to keep redundant reads
+
+    Returns
+    ----
+    HTSeq.GenomicArray
+ 
     BedGraph format, gzip or not into HTSeq.GenomicArray 
     """
     rs = set()
@@ -40,8 +54,10 @@ def bed2model(bg):
         f = gzip.open(bg, "rb")
     else:
         f = open(bg)
-    print(datetime.now(), "Start building model for %s" % bg)
+    logger.info("Start building model for %s, with MAPQ cutoff >=%s" %
+                (bg, mapq))
     model = HTSeq.GenomicArray("auto", stranded=False)
+    t = 0
     for i, line in enumerate(f):
         if i % 10000 == 0:
             report = "%s lines genome signal read." % i
@@ -55,14 +71,22 @@ def bed2model(bg):
             e = int(line[2])
         except:
             continue
-        m = (s + e) / 2
-        #r = (chrom,m,m+1)
+        if int(line[4]) < mapq:
+            continue
+        t += 1
         r = (chrom, s, e)
-        if r not in rs:
-            #iv = HTSeq.GenomicInterval(chrom, m, m+1)
+        if noRedu:
+            if r not in rs:
+                if line[5] == "+":
+                    e = s+ext
+                else:
+                    s = max(0,e - ext)
+                iv = HTSeq.GenomicInterval(chrom, s, e)
+                model[iv] += 1
+                rs.add(r)
+        else:
             iv = HTSeq.GenomicInterval(chrom, s, e)
             model[iv] += 1
-            rs.add(r)
     print("%s:totalReads:%s;nonRedudant:%s" % (f, i, len(rs)))
     logger.info("%s:totalReads:%s;nonRedudant:%s" % (f, i, len(rs)))
     return len(rs), model
@@ -79,7 +103,7 @@ def model2bedgraph(t, model, fout):
 
 
 def bed2bdg(f):
-    fo = f.split("/")[-1].replace(".bed", ".bdg")
+    fo = f.split("/")[-1].replace(".bed.gz", ".bdg")
     if os.path.isfile(fo):
         return
     t, model = bed2model(f)
@@ -87,7 +111,7 @@ def bed2bdg(f):
 
 
 def main():
-    fs = glob("../4.mm10Bed/*.bed")
+    fs = glob("../3.beds/*.bed.gz")
     Parallel(n_jobs=len(fs))(delayed(bed2bdg)(f) for f in fs)
 
 
