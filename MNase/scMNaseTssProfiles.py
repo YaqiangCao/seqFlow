@@ -87,17 +87,18 @@ def buildCovModel(readF, dfilter=[80, 80, 180], mapq=1):
         else:
             reds.add(r)
         m = (s + e) / 2
-        iv = HTSeq.GenomicInterval(line[0], m, m + 1)
+        #iv = HTSeq.GenomicInterval(line[0], m, m + 1)
+        iv = HTSeq.GenomicInterval(line[0], s, e)
         if d <= dfilter[0]:  #sp
             sp += 1
             modelSp[iv] += 1
         if d > dfilter[1] and d <= dfilter[2]:
             cn += 1
             modelCn[iv] += 1
-    return len(reds), cn, sp, modelCn, modelSp
+    return cn, sp, modelCn, modelSp
 
 
-def getProfiles(t, model, gs=None, ext=2000, bin=1, skipZero=True):
+def getProfiles(t, model, gs=None, ext=1000, bin=1, skipZero=True):
     """
     Get profiles from the converge model for TSS.
 
@@ -114,50 +115,53 @@ def getProfiles(t, model, gs=None, ext=2000, bin=1, skipZero=True):
     ---
     pd.Series with index indicate location and value indicate signal level
     """
-    profile = np.zeros(2 * ext / bin)
+    c = 0
+    profile = np.zeros(ext / bin)
     for line in open(TSS):
         line = line.split("\n")[0].split("\t")
         if gs is not None and line[4] not in gs:
             continue
-        print(line[4])
-        if line[-1] == "-1":
+        if line[-1] == "-1":  #minse strand
             m = int(line[2])
+            s = m - ext
+            e = m
         else:
             m = int(line[1])
-        s = m - ext
+            s = m
+            e = m + ext
         if s < 0:
             continue
-        e = m + ext
         iv = HTSeq.GenomicInterval(line[0], s, e, ".")
-        cvg = np.fromiter(model[iv], dtype='i', count=2 * ext)
+        cvg = np.fromiter(model[iv], dtype='i', count=ext)
         cvg = cvg.reshape((len(cvg) / bin, bin))
         cvg = np.mean(cvg, axis=1)
         cvg = cvg / 1.0 / t * 10**6
         if skipZero and np.sum(cvg) == 0:
             continue
+        c += 1
         if line[-1] == "-1":
             profile += cvg[::-1]
         else:
             profile += cvg
-    s = pd.Series(profile, index=np.arange(0 - ext, ext, bin))
+    s = pd.Series(profile, index=np.arange(0, ext, bin)) / c
     return s
 
 
-def getCnSpProfiles(f,gs=None, ext=2000, bin=1, skipZero=True, todir="data"):
+def getCnSpProfiles(f, gs=None, ext=1000, bin=1, skipZero=True, todir="data"):
     fosp = "%s/%s_sp.txt" % (todir, f.split("/")[-1].split(".bedpe")[0])
     focn = "%s/%s_cn.txt" % (todir, f.split("/")[-1].split(".bedpe")[0])
     if not os.path.exists(todir):
         os.mkdir(todir)
     if os.path.isfile(fosp) and os.path.isfile(focn):
         return
-    tot, cn, sp, modelCn, modelSp = buildCovModel(f)
-    cnp = getProfiles(cn, modelCn,gs, ext, bin, skipZero)
-    spp = getProfiles(sp, modelSp,gs, ext, bin, skipZero)
-    cnp.to_csv(focn, sep="\t")
-    spp.to_csv(fosp, sep="\t")
+    cn, sp, modelCn, modelSp = buildCovModel(f)
+    cnp = getProfiles(cn, modelCn, gs, ext, bin, skipZero)
+    spp = getProfiles(sp, modelSp, gs, ext, bin, skipZero)
+    cnp.to_csv(focn, sep="\t", header=False)
+    spp.to_csv(fosp, sep="\t", header=False)
 
 
-def smooth(x, window_len=101, window='hanning'):
+def smooth(x, window_len=11, window='hanning'):
     """smooth the data using a window with requested size.
     
     This method is based on the convolution of a scaled window with the signal.
@@ -211,12 +215,11 @@ def smooth(x, window_len=101, window='hanning'):
     return y
 
 
-def plotProfileBin(fcn, fsp, fout, bin=5):
+def plotProfileBin(fcn, fsp, fout, bin=1):
     """
     MNase-seq profile plot, left y-axis is cn, right x-axis is sp
     """
     fig, ax = pylab.subplots(figsize=(2, 2.75 * 0.8))
-    ax2 = ax.twinx()
     ss = pd.Series.from_csv(fcn, sep="\t")
     x = np.arange(ss.index[0], ss.index[-1], bin)
     ss = ss.values.reshape((len(ss) / bin, bin))
@@ -249,43 +252,85 @@ def plotProfile(fcn, fsp, fout):
     ss = pd.Series.from_csv(fcn, sep="\t")
     x = list(ss.index)
     y = list(smooth(np.array(ss.values)))
-    x = np.arange(np.min(x), np.max(x), (np.max(x) - np.min(x)) / float(len(y)))
-    ax.plot(x,y,color=colors[0],linewidth=1)
+    x = np.arange(np.min(x), np.max(x),
+                  (np.max(x) - np.min(x)) / float(len(y)))
+    ax.plot(x, y, color=colors[0], linewidth=1)
     #ax.plot(ss.index, ss, color=colors[0], linewidth=1)
     ax.set_ylabel("Nucleosome density")
     ax.set_xlabel("Distance from TSS")
     ax.spines['left'].set_color(colors[0])
-    ax.set_title(fout)
+    #ax.set_title(fout)
     for t in ax.get_yticklabels():
         t.set_color(colors[0])
     ax2 = ax.twinx()
     ss = pd.Series.from_csv(fsp, sep="\t")
     x = list(ss.index)
     y = list(smooth(np.array(ss.values)))
-    x = np.arange(np.min(x), np.max(x), (np.max(x) - np.min(x)) / float(len(y)))
-    ax.plot(x,y,color=colors[1],linewidth=1)
+    x = np.arange(np.min(x), np.max(x),
+                  (np.max(x) - np.min(x)) / float(len(y)))
+    ax2.plot(x, y, color=colors[1], linewidth=1)
     #ax2.plot(ss.index, ss, color=colors[1], linewidth=1)
     ax2.set_ylabel("Subnucl. density")
     for t in ax2.get_yticklabels():
         t.set_color(colors[1])
     ax2.spines['right'].set_color(colors[1])
-    fig.tight_layout()
+    pylab.tight_layout()
     pylab.savefig(fout + ".pdf")
+
+
+def plotAllProfile(ext=1000, bin=1):
+    fs = glob("data/*cn.txt")
+    profile = np.zeros(ext / bin)
+    print(len(profile))
+    #for f in tqdm(fs[:100]):
+    for f in fs[:100]:
+        s = pd.Series.from_csv(f, sep="\t")
+        s = s.fillna(0.0)
+        x = s.index
+        profile += s
+    profile = profile / len(fs)
+    print(len(profile))
+    print(profile)
+    fig, ax = pylab.subplots()
+    ax.plot(x, profile, color=colors[0], linewidth=1)
+    ax.set_ylabel("Nucleosome density")
+    ax.set_xlabel("Distance from TSS")
+    ax.spines['left'].set_color(colors[0])
+    for t in ax.get_yticklabels():
+        t.set_color(colors[0])
+    pylab.tight_layout()
+    pylab.savefig("all_phasing.pdf")
+
+
+def sumMat(fs, fout):
+    ds = {}
+    for f in fs:
+        s = pd.Series.from_csv(f, sep="\t")
+        n = "_".join(f.split("/")[-1].split("_")[:-1])
+        ds[n] = s
+    ds = pd.DataFrame(ds)
+    ds.to_csv(fout, sep="\t", index_label="TssProfile")
 
 
 def main():
     """
-    gs = set(open("../../0.DHSs/ELIP_average.list").read().split("\n"))
-    f = "../1.bedpe/WT_EILP.bedpe.gz"
-    getCnSpProfiles(f,gs=gs,bin=1)
-    gs = set(open("../../0.DHSs/ILCP_average.list").read().split("\n"))
-    f = "../1.bedpe/WT_ILCP.bedpe.gz"
-    getCnSpProfiles(f,gs=gs,bin=1)
-    #fs = glob("../1.bedpe/*.bedpe.gz")
-    #plotProfile( "data/KO_EILP_cn.txt","data/KO_EILP_sp.txt","KO_EILP" )
+    fs = glob("../5.reduBedpe/*.bedpe.gz")
+    ds = pd.read_csv("../4.bedpe/stat_filter3.txt",index_col=0,sep="\t").index
+    fs = [f for f in fs if f.split("/")[-1].split(".bedpe")[0] in ds]
+    fs.sort()
+    Parallel(n_jobs=50)(delayed(getCnSpProfiles)(f) for f in fs)
+    #plot every single cell profiles
+    nfs = {}
+    for f in glob("data/*.txt"):
+        t = f.split("_")[-1].split(".txt")[0]
+        nf ="_".join( f.split("_")[:-1] )
+        if nf not in nfs:
+            nfs[nf] = {}
+        nfs[nf][t] =f 
+    for n in nfs.keys():
+        plotProfile( nfs[n]["cn"],nfs[n]["sp"],n)
+    plotAllProfile()
     """
-    plotProfile( "data/WT_EILP_cn.txt","data/WT_EILP_sp.txt","WT_EILP" )
-    plotProfile( "data/WT_ILCP_cn.txt","data/WT_ILCP_sp.txt","WT_ILCP" )
 
 
 if __name__ == '__main__':

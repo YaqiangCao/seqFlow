@@ -61,7 +61,7 @@ def getProfile(f,filterZero=True):
 
 
 
-def smooth(x, window_len=5, window='hanning'):
+def smooth(x, window_len=11, window='hanning'):
     """smooth the data using a window with requested size.
     
     This method is based on the convolution of a scaled window with the signal.
@@ -117,13 +117,11 @@ def smooth(x, window_len=5, window='hanning'):
 
 def profilePlot(fs,fout):
     fig, ax = pylab.subplots(figsize=(2,2.75*0.8))
-    ax2 = ax.twinx()
     ss = getProfile(fs[0])
     x = list(ss.index)
     y = list(smooth(np.array(ss.values)))
     x = np.arange(np.min(x), np.max(x), (np.max(x) - np.min(x)) / float(len(y)))
     ax.plot(x,y,color=colors[0],linewidth=1)
-    #ax.plot(ss.index,ss,color=colors[0],linewidth=1)
     ax.set_ylabel("Nucleosome density")
     ax.set_xlabel("Distance from TSS")
     ax.set_title(fout)
@@ -134,7 +132,7 @@ def profilePlot(fs,fout):
     x = list(ss.index)
     y = list(smooth(np.array(ss.values)))
     x = np.arange(np.min(x), np.max(x), (np.max(x) - np.min(x)) / float(len(y)))
-    ax.plot(x,y,color=colors[1],linewidth=1)
+    ax2.plot(x,y,color=colors[1],linewidth=1)
     #ax2.plot(ss.index,ss,color=colors[1],linewidth=1)
     ax2.set_ylabel("Subnucl. density")
     for t in ax2.get_yticklabels():

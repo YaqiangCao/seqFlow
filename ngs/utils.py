@@ -133,7 +133,6 @@ class PET(object):
     """
     Paired-end tags / PETs object.
     """
-    #cA is the center of left read
     __slots__ = [
         "chromA",
         "chromB",
@@ -182,3 +181,8 @@ class PET(object):
             self.mid = (self.startA + self.endB) / 2  #middle of the fragment
             self.start = self.startA
             self.end = self.endB
+        else:
+            self.distance = None
+            self.length = None
+            self.mid = None
+
