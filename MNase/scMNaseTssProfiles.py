@@ -116,23 +116,21 @@ def getProfiles(t, model, gs=None, ext=1000, bin=1, skipZero=True):
     pd.Series with index indicate location and value indicate signal level
     """
     c = 0
-    profile = np.zeros(ext / bin)
+    profile = np.zeros(2 * ext / bin)
     for line in open(TSS):
         line = line.split("\n")[0].split("\t")
         if gs is not None and line[4] not in gs:
             continue
         if line[-1] == "-1":  #minse strand
             m = int(line[2])
-            s = m - ext
-            e = m
         else:
             m = int(line[1])
-            s = m
-            e = m + ext
+        s = m - ext
+        e = m + ext
         if s < 0:
             continue
         iv = HTSeq.GenomicInterval(line[0], s, e, ".")
-        cvg = np.fromiter(model[iv], dtype='i', count=ext)
+        cvg = np.fromiter(model[iv], dtype='i', count=2*ext)
         cvg = cvg.reshape((len(cvg) / bin, bin))
         cvg = np.mean(cvg, axis=1)
         cvg = cvg / 1.0 / t * 10**6
@@ -143,7 +141,7 @@ def getProfiles(t, model, gs=None, ext=1000, bin=1, skipZero=True):
             profile += cvg[::-1]
         else:
             profile += cvg
-    s = pd.Series(profile, index=np.arange(0, ext, bin)) / c
+    s = pd.Series(profile, index=np.arange(0-ext, ext, bin)) / c
     return s
 
 
@@ -278,19 +276,16 @@ def plotProfile(fcn, fsp, fout):
     pylab.savefig(fout + ".pdf")
 
 
-def plotAllProfile(ext=1000, bin=1):
+def plotAllProfile(ext=2000, bin=1):
     fs = glob("data/*cn.txt")
     profile = np.zeros(ext / bin)
-    print(len(profile))
     #for f in tqdm(fs[:100]):
-    for f in fs[:100]:
+    for f in fs:
         s = pd.Series.from_csv(f, sep="\t")
         s = s.fillna(0.0)
         x = s.index
         profile += s
     profile = profile / len(fs)
-    print(len(profile))
-    print(profile)
     fig, ax = pylab.subplots()
     ax.plot(x, profile, color=colors[0], linewidth=1)
     ax.set_ylabel("Nucleosome density")
@@ -306,6 +301,10 @@ def sumMat(fs, fout):
     ds = {}
     for f in fs:
         s = pd.Series.from_csv(f, sep="\t")
+        s = s.fillna(0.0)
+        if s.sum() == 0:
+            print(f)
+            continue
         n = "_".join(f.split("/")[-1].split("_")[:-1])
         ds[n] = s
     ds = pd.DataFrame(ds)
@@ -313,11 +312,11 @@ def sumMat(fs, fout):
 
 
 def main():
-    """
     fs = glob("../5.reduBedpe/*.bedpe.gz")
     ds = pd.read_csv("../4.bedpe/stat_filter3.txt",index_col=0,sep="\t").index
     fs = [f for f in fs if f.split("/")[-1].split(".bedpe")[0] in ds]
     fs.sort()
+    fs = fs[:10]
     Parallel(n_jobs=50)(delayed(getCnSpProfiles)(f) for f in fs)
     #plot every single cell profiles
     nfs = {}
@@ -330,7 +329,10 @@ def main():
     for n in nfs.keys():
         plotProfile( nfs[n]["cn"],nfs[n]["sp"],n)
     plotAllProfile()
-    """
+    fs = glob("data/*cn.txt")
+    sumMat( fs,"TssProfile_cN.txt" )
+    fs = glob("data/*sp.txt")
+    sumMat( fs,"TssProfile_sP.txt" )
 
 
 if __name__ == '__main__':

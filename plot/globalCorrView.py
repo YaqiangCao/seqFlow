@@ -107,11 +107,8 @@ def tsne_plot(mat, p=10, pre="test"):
 
 
 def umap_plot(mat,n=5,pre="test"):
-    try:
-        Y = umap.UMAP(n_neighbors=n,n_components=2,metric="manhattan",random_state=123,n_epochs=500).fit_transform(mat.values.T) 
-        plotEmbeding(mat,Y,"UMAP","UMAP-1","UMAP-2",pre+"_umap")
-    except:
-        return
+    Y = umap.UMAP(n_neighbors=n,n_components=2,metric="euclidean",random_state=123,n_epochs=500).fit_transform(mat.values.T) 
+    plotEmbeding(mat,Y,"UMAP","UMAP-1","UMAP-2",pre+"_umap")
 
 def umap_plot_sup():
     """
@@ -122,17 +119,16 @@ def umap_plot_sup():
 def main():
     ps = range(5,60,5) #parameters for tSNE
     ns = [5,10,15,20,30]
-    for f in glob("../*.txt"):
+    for f in glob("*.txt"):
         print(f)
         mat = pd.read_table(f, index_col=0,sep="\t")
         n = f.split("/")[-1].split(".txt")[0]
-        pca_plot(mat, n)
         """
+        pca_plot(mat, n)
         mds_plot(mat, n)
         Parallel(n_jobs=1)(delayed(tsne_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ps)
-        umap_plot( mat, 5, n )
         """
-        Parallel(n_jobs=5)(delayed(umap_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ns)
+        Parallel(n_jobs=1)(delayed(umap_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ns)
  
 
 

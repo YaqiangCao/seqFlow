@@ -106,7 +106,7 @@ def getNucPosSim(fa,fb,fdhs):
     d = d / 1.0 /n 
     na = fa.split("/")[-1].split(".bedpe.gz")[0]
     nb = fb.split("/")[-1].split(".bedpe.gz")[0]
-    print(na,nb,d)
+    logger.info(na,nb,d)
     return na,nb,d
 
 
