@@ -132,19 +132,19 @@ Non-specific scripts for propressing NGS data.
 
 0. Utilites
 Usefule frequent used code including logging, call system funciton with logging, basic data structure, ploting settings, and only depends on python.      
-- [utils.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/utils.py)   
+- [utils.py](https://github.com/YaqiangCao/seqFlow/blob/master/ngs/utils.py)   
 
 1. Mapping DNA sequenes to genome (obtain BAM) and get mapping stats     
 Based on [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml) and [samtools](http://samtools.sourceforge.net/). The mapping stats were parsed from Bowtie2 print logging.  
-- [dnaMapping.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/dnaMapping.py)    
+- [dnaMapping.py](https://github.com/YaqiangCao/seqFlow/blob/master/ngs/dnaMapping.py)    
 
 2. BAM files to BED files conversion
 Based on [bedtools](https://bedtools.readthedocs.io/en/latest/), single end sequencing can be converted to BED file to save disk and easy parsing. 
-- [bam2bed.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bed.py) 
+- [bam2bed.py](https://github.com/YaqiangCao/seqFlow/blob/master/ngs/bam2bed.py) 
 
 3. BAM files to BEDPE files conversion
 Based on [bedtools](https://bedtools.readthedocs.io/en/latest/), paired end sequencing can be converted to BEDPE file to save disk and easy parsing. 
-- [bam2bedpe.py](https://github.com/YaqiangCao/ngsPipes/blob/master/ngs/bam2bedpe.py)
+- [bam2bedpe.py](https://github.com/YaqiangCao/seqFlow/blob/master/ngs/bam2bedpe.py)
 
 ---
 ## Peaks 
@@ -165,6 +165,7 @@ Specific scripts for analysis of MNase-seq data.
 ---
 ## Plot
 Some usefule code to generate common shown figures in papers.
+- [globalCorrView.py](https://github.com/YaqiangCao/seqFlow/blob/master/Plot/globalCorrView.py*): global correlation plot (2D projection), such as PCA, [t-SNE](https://www.datacamp.com/community/tutorials/introduction-t-sne) and [UMAP](https://github.com/lmcinnes/umap). 
 
 ---
 ## Notebook
