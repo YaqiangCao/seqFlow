@@ -58,20 +58,72 @@ def plotEmbeding(mat, Y, title, xlabel, ylabel, pre):
     f, ax = pylab.subplots()
     for i, label in enumerate(list(mat.columns)):
         c = cs["_".join(label.split("_")[:-1])]
-        ax.scatter(Y[i, 0], Y[i, 1], color=colors[c],s=5)
+        ax.scatter(Y[i, 0], Y[i, 1], color=colors[c], s=5)
         #ax.text(Y[i,0],Y[i,1],label)
     for label, c in cs.items():
         ax.plot(1, 1, color=colors[c], label=label, markeredgecolor='none')
     #leg = ax.legend(loc="upper left",
-    leg = ax.legend(loc="best",
-                    fancybox=True,
-                    #bbox_to_anchor=(1, 1),
-                    fontsize="x-small")
+    leg = ax.legend(
+        loc="best",
+        fancybox=True,
+        #bbox_to_anchor=(1, 1),
+        fontsize="x-small")
     #pylab.setp(leg.get_texts())
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.set_title(title)
     pylab.savefig(pre + ".pdf")
+
+
+def plotClusterHeatmap(mat, pre):
+    """
+    Plot the hierarchal clustering result for samples (columns), do-not use this for maxtrix larger than 1000*1000, could be quite slow. 
+    """
+    cs = ["_".join(c.split("_")[:-1]) for c in mat.columns]
+    cs = list(set(cs))
+    cs = {c: i for i, c in enumerate(cs)}
+    cs = [cs["_".join(c.split("_")[:-1])] for c in mat.columns]
+    sample_colors = [colors[c] for c in cs]
+    fig, ax = pylab.subplots(figsize=(4, 4))
+    sns.clustermap(
+        mat,
+        #center=0.5,
+        cmap="vlag",
+        row_cluster=False,
+        col_cluster=True,
+        #z_score=1,
+        xticklabels=False,
+        yticklabels=False,
+        #row_colors=sample_colors,
+        col_colors=sample_colors)
+    #pylab.show()
+    pylab.savefig(pre + "_cluster_heat.pdf")
+
+
+def plotCorrHeatmap(mat, pre):
+    """
+    Plot the hierarchal clustering result for samples (columns), do-not use this for maxtrix larger than 1000*1000, could be quite slow. 
+    """
+    mat = mat.corr()
+    cs = ["_".join(c.split("_")[:-1]) for c in mat.columns]
+    cs = list(set(cs))
+    cs = {c: i for i, c in enumerate(cs)}
+    cs = [cs["_".join(c.split("_")[:-1])] for c in mat.columns]
+    sample_colors = [colors[c] for c in cs]
+    fig, ax = pylab.subplots(figsize=(4, 4))
+    sns.clustermap(
+        mat,
+        #center=0.5,
+        cmap="vlag",
+        row_cluster=True,
+        col_cluster=True,
+        #z_score=1,
+        xticklabels=False,
+        yticklabels=False,
+        row_colors=sample_colors,
+        col_colors=sample_colors)
+    #pylab.show()
+    pylab.savefig(pre + "_corr_heat.pdf")
 
 
 def pca_plot(mat, pre="test"):
@@ -97,8 +149,8 @@ def tsne_plot(mat, p=10, pre="test"):
     tsne = manifold.TSNE(n_components=2, perplexity=p)
     #embeding space normalization
     Y = tsne.fit_transform(mat.values.T)
-    y_min,y_max = Y.min(0),Y.max(0)
-    Y = (Y - y_min)/(y_max-y_min)
+    y_min, y_max = Y.min(0), Y.max(0)
+    Y = (Y - y_min) / (y_max - y_min)
     xlabel = "t-SNE-1"
     ylabel = "t-SNE-2"
     #title = "perplexity=%s,init=PCA" % p
@@ -106,9 +158,15 @@ def tsne_plot(mat, p=10, pre="test"):
     plotEmbeding(mat, Y, title, xlabel, ylabel, pre + "_tsne")
 
 
-def umap_plot(mat,n=5,pre="test"):
-    Y = umap.UMAP(n_neighbors=n,n_components=2,metric="euclidean",random_state=123,n_epochs=500).fit_transform(mat.values.T) 
-    plotEmbeding(mat,Y,"UMAP","UMAP-1","UMAP-2",pre+"_umap")
+def umap_plot(mat, n=5, pre="test"):
+    #Y = umap.UMAP(n_neighbors=n,n_components=2,metric="correlation",random_state=123,n_epochs=500).fit_transform(mat.values.T)
+    Y = umap.UMAP(n_neighbors=n,
+                  n_components=2,
+                  metric="euclidean",
+                  random_state=123,
+                  n_epochs=500).fit_transform(mat.values.T)
+    plotEmbeding(mat, Y, "UMAP", "UMAP-1", "UMAP-2", pre + "_umap")
+
 
 def umap_plot_sup():
     """
@@ -118,19 +176,20 @@ def umap_plot_sup():
 
 
 def main():
-    ps = range(5,60,5) #parameters for tSNE
-    ns = [5,10,15,20,30]
+    ps = range(5, 60, 5)  #parameters for tSNE
+    ns = [5, 10, 15, 20, 30]
     for f in glob("*.txt"):
         print(f)
-        mat = pd.read_table(f, index_col=0,sep="\t")
+        mat = pd.read_table(f, index_col=0, sep="\t")
         n = f.split("/")[-1].split(".txt")[0]
         """
         pca_plot(mat, n)
         mds_plot(mat, n)
         Parallel(n_jobs=1)(delayed(tsne_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ps)
-        Parallel(n_jobs=1)(delayed(umap_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ns)
+        Parallel(n_jobs=5)(delayed(umap_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ns)
         """
- 
+        plotCorrHeatmap(mat, n)
+        plotClusterHeatmap(mat, n)
 
 
 main()
