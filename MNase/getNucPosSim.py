@@ -106,7 +106,8 @@ def getNucPosSim(fa,fb,fdhs):
     d = d / 1.0 /n 
     na = fa.split("/")[-1].split(".bedpe.gz")[0]
     nb = fb.split("/")[-1].split(".bedpe.gz")[0]
-    logger.info(na,nb,d)
+    r = "%s\t%s\t%s"%(na,nb,d)
+    logger.info(r)
     return na,nb,d
 
 
@@ -115,11 +116,12 @@ def main():
     ds = pd.read_table("../4.bedpe/stat_filter3.txt",index_col=0,sep="\t").index
     fs = glob("../5.reduBedpe/*.bedpe.gz")
     fs =  [f for f in fs if f.split("/")[-1].split(".bedpe")[0] in ds]
+    fs.sort()
     ps = []
     for i in range(len(fs)):
         for j in range(i+1,len(fs)):
             ps.append( [fs[i],fs[j],fdhs] )
-    ds = Parallel(n_jobs=10)(delayed( getNucPosSim )(p[0],p[1],p[2]) for p in ps)
+    ds = Parallel(n_jobs=30)(delayed( getNucPosSim )(p[0],p[1],p[2]) for p in ps)
     data = {}
     for d in ds:
         if d[0] not in data:
