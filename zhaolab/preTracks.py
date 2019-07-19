@@ -40,11 +40,8 @@ def main():
                 print("%s not exist for %s"%(t,g))
                 continue
             ng = root + t
-            if "Th17" in meta.loc[g,"SampleDiscription"]:
-                ct = "TH17"
-            else:
-                ct = "CD4+"
-            nline = [ng,"bedGraph","CYQ-UNKWN",ct,"CHIC",g+"_"+meta.loc[g,"SampleDiscription"]]
+            ct = "unkwn"
+            nline = [ng,"bedGraph","CYQ-UNKWN",ct,"CHIC",g+"_"+meta.loc[g,"Sample discription"]]
             fo.write("\t".join(nline)+"\n")
 
 

@@ -4,6 +4,7 @@
 globalCorrView.py
 2019-05-31: updated t-SNE
 2019-06-26: UMAP added
+2019-07-18: updated plotEmbeding
 """
 
 __author__ = "CAO Yaqiang"
@@ -12,6 +13,7 @@ __modified__ = ""
 __email__ = "caoyaqiang0410@gmail.com"
 
 #sys
+import random
 from glob import glob
 from datetime import datetime
 
@@ -52,22 +54,19 @@ def plotEmbeding(mat, Y, title, xlabel, ylabel, pre):
     Y: the component matrix, such as from PCA.
     """
     #prapare samples for different color
-    cs = ["_".join(c.split("_")[:-1]) for c in mat.columns]
-    cs = list(set(cs))
-    cs = {c: i for i, c in enumerate(cs)}
+    cs = np.array(["_".join(c.split("_")[:-1]) for c in mat.columns])
+    ncs = list(set(cs))
+    ncs = {c: i for i, c in enumerate(ncs)}
     f, ax = pylab.subplots()
-    for i, label in enumerate(list(mat.columns)):
-        c = cs["_".join(label.split("_")[:-1])]
-        ax.scatter(Y[i, 0], Y[i, 1], color=colors[c], s=5)
-        #ax.text(Y[i,0],Y[i,1],label)
-    for label, c in cs.items():
-        ax.plot(1, 1, color=colors[c], label=label, markeredgecolor='none')
-    #leg = ax.legend(loc="upper left",
+    for c,i in ncs.items():
+        ps = np.where( cs == c)[0]
+        ax.scatter(Y[ps, 0], Y[ps, 1], color=colors[i],s=5,label=c)
     leg = ax.legend(
         loc="best",
         fancybox=True,
         #bbox_to_anchor=(1, 1),
-        fontsize="x-small")
+        #fontsize="x-small"
+    )
     #pylab.setp(leg.get_texts())
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
@@ -94,6 +93,7 @@ def plotClusterHeatmap(mat, pre):
         #z_score=1,
         xticklabels=False,
         yticklabels=False,
+        #metric="manhattan",
         #row_colors=sample_colors,
         col_colors=sample_colors)
     #pylab.show()
@@ -162,32 +162,39 @@ def umap_plot(mat, n=5, pre="test"):
     #Y = umap.UMAP(n_neighbors=n,n_components=2,metric="correlation",random_state=123,n_epochs=500).fit_transform(mat.values.T)
     Y = umap.UMAP(n_neighbors=n,
                   n_components=2,
-                  metric="euclidean",
+                  metric="manhattan",
                   random_state=123,
                   n_epochs=500).fit_transform(mat.values.T)
     plotEmbeding(mat, Y, "UMAP", "UMAP-1", "UMAP-2", pre + "_umap")
 
+def umap_shuffle_plot(mat, n=5, pre="test"):
+    cs =list(mat.columns)
+    random.shuffle( cs )
+    mat = mat[cs]
+    Y = umap.UMAP(n_neighbors=n,
+                  n_components=2,
+                  metric="manhattan",
+                  random_state=123,
+                  n_epochs=500).fit_transform(mat.values.T)
+    plotEmbeding(mat, Y, "UMAP", "UMAP-1", "UMAP-2", pre + "_umap_shuffle")
 
-def umap_plot_sup():
-    """
-    Supviszed UMAP dimension reduction.
-    """
-    pass
+
 
 
 def main():
-    ps = range(5, 60, 5)  #parameters for tSNE
-    ns = [5, 10, 15, 20, 30]
+    #ps = range(5, 60, 5)  #parameters for tSNE
+    #ns = [5, 10, 15, 20, 30]
     for f in glob("*.txt"):
         print(f)
-        mat = pd.read_table(f, index_col=0, sep="\t")
+        mat = pd.read_csv(f, index_col=0, sep="\t")
         n = f.split("/")[-1].split(".txt")[0]
-        """
         pca_plot(mat, n)
         mds_plot(mat, n)
-        Parallel(n_jobs=1)(delayed(tsne_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ps)
-        Parallel(n_jobs=5)(delayed(umap_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ns)
-        """
+        #Parallel(n_jobs=1)(delayed(tsne_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ps)
+        #Parallel(n_jobs=1)(delayed(umap_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ns)
+        tsne_plot(mat,30,"%s_p_%s"%(n,30))
+        umap_plot(mat,30,"%s_p_%s"%(n,30))
+        umap_shuffle_plot(mat,30,"%s_p_%s"%(n,30))
         plotCorrHeatmap(mat, n)
         plotClusterHeatmap(mat, n)
 

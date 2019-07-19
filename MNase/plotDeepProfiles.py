@@ -39,7 +39,7 @@ del colors[10]
 
 def getProfile(f, filterZero=True):
     ds = {}
-    #-2000 and 2000 is the length before/after TSS
+    #-2000 and 2000 is the length before/after TSS/center
     xs = np.arange(-2000, 2000, 10)
     for i, line in enumerate(gzip.open(f)):
         if i == 0:
@@ -49,7 +49,6 @@ def getProfile(f, filterZero=True):
         ss = list(map(float, line[6:]))
         if filterZero:
             if np.sum(ss) == 0.0:
-                #if np.max(ss) < 0.2:
                 continue
         #if line[5] == '-': do not need, as deeptools already consider it
         #    ss.reverse()
@@ -115,13 +114,12 @@ def smooth(x, window_len=11, window='hanning'):
 
 def profilePlot(fs, fout):
     fig, ax = pylab.subplots(figsize=(2, 2.75 * 0.8))
-    ax2 = ax.twinx()
     ss = getProfile(fs[0])
-    x = list(ss.index)
-    y = list(smooth(np.array(ss.values)))
-    x = np.arange(np.min(x), np.max(x),
-                  (np.max(x) - np.min(x)) / float(len(y)))
-    ax.plot(x, y, color=colors[0], linewidth=1)
+    #x = list(ss.index)
+    #y = list(smooth(np.array(ss.values)))
+    #x = np.arange(np.min(x), np.max(x),
+    #              (np.max(x) - np.min(x)) / float(len(y)))
+    #ax.plot(x, y, color=colors[0], linewidth=1)
     #ax.plot(ss.index,ss,color=colors[0],linewidth=1)
     ax.set_ylabel("Nucleosome density")
     ax.set_xlabel("Distance from TSS")
@@ -134,7 +132,7 @@ def profilePlot(fs, fout):
     y = list(smooth(np.array(ss.values)))
     x = np.arange(np.min(x), np.max(x),
                   (np.max(x) - np.min(x)) / float(len(y)))
-    ax.plot(x, y, color=colors[1], linewidth=1)
+    ax2.plot(x, y, color=colors[1], linewidth=1)
     #ax2.plot(ss.index,ss,color=colors[1],linewidth=1)
     ax2.set_ylabel("Subnucl. density")
     for t in ax2.get_yticklabels():
@@ -145,9 +143,7 @@ def profilePlot(fs, fout):
 
 
 def main():
-    profilePlot(["KO_EILP_cN_tss.txt.gz", "KO_EILP_sP_tss.txt.gz"], "KO_EILP")
-    profilePlot(["WT_EILP_cN_tss.txt.gz", "WT_EILP_sP_tss.txt.gz"], "WT_EILP")
-    profilePlot(["WT_ILCP_cN_tss.txt.gz", "WT_ILCP_sP_tss.txt.gz"], "WT_ILCP")
+    profilePlot(["all_cN_tss.txt.gz", "all_sP_tss.txt.gz"], "all")
 
 
 main()
