@@ -1,0 +1,16 @@
+BEDgraph	type	Scientist	Cell-type	Assay-type	Description
+/var/www/html/browser/data/mm10/CYQ/GB9339_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9339_Test S21 -6hG- TCF1N100srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9340_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9340_Test S21 -6hG- TCF1N500srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9341_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9341_Test S21 -6hG- TCF1N1000srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9342_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9342_Test S21 -6hG- TEF1A srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9343_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9343_Test S21 -6hG- TEF1B srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9344_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9344_Test S21 -6hG- TEF1C srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9345_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9345_Test S21 -6hG- H3k4me3 srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9346_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9346_Test S21 -6hG- IgG CST srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9347_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9347_Test S21 -6hG- IgG M srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9348_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9348_Test S21 -6hG- IgG CST prep.1
+/var/www/html/browser/data/mm10/CYQ/GB9349_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9349_Test S21 -6hG- IgG M prep.1
+/var/www/html/browser/data/mm10/CYQ/GB9350_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9350_WT TCF1AID -6h GFP+ TCF1 srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9351_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9351_WT TCF1AID -6h GFP+ LEF1A srep.1
+/var/www/html/browser/data/mm10/CYQ/GB9352_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9352_WT TCF1AID -6h GFP+ TCF1 srep.2
+/var/www/html/browser/data/mm10/CYQ/GB9353_washU.txt.gz	bedGraph	CYQ-UNKWN	unkwn	CHIC	GB9353_WT TCF1AID -6h GFP+ LEF1A srep.2

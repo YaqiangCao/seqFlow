@@ -1,0 +1,75 @@
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9353/GB9353.bam >> ./GB9353.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9352/GB9352.bam >> ./GB9352.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9342/GB9342.bam >> ./GB9342.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9341/GB9341.bam >> ./GB9341.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9339/GB9339.bam >> ./GB9339.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9349/GB9349.bam >> ./GB9349.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9343/GB9343.bam >> ./GB9343.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9350/GB9350.bam >> ./GB9350.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9340/GB9340.bam >> ./GB9340.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9344/GB9344.bam >> ./GB9344.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9345/GB9345.bam >> ./GB9345.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9346/GB9346.bam >> ./GB9346.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9351/GB9351.bam >> ./GB9351.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9347/GB9347.bam >> ./GB9347.2.bam
+2019-07-19 14:14:34 root   INFO     samtools view -b -q 10 -F 4 ../2.mapping/GB9348/GB9348.bam >> ./GB9348.2.bam
+2019-07-19 14:15:48 root   INFO     samtools sort -n -@ 2 ./GB9350.2.bam -T GB9350 -o GB9350.bam
+2019-07-19 14:15:54 root   INFO     samtools sort -n -@ 2 ./GB9351.2.bam -T GB9351 -o GB9351.bam
+2019-07-19 14:15:57 root   INFO     samtools sort -n -@ 2 ./GB9352.2.bam -T GB9352 -o GB9352.bam
+2019-07-19 14:15:59 root   INFO     samtools sort -n -@ 2 ./GB9353.2.bam -T GB9353 -o GB9353.bam
+2019-07-19 14:16:06 root   INFO     samtools sort -n -@ 2 ./GB9343.2.bam -T GB9343 -o GB9343.bam
+2019-07-19 14:16:06 root   INFO     samtools sort -n -@ 2 ./GB9347.2.bam -T GB9347 -o GB9347.bam
+2019-07-19 14:16:08 root   INFO     samtools sort -n -@ 2 ./GB9348.2.bam -T GB9348 -o GB9348.bam
+2019-07-19 14:16:11 root   INFO     samtools sort -n -@ 2 ./GB9346.2.bam -T GB9346 -o GB9346.bam
+2019-07-19 14:16:12 root   INFO     samtools sort -n -@ 2 ./GB9344.2.bam -T GB9344 -o GB9344.bam
+2019-07-19 14:16:12 root   INFO     samtools sort -n -@ 2 ./GB9340.2.bam -T GB9340 -o GB9340.bam
+2019-07-19 14:16:15 root   INFO     samtools sort -n -@ 2 ./GB9341.2.bam -T GB9341 -o GB9341.bam
+2019-07-19 14:16:16 root   INFO     samtools sort -n -@ 2 ./GB9339.2.bam -T GB9339 -o GB9339.bam
+2019-07-19 14:16:16 root   INFO     samtools sort -n -@ 2 ./GB9342.2.bam -T GB9342 -o GB9342.bam
+2019-07-19 14:16:26 root   INFO     samtools sort -n -@ 2 ./GB9345.2.bam -T GB9345 -o GB9345.bam
+2019-07-19 14:16:33 root   INFO     samtools sort -n -@ 2 ./GB9349.2.bam -T GB9349 -o GB9349.bam
+2019-07-19 14:17:53 root   INFO     bamToBed -bedpe -i GB9350.bam > ./GB9350.bedpe
+2019-07-19 14:18:05 root   INFO     bamToBed -bedpe -i GB9351.bam > ./GB9351.bedpe
+2019-07-19 14:18:07 root   INFO     bamToBed -bedpe -i GB9352.bam > ./GB9352.bedpe
+2019-07-19 14:18:10 root   INFO     bamToBed -bedpe -i GB9353.bam > ./GB9353.bedpe
+2019-07-19 14:18:34 root   INFO     bamToBed -bedpe -i GB9347.bam > ./GB9347.bedpe
+2019-07-19 14:18:36 root   INFO     bamToBed -bedpe -i GB9343.bam > ./GB9343.bedpe
+2019-07-19 14:18:37 root   INFO     bamToBed -bedpe -i GB9348.bam > ./GB9348.bedpe
+2019-07-19 14:18:45 root   INFO     rm ./GB9350.2.bam GB9350.bam
+2019-07-19 14:18:45 root   INFO     gzip ./GB9350.bedpe
+2019-07-19 14:18:46 root   INFO     bamToBed -bedpe -i GB9346.bam > ./GB9346.bedpe
+2019-07-19 14:18:49 root   INFO     bamToBed -bedpe -i GB9340.bam > ./GB9340.bedpe
+2019-07-19 14:18:57 root   INFO     bamToBed -bedpe -i GB9342.bam > ./GB9342.bedpe
+2019-07-19 14:18:58 root   INFO     bamToBed -bedpe -i GB9344.bam > ./GB9344.bedpe
+2019-07-19 14:18:59 root   INFO     bamToBed -bedpe -i GB9341.bam > ./GB9341.bedpe
+2019-07-19 14:19:02 root   INFO     rm ./GB9351.2.bam GB9351.bam
+2019-07-19 14:19:03 root   INFO     gzip ./GB9351.bedpe
+2019-07-19 14:19:06 root   INFO     rm ./GB9352.2.bam GB9352.bam
+2019-07-19 14:19:06 root   INFO     rm ./GB9353.2.bam GB9353.bam
+2019-07-19 14:19:06 root   INFO     gzip ./GB9352.bedpe
+2019-07-19 14:19:06 root   INFO     gzip ./GB9353.bedpe
+2019-07-19 14:19:11 root   INFO     bamToBed -bedpe -i GB9339.bam > ./GB9339.bedpe
+2019-07-19 14:19:33 root   INFO     rm ./GB9347.2.bam GB9347.bam
+2019-07-19 14:19:33 root   INFO     gzip ./GB9347.bedpe
+2019-07-19 14:19:34 root   INFO     rm ./GB9343.2.bam GB9343.bam
+2019-07-19 14:19:34 root   INFO     gzip ./GB9343.bedpe
+2019-07-19 14:19:38 root   INFO     rm ./GB9348.2.bam GB9348.bam
+2019-07-19 14:19:38 root   INFO     gzip ./GB9348.bedpe
+2019-07-19 14:19:45 root   INFO     bamToBed -bedpe -i GB9345.bam > ./GB9345.bedpe
+2019-07-19 14:19:49 root   INFO     rm ./GB9346.2.bam GB9346.bam
+2019-07-19 14:19:49 root   INFO     bamToBed -bedpe -i GB9349.bam > ./GB9349.bedpe
+2019-07-19 14:19:50 root   INFO     gzip ./GB9346.bedpe
+2019-07-19 14:19:52 root   INFO     rm ./GB9340.2.bam GB9340.bam
+2019-07-19 14:19:52 root   INFO     gzip ./GB9340.bedpe
+2019-07-19 14:19:59 root   INFO     rm ./GB9344.2.bam GB9344.bam
+2019-07-19 14:19:59 root   INFO     rm ./GB9342.2.bam GB9342.bam
+2019-07-19 14:20:00 root   INFO     gzip ./GB9344.bedpe
+2019-07-19 14:20:00 root   INFO     gzip ./GB9342.bedpe
+2019-07-19 14:20:00 root   INFO     rm ./GB9341.2.bam GB9341.bam
+2019-07-19 14:20:01 root   INFO     gzip ./GB9341.bedpe
+2019-07-19 14:20:14 root   INFO     rm ./GB9339.2.bam GB9339.bam
+2019-07-19 14:20:15 root   INFO     gzip ./GB9339.bedpe
+2019-07-19 14:20:56 root   INFO     rm ./GB9345.2.bam GB9345.bam
+2019-07-19 14:20:57 root   INFO     gzip ./GB9345.bedpe
+2019-07-19 14:21:01 root   INFO     rm ./GB9349.2.bam GB9349.bam
+2019-07-19 14:21:01 root   INFO     gzip ./GB9349.bedpe

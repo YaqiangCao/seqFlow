@@ -1,0 +1,240 @@
+2019-07-19 12:21:04 root   INFO     Start mapping GB9350.
+
+2019-07-19 12:21:04 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9350_R1.fastq.gz -2 ../1.fastq/GB9350_R2.fastq.gz -S GB9350/GB9350.sam
+2019-07-19 12:21:04 root   INFO     Start mapping GB9342.
+
+2019-07-19 12:21:04 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9342_R1.fastq.gz -2 ../1.fastq/GB9342_R2.fastq.gz -S GB9342/GB9342.sam
+2019-07-19 12:21:04 root   INFO     Start mapping GB9339.
+
+2019-07-19 12:21:04 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9339_R1.fastq.gz -2 ../1.fastq/GB9339_R2.fastq.gz -S GB9339/GB9339.sam
+2019-07-19 12:21:04 root   INFO     Start mapping GB9345.
+
+2019-07-19 12:21:04 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9345_R1.fastq.gz -2 ../1.fastq/GB9345_R2.fastq.gz -S GB9345/GB9345.sam
+2019-07-19 12:21:04 root   INFO     Start mapping GB9344.
+
+2019-07-19 12:21:04 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9344_R1.fastq.gz -2 ../1.fastq/GB9344_R2.fastq.gz -S GB9344/GB9344.sam
+2019-07-19 12:39:30 root   INFO     FLAG_A:GB9350
+21992317 reads; of these:
+  21992317 (100.00%) were paired; of these:
+    10004644 (45.49%) aligned concordantly 0 times
+    9186239 (41.77%) aligned concordantly exactly 1 time
+    2801434 (12.74%) aligned concordantly >1 times
+54.51% overall alignment rate
+FLAG_A
+
+2019-07-19 12:39:30 root   INFO     samtools view -S GB9350/GB9350.sam -b -o GB9350/GB9350.bam
+2019-07-19 12:43:20 root   INFO     samtools sort -@ 2 GB9350/GB9350.bam -T GB9350/GB9350 -o GB9350/GB9350.bam
+2019-07-19 12:43:38 root   INFO     FLAG_A:GB9345
+23757469 reads; of these:
+  23757469 (100.00%) were paired; of these:
+    4456767 (18.76%) aligned concordantly 0 times
+    15938043 (67.09%) aligned concordantly exactly 1 time
+    3362659 (14.15%) aligned concordantly >1 times
+81.24% overall alignment rate
+FLAG_A
+
+2019-07-19 12:43:38 root   INFO     samtools view -S GB9345/GB9345.sam -b -o GB9345/GB9345.bam
+2019-07-19 12:45:41 root   INFO     samtools index GB9350/GB9350.bam GB9350/GB9350.bai
+2019-07-19 12:45:59 root   INFO     rm GB9350/GB9350.sam
+2019-07-19 12:46:00 root   INFO     Start mapping GB9347.
+
+2019-07-19 12:46:00 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9347_R1.fastq.gz -2 ../1.fastq/GB9347_R2.fastq.gz -S GB9347/GB9347.sam
+2019-07-19 12:47:40 root   INFO     samtools sort -@ 2 GB9345/GB9345.bam -T GB9345/GB9345 -o GB9345/GB9345.bam
+2019-07-19 12:48:55 root   INFO     FLAG_A:GB9342
+22474843 reads; of these:
+  22474843 (100.00%) were paired; of these:
+    5584280 (24.85%) aligned concordantly 0 times
+    12863285 (57.23%) aligned concordantly exactly 1 time
+    4027278 (17.92%) aligned concordantly >1 times
+75.15% overall alignment rate
+FLAG_A
+
+2019-07-19 12:48:55 root   INFO     samtools view -S GB9342/GB9342.sam -b -o GB9342/GB9342.bam
+2019-07-19 12:49:49 root   INFO     FLAG_A:GB9339
+24054848 reads; of these:
+  24054848 (100.00%) were paired; of these:
+    6294461 (26.17%) aligned concordantly 0 times
+    13598776 (56.53%) aligned concordantly exactly 1 time
+    4161611 (17.30%) aligned concordantly >1 times
+73.83% overall alignment rate
+FLAG_A
+
+2019-07-19 12:49:49 root   INFO     samtools view -S GB9339/GB9339.sam -b -o GB9339/GB9339.bam
+2019-07-19 12:50:57 root   INFO     samtools index GB9345/GB9345.bam GB9345/GB9345.bai
+2019-07-19 12:51:14 root   INFO     rm GB9345/GB9345.sam
+2019-07-19 12:51:17 root   INFO     Start mapping GB9346.
+
+2019-07-19 12:51:17 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9346_R1.fastq.gz -2 ../1.fastq/GB9346_R2.fastq.gz -S GB9346/GB9346.sam
+2019-07-19 12:52:13 root   INFO     samtools sort -@ 2 GB9342/GB9342.bam -T GB9342/GB9342 -o GB9342/GB9342.bam
+2019-07-19 12:52:17 root   INFO     FLAG_A:GB9344
+31844069 reads; of these:
+  31844069 (100.00%) were paired; of these:
+    14854000 (46.65%) aligned concordantly 0 times
+    12200522 (38.31%) aligned concordantly exactly 1 time
+    4789547 (15.04%) aligned concordantly >1 times
+53.35% overall alignment rate
+FLAG_A
+
+2019-07-19 12:52:17 root   INFO     samtools view -S GB9344/GB9344.sam -b -o GB9344/GB9344.bam
+2019-07-19 12:52:56 root   INFO     samtools sort -@ 2 GB9339/GB9339.bam -T GB9339/GB9339 -o GB9339/GB9339.bam
+2019-07-19 12:54:51 root   INFO     samtools index GB9342/GB9342.bam GB9342/GB9342.bai
+2019-07-19 12:55:08 root   INFO     rm GB9342/GB9342.sam
+2019-07-19 12:55:10 root   INFO     Start mapping GB9341.
+
+2019-07-19 12:55:10 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9341_R1.fastq.gz -2 ../1.fastq/GB9341_R2.fastq.gz -S GB9341/GB9341.sam
+2019-07-19 12:55:17 root   INFO     samtools index GB9339/GB9339.bam GB9339/GB9339.bai
+2019-07-19 12:55:39 root   INFO     rm GB9339/GB9339.sam
+2019-07-19 12:55:41 root   INFO     Start mapping GB9340.
+
+2019-07-19 12:55:41 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9340_R1.fastq.gz -2 ../1.fastq/GB9340_R2.fastq.gz -S GB9340/GB9340.sam
+2019-07-19 12:56:27 root   INFO     samtools sort -@ 2 GB9344/GB9344.bam -T GB9344/GB9344 -o GB9344/GB9344.bam
+2019-07-19 13:00:54 root   INFO     samtools index GB9344/GB9344.bam GB9344/GB9344.bai
+2019-07-19 13:01:25 root   INFO     rm GB9344/GB9344.sam
+2019-07-19 13:01:28 root   INFO     Start mapping GB9343.
+
+2019-07-19 13:01:28 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9343_R1.fastq.gz -2 ../1.fastq/GB9343_R2.fastq.gz -S GB9343/GB9343.sam
+2019-07-19 13:06:32 root   INFO     FLAG_A:GB9347
+27837457 reads; of these:
+  27837457 (100.00%) were paired; of these:
+    11753068 (42.22%) aligned concordantly 0 times
+    11782005 (42.32%) aligned concordantly exactly 1 time
+    4302384 (15.46%) aligned concordantly >1 times
+57.78% overall alignment rate
+FLAG_A
+
+2019-07-19 13:06:32 root   INFO     samtools view -S GB9347/GB9347.sam -b -o GB9347/GB9347.bam
+2019-07-19 13:11:23 root   INFO     samtools sort -@ 2 GB9347/GB9347.bam -T GB9347/GB9347 -o GB9347/GB9347.bam
+2019-07-19 13:13:04 root   INFO     FLAG_A:GB9346
+27539212 reads; of these:
+  27539212 (100.00%) were paired; of these:
+    10573881 (38.40%) aligned concordantly 0 times
+    12269817 (44.55%) aligned concordantly exactly 1 time
+    4695514 (17.05%) aligned concordantly >1 times
+61.60% overall alignment rate
+FLAG_A
+
+2019-07-19 13:13:04 root   INFO     samtools view -S GB9346/GB9346.sam -b -o GB9346/GB9346.bam
+2019-07-19 13:14:38 root   INFO     samtools index GB9347/GB9347.bam GB9347/GB9347.bai
+2019-07-19 13:15:05 root   INFO     rm GB9347/GB9347.sam
+2019-07-19 13:15:08 root   INFO     Start mapping GB9351.
+
+2019-07-19 13:15:08 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9351_R1.fastq.gz -2 ../1.fastq/GB9351_R2.fastq.gz -S GB9351/GB9351.sam
+2019-07-19 13:16:50 root   INFO     FLAG_A:GB9340
+23687021 reads; of these:
+  23687021 (100.00%) were paired; of these:
+    6550386 (27.65%) aligned concordantly 0 times
+    12762912 (53.88%) aligned concordantly exactly 1 time
+    4373723 (18.46%) aligned concordantly >1 times
+72.35% overall alignment rate
+FLAG_A
+
+2019-07-19 13:16:50 root   INFO     samtools view -S GB9340/GB9340.sam -b -o GB9340/GB9340.bam
+2019-07-19 13:17:10 root   INFO     samtools sort -@ 2 GB9346/GB9346.bam -T GB9346/GB9346 -o GB9346/GB9346.bam
+2019-07-19 13:18:48 root   INFO     FLAG_A:GB9341
+25572360 reads; of these:
+  25572360 (100.00%) were paired; of these:
+    8219622 (32.14%) aligned concordantly 0 times
+    12800370 (50.06%) aligned concordantly exactly 1 time
+    4552368 (17.80%) aligned concordantly >1 times
+67.86% overall alignment rate
+FLAG_A
+
+2019-07-19 13:18:48 root   INFO     samtools view -S GB9341/GB9341.sam -b -o GB9341/GB9341.bam
+2019-07-19 13:20:06 root   INFO     samtools index GB9346/GB9346.bam GB9346/GB9346.bai
+2019-07-19 13:20:17 root   INFO     samtools sort -@ 2 GB9340/GB9340.bam -T GB9340/GB9340 -o GB9340/GB9340.bam
+2019-07-19 13:20:25 root   INFO     rm GB9346/GB9346.sam
+2019-07-19 13:20:28 root   INFO     Start mapping GB9352.
+
+2019-07-19 13:20:28 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9352_R1.fastq.gz -2 ../1.fastq/GB9352_R2.fastq.gz -S GB9352/GB9352.sam
+2019-07-19 13:22:06 root   INFO     samtools sort -@ 2 GB9341/GB9341.bam -T GB9341/GB9341 -o GB9341/GB9341.bam
+2019-07-19 13:22:24 root   INFO     FLAG_A:GB9343
+24335741 reads; of these:
+  24335741 (100.00%) were paired; of these:
+    8730735 (35.88%) aligned concordantly 0 times
+    11601356 (47.67%) aligned concordantly exactly 1 time
+    4003650 (16.45%) aligned concordantly >1 times
+64.12% overall alignment rate
+FLAG_A
+
+2019-07-19 13:22:24 root   INFO     samtools view -S GB9343/GB9343.sam -b -o GB9343/GB9343.bam
+2019-07-19 13:22:50 root   INFO     samtools index GB9340/GB9340.bam GB9340/GB9340.bai
+2019-07-19 13:23:14 root   INFO     rm GB9340/GB9340.sam
+2019-07-19 13:23:16 root   INFO     Start mapping GB9349.
+
+2019-07-19 13:23:16 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9349_R1.fastq.gz -2 ../1.fastq/GB9349_R2.fastq.gz -S GB9349/GB9349.sam
+2019-07-19 13:24:40 root   INFO     samtools index GB9341/GB9341.bam GB9341/GB9341.bai
+2019-07-19 13:25:00 root   INFO     rm GB9341/GB9341.sam
+2019-07-19 13:25:03 root   INFO     Start mapping GB9348.
+
+2019-07-19 13:25:03 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9348_R1.fastq.gz -2 ../1.fastq/GB9348_R2.fastq.gz -S GB9348/GB9348.sam
+2019-07-19 13:25:43 root   INFO     samtools sort -@ 2 GB9343/GB9343.bam -T GB9343/GB9343 -o GB9343/GB9343.bam
+2019-07-19 13:29:19 root   INFO     samtools index GB9343/GB9343.bam GB9343/GB9343.bai
+2019-07-19 13:29:45 root   INFO     rm GB9343/GB9343.sam
+2019-07-19 13:29:47 root   INFO     Start mapping GB9353.
+
+2019-07-19 13:29:47 root   INFO     bowtie2 --no-mixed --no-discordant -p 15 -q --local --very-sensitive -x /home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10 -1 ../1.fastq/GB9353_R1.fastq.gz -2 ../1.fastq/GB9353_R2.fastq.gz -S GB9353/GB9353.sam
+2019-07-19 13:31:01 root   INFO     FLAG_A:GB9351
+22072813 reads; of these:
+  22072813 (100.00%) were paired; of these:
+    8209636 (37.19%) aligned concordantly 0 times
+    10580083 (47.93%) aligned concordantly exactly 1 time
+    3283094 (14.87%) aligned concordantly >1 times
+62.81% overall alignment rate
+FLAG_A
+
+2019-07-19 13:31:01 root   INFO     samtools view -S GB9351/GB9351.sam -b -o GB9351/GB9351.bam
+2019-07-19 13:34:53 root   INFO     samtools sort -@ 2 GB9351/GB9351.bam -T GB9351/GB9351 -o GB9351/GB9351.bam
+2019-07-19 13:37:57 root   INFO     samtools index GB9351/GB9351.bam GB9351/GB9351.bai
+2019-07-19 13:38:19 root   INFO     rm GB9351/GB9351.sam
+2019-07-19 13:38:57 root   INFO     FLAG_A:GB9352
+25827280 reads; of these:
+  25827280 (100.00%) were paired; of these:
+    11769326 (45.57%) aligned concordantly 0 times
+    10755303 (41.64%) aligned concordantly exactly 1 time
+    3302651 (12.79%) aligned concordantly >1 times
+54.43% overall alignment rate
+FLAG_A
+
+2019-07-19 13:38:57 root   INFO     samtools view -S GB9352/GB9352.sam -b -o GB9352/GB9352.bam
+2019-07-19 13:42:13 root   INFO     samtools sort -@ 2 GB9352/GB9352.bam -T GB9352/GB9352 -o GB9352/GB9352.bam
+2019-07-19 13:44:38 root   INFO     samtools index GB9352/GB9352.bam GB9352/GB9352.bai
+2019-07-19 13:44:59 root   INFO     rm GB9352/GB9352.sam
+2019-07-19 13:45:52 root   INFO     FLAG_A:GB9353
+21712967 reads; of these:
+  21712967 (100.00%) were paired; of these:
+    7915431 (36.45%) aligned concordantly 0 times
+    10522703 (48.46%) aligned concordantly exactly 1 time
+    3274833 (15.08%) aligned concordantly >1 times
+63.55% overall alignment rate
+FLAG_A
+
+2019-07-19 13:45:52 root   INFO     samtools view -S GB9353/GB9353.sam -b -o GB9353/GB9353.bam
+2019-07-19 13:48:15 root   INFO     samtools sort -@ 2 GB9353/GB9353.bam -T GB9353/GB9353 -o GB9353/GB9353.bam
+2019-07-19 13:50:08 root   INFO     samtools index GB9353/GB9353.bam GB9353/GB9353.bai
+2019-07-19 13:50:22 root   INFO     rm GB9353/GB9353.sam
+2019-07-19 13:56:25 root   INFO     FLAG_A:GB9349
+29170679 reads; of these:
+  29170679 (100.00%) were paired; of these:
+    6554600 (22.47%) aligned concordantly 0 times
+    13808627 (47.34%) aligned concordantly exactly 1 time
+    8807452 (30.19%) aligned concordantly >1 times
+77.53% overall alignment rate
+FLAG_A
+
+2019-07-19 13:56:25 root   INFO     samtools view -S GB9349/GB9349.sam -b -o GB9349/GB9349.bam
+2019-07-19 13:57:48 root   INFO     FLAG_A:GB9348
+23967433 reads; of these:
+  23967433 (100.00%) were paired; of these:
+    6892993 (28.76%) aligned concordantly 0 times
+    9849903 (41.10%) aligned concordantly exactly 1 time
+    7224537 (30.14%) aligned concordantly >1 times
+71.24% overall alignment rate
+FLAG_A
+
+2019-07-19 13:57:48 root   INFO     samtools view -S GB9348/GB9348.sam -b -o GB9348/GB9348.bam
+2019-07-19 13:59:48 root   INFO     samtools sort -@ 2 GB9349/GB9349.bam -T GB9349/GB9349 -o GB9349/GB9349.bam
+2019-07-19 14:00:31 root   INFO     samtools sort -@ 2 GB9348/GB9348.bam -T GB9348/GB9348 -o GB9348/GB9348.bam
+2019-07-19 14:02:13 root   INFO     samtools index GB9349/GB9349.bam GB9349/GB9349.bai
+2019-07-19 14:02:32 root   INFO     rm GB9349/GB9349.sam
+2019-07-19 14:02:34 root   INFO     samtools index GB9348/GB9348.bam GB9348/GB9348.bai
+2019-07-19 14:02:51 root   INFO     rm GB9348/GB9348.sam

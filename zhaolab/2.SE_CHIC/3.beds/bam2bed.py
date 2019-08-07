@@ -33,7 +33,7 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
 
-def bam2Bed(bam, bed, mapq=10):
+def bam2Bed(bam, bed, mapq=1):
     """
     Converting BAM file to BED file. 
     bam: bam file path
