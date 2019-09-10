@@ -43,9 +43,7 @@ def thinBedpe(f):
             if line[0] != line[3] or "_" in line[0] or "_" in line[3]:
                 continue
             #remove redudant PETs
-            s = min(int(line[1]), int(line[4]))
-            e = max(int(line[2]), int(line[5]))
-            r = (line[0], s, e)
+            r = (line[0], line[1],line[2],line[3],line[4],line[5])
             if r in redus:
                 continue
             else:
@@ -56,7 +54,7 @@ def thinBedpe(f):
 
 
 def main():
-    fs = glob("../../9.T_bedpe/*.bedpe.gz")
+    fs = glob("../2.bedpe/*.bedpe.gz")
     data = Parallel(n_jobs=20)(delayed(thinBedpe)(f) for f in fs)
 
 

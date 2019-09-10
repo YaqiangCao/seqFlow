@@ -9,6 +9,7 @@ def callSys(cmd):
     print(cmd)
     os.system(cmd)
 
+
 @click.command()
 @click.option("-f",required=True,help="Samples related meta information, contains the fastq file location.")
 @click.option("-cpu",default=10,help="CPU numbers to fetch fastqs.")
@@ -17,9 +18,8 @@ def main(f,cpu):
     ds = pd.read_csv(f,index_col=0,sep="\t")
     for t in ds.itertuples():
         gb = t[0]
-        sample = t[1]
-        fs = t[2].split(",")
-        #fs = t[5].split(",")
+        sample = t[0]
+        fs = t[-1].split(",")
         if len(fs) == 1:
             #cmd = "rsync -aP caoy7@137.187.135.165:%s %s.fastq.gz"%(fs[0],gb)
             cmd = "rsync -aP caoy7@137.187.135.165:%s %s.fastq.gz"%(fs[0],sample)
@@ -30,7 +30,10 @@ def main(f,cpu):
             cmds.append(cmd1)
             cmds.append(cmd2)
         else:
-            print("ERROR. Files for %s is %s"%(gb,fs))
+            for f in fs:
+                cmd = " rsync -aP caoy7@137.187.135.165:%s ."%f
+                cmds.append( cmd)
+            #print("ERROR. Files for %s is %s"%(gb,fs))
     Parallel(n_jobs=cpu)(delayed(callSys)(c) for c in cmds)
     
  

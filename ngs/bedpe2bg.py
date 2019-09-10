@@ -33,7 +33,7 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
 
-def bedpe2model(bg, mapq=1,noRedu=True):
+def bedpe2model(bg, mapq=10,noRedu=True):
     """
     Convet BEDPE format file into HTSeq.GenomicArray to get the genomic coverage.
     Only non-redundant reads will be kept.
@@ -74,12 +74,16 @@ def bedpe2model(bg, mapq=1,noRedu=True):
         r = (pet.chromA, pet.mid, pet.mid + 1)
         if noRedu:
             if r not in rs:
-                iv = HTSeq.GenomicInterval(pet.chromA, pet.start, pet.end)
-                model[iv] += 1
+                iva = HTSeq.GenomicInterval(pet.chromA, pet.startA, pet.endA)
+                ivb = HTSeq.GenomicInterval(pet.chromB, pet.startB, pet.endB)
+                model[iva] += 1
+                model[ivb] += 1
                 rs.add(r)
         else:
-            iv = HTSeq.GenomicInterval(pet.chromA, pet.start, pet.end)
-            model[iv] += 1
+            iva = HTSeq.GenomicInterval(pet.chromA, pet.startA, pet.endA)
+            ivb = HTSeq.GenomicInterval(pet.chromB, pet.startB, pet.endB)
+            model[iva] += 1
+            model[ivb] += 1
     logger.info("%s:totalReads:%s;nonRedudant:%s" % (bg, t, len(rs)))
     if noRedu:
         return len(rs), model

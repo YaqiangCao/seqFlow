@@ -166,7 +166,10 @@ class PET(object):
         self.endB = int(d[5])
         self.strandB = d[9]
         self.cis = False
-        self.mapq = int(d[7])
+        try:
+            self.mapq = int(d[7])
+        except:
+            self.mapq = 44 
         if self.chromA == self.chromB:
             self.cis = True
             #adjust the left end and right end to make sure left is alwasy small than right
