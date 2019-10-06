@@ -42,8 +42,12 @@ date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
 logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 #data
-CHROM_SIZE = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/1.fa/mm10.chrom.sizes"
-STAR_INDEX = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/3.star/1.50bp"
+#mouse
+#CHROM_SIZE = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/1.fa/mm10.chrom.sizes"
+#STAR_INDEX = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/3.star/1.50bp"
+#human
+CHROM_SIZE = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/1.fa/hg38.chrom.sizes"
+STAR_INDEX = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/3.index/5.STAR/1.100bp/hg38"
 
 
 def call_sys(cmds):
@@ -277,7 +281,7 @@ def STAR_multiplemapping(sample, fqs, mapping_Root="5.MultipleMapping/"):
     d = os.path.join(mapping_Root, sample)
     if not os.path.exists(d):
         os.mkdir(d)
-    cmd = "STAR --runMode alignReads --runThreadN 10 --genomeDir {genomeDir} --genomeLoad NoSharedMemory --readFilesIn {fq} --readMatesLengthsIn Equal --readFilesCommand 'zcat -1' --outFileNamePrefix {prefix} --outSAMtype BAM Unsorted --outSAMstrandField intronMotif --outSAMreadID Number --outFilterMultimapNmax 20 --alignEndsType Local --twopassMode Basic --outReadsUnmapped None --chimSegmentMin 12 -chimJunctionOverhangMin 12 --alignSJDBoverhangMin 10 --alignMatesGapMax 10000 --alignIntronMax 100000 --chimSegmentReadGapMax 3 --alignSJstitchMismatchNmax 5 -1 5 5 --outFilterScoreMinOverLread 0.3 --outFilterMatchNminOverLread 0.3".format(
+    cmd = "STAR --runMode alignReads --runThreadN 8 --genomeDir {genomeDir} --genomeLoad NoSharedMemory --readFilesIn {fq} --readMatesLengthsIn Equal --readFilesCommand 'zcat -1' --outFileNamePrefix {prefix} --outSAMtype BAM Unsorted --outSAMstrandField intronMotif --outSAMreadID Number --outFilterMultimapNmax 20 --alignEndsType Local --twopassMode Basic --outReadsUnmapped None --chimSegmentMin 12 -chimJunctionOverhangMin 12 --alignSJDBoverhangMin 10 --alignMatesGapMax 10000 --alignIntronMax 100000 --chimSegmentReadGapMax 3 --alignSJstitchMismatchNmax 5 -1 5 5 --outFilterScoreMinOverLread 0.3 --outFilterMatchNminOverLread 0.3".format(
         genomeDir=STAR_INDEX, fq=" ".join(fqs), prefix=prefix)
     c = "rm -fvr {pre}_STARtmp".format(pre=prefix)
     #sorting and index bam, bzip unmapped fastq files
@@ -290,10 +294,10 @@ def STAR_multiplemapping(sample, fqs, mapping_Root="5.MultipleMapping/"):
 
 
 def main():
-    Fastq_Root = "../2.reid/"
+    Fastq_Root = "../1.fastq/"
     mapping_Root = "./"
     data = prepare_fastq(Fastq_Root)
-    Parallel(n_jobs=6)(delayed(STAR_multiplemapping)(sample, fqs, mapping_Root)
+    Parallel(n_jobs=5)(delayed(STAR_multiplemapping)(sample, fqs, mapping_Root)
                        for sample, fqs in data.items())
     data = parse_STAR_log(
         logs=None, fOut="MappingStat.txt", mapping_root=mapping_Root)
