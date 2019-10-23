@@ -1,7 +1,6 @@
 #--coding:utf-8--
 """
-plotDeepProfiles.py
-2019-06-03
+Get the matrix from deeptools.
 """
 
 __author__ = "CAO Yaqiang"
