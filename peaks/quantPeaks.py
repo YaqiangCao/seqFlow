@@ -1,4 +1,3 @@
-#!/Users/caoyaqiang/anaconda3/bin/python3.6
 """
 quantPeaks.py
 """
@@ -14,6 +13,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from tqdm import tqdm
+from joblib import Parallel, delayed
 
 #global settings
 import matplotlib as mpl
@@ -38,6 +38,8 @@ def buildCovModel(readF):
 
 
 def quantify(readF, peakF, fnOut):
+    if os.path.isfile(fnOut):
+        return  #has been generated
     print("builidng coverage model for counting")
     covModel, t = buildCovModel(readF)
     r = set()
@@ -65,19 +67,14 @@ def quantify(readF, peakF, fnOut):
     ds.to_csv(fnOut,sep="\t",index_label="peakId")
 
 
-def getAllCountsRPKM():
-    peakf = "../mm10/Merged_DHSs_mm10.bed"
-    n = peakf.split("/")[-1].replace("_filter_merged.bed","")
-    for bed in glob("../mm10/Bed/*.gz"):
-        nn = bed.split("/")[-1].replace(".bed.gz","")
-        fnOut = "./%s_peaksQuant.txt" % nn
-        if os.path.isfile(fnOut):
-            continue  #has been generated
-        print(peakf, bed, fnOut)
-        quantify(bed,peakf,fnOut)
-   
+def getAllCounts():
+    peakf = "../1.call/Trac_SOD_borders.bed"
+    beds = glob("/mnt/data/caoy7/Projects/5.4DN_Trac/0.Pub/0.ENCODE/5.ChIP-seq/1.GM12878/3.beds/*.bed.gz")
+    ds = Parallel(n_jobs=20)(delayed(quantify)( bed,peakf, "./peaksQuant/%s_peaksQuant.txt"%bed.split("/")[-1].replace(".bed.gz","") ) for bed in beds)
+  
 
-def summaryCountsRPKM(p):
+
+def summaryCounts():
     fs = glob("*%s*.txt"%p)
     fs.sort()
     fs.reverse()
@@ -103,7 +100,7 @@ def summaryCountsRPKM(p):
 
 def main():
     #getAllCountsRPKM()
-    summaryCountsRPKM("scMNase_DHS")
+    summaryCountsRPKM("borders")
 
 
 if __name__ == "__main__":
