@@ -3,6 +3,7 @@
 """
 Deep-learning neuron network model for richs prediction, richs were detected from Trac-looping data. 
 The model is also used for feature importance detection.
+2019-11-17: to do, add the samples that cannot be classified right.
 """
 
 __author__ = "CAO Yaqiang"
@@ -28,6 +29,7 @@ from sklearn.utils import class_weight
 #deep-learning related
 import tensorflow as tf
 from tensorflow.keras import backend as K
+from tensorflow.keras import metrics
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import load_model, Sequential, Model
 from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
@@ -91,15 +93,19 @@ def getModel(input_shape,
         model = load_model(checkpoint)
     else:
         model = Sequential()
-        model.add(Dense(64, input_dim=input_shape, activation="relu"))
-        model.add(Dense(32, activation="relu"))
-        model.add(Dense(16, activation="relu"))
+        model.add(Dense(128, input_dim=input_shape))
+        model.add(BatchNormalization())
+        model.add(Activation(activation="relu"))
+        model.add(Dense(64, activation="relu"))
+        #model.add(Dense(32, activation="relu"))
+        #model.add(Dense(16, activation="relu"))
         model.add(Dropout(0.1))
         model.add(Dense(num_classes, activation="softmax"))
         model.compile(
-            loss="binary_crossentropy",
+            #loss="binary_crossentropy",
+            loss="categorical_crossentropy",
             optimizer=Adam(lr=lr),
-            metrics=['accuracy'],
+            metrics=['accuracy',metrics.categorical_accuracy],
         )
     reduce_lr = ReduceLROnPlateau(monitor="val_loss",
                                   patience=reduce_lr_patience)
@@ -115,14 +121,6 @@ def getModel(input_shape,
                              mode='min')
     callbacks.append(cp)
     return model, callbacks
-
-
-def getStat(model, x, y):
-    yps = []
-    yps = model.predict(x)
-    yps = [np.argmax(yp) for yp in yps]
-    acc = accuracy_score(y, yps)
-    return acc
 
 
 def train(trainF, valiF, checkpoint):
@@ -185,6 +183,14 @@ def getFeatureImportance(cp, f, pre="", repeat=10):
     ns = ns.sort_values(inplace=False, ascending=False)
 
 
+def getStat(model, x, y):
+    yps = []
+    yps = model.predict(x)
+    yps = [np.argmax(yp) for yp in yps]
+    acc = accuracy_score(y, yps)
+    return acc
+
+
 def plotTrainning(trainF, valiF, testF, cp):
     x_train, y_train = readData(trainF)
     x_vali, y_vali = readData(valiF)
@@ -196,62 +202,86 @@ def plotTrainning(trainF, valiF, testF, cp):
     mat = pd.read_csv("trainningHistroy.txt", index_col=0, sep="\t")
     fig, ax = pylab.subplots()
     ax.plot(mat.index,
-            mat["acc"],
+            mat["loss"],
             color=colors[0],
             linewidth=2,
-            label="trainning:%.3f acc" % acc_train)
+            label="trainning acc:%.3f" % acc_train)
     ax.plot(mat.index,
-            mat["val_acc"],
+            mat["val_loss"],
             color=colors[1],
             linewidth=2,
-            label="validation:%.3f acc" % acc_vali)
+            label="validation acc:%.3f" % acc_vali)
+    p = np.argmin( mat["val_loss"] )
+    ax.axvline( x = p,color="gray",linestyle="--" )
     ax.set_xlabel("epoch")
-    ax.set_ylabel("accuracy")
-    ax.set_ylim([0.8, 1.0])
+    ax.set_ylabel("loss")
     ax.legend()
-    ax.set_title("test set:%.3f acc" % acc_test)
+    ax.set_title("test acc:%.3f " % acc_test)
     pylab.savefig("trainningHistroy.pdf")
 
 
-def plotValiAUC(valiF, testF, cp):
+def plotAUC(trainF,valiF, testF, cp):
     model = load_model(cp)
-    x_vali, y_vali = readData(valiF)
-    yps = model.predict(x_vali)
-    yps = yps[:, 0]
-    fpr, tpr, thresholds = roc_curve(y_vali, yps, pos_label=0)
-    auc_vali = auc(fpr, tpr)
-    x_test, y_test = readData(testF)
-    yps = model.predict(x_test)
-    yps = yps[:, 0]
-    auc_test = auc(fpr, tpr)
-    fig, ax = pylab.subplots(figsize=(2 * 0.8, 2.75 * 0.8))
-    ax.bar([0, 1], [auc_vali, auc_test], color=[colors[0], colors[1]])
-    ax.set_xticklabels(["vali", "test"])
-    ax.set_ylabel("AUC")
-    ax.set_title("AUC for RICH classificaiton")
-    ax.set_ylim([0.9, 1.0])
+    labels = ["train","vali","test"]
+    fig, ax = pylab.subplots()
+    for i,f in enumerate([trainF,valiF,testF]):
+        x, y = readData(f)
+        yps = model.predict(x)
+        yps = yps[:, 0]
+        fpr, tpr, thresholds = roc_curve(y, yps, pos_label=0)
+        ax.plot( fpr,tpr, color=colors[i],label=labels[i]+" auc:%.3f"%auc(fpr,tpr))
+    ax.plot( [0,1.0],[0.0,1.0],color="gray",linestyle="--",label="random guess" )
+    ax.legend()
+    ax.set_xlabel("False positive rate")
+    ax.set_ylabel("True positive rate")
+    ax.set_title("ROC for classification of RICH")
     pylab.savefig("roc.pdf")
-
 
 def plotFeatureImportance(f, pre):
     mat = pd.read_csv(f, index_col=0, sep="\t")
     ss = mat.mean(axis=1)
     ss = ss.sort_values(inplace=False, ascending=False)
-    print(ss[:20])
+    ss = ss[:20]
+    fig, ax = pylab.subplots(figsize=(8.0*0.8,1*0.8))
+    x = list(range(len(ss)))
+    sns.barplot(x=x,y=ss.values,ax=ax,color=colors[1])
+    ax.set_xticklabels( list(ss.index),rotation=45,ha="right",fontsize=8)
+    ax.set_ylabel("feature importance")
+    pylab.savefig("fi.pdf")
+
+def getWrong(cp,f):
+    model = load_model(cp)
+    x, y = readData(f)
+    yps = model.predict(x)
+    yps = [np.argmax(yp) for yp in yps]
+    yps = pd.Series(yps,index=y.index)
+    ns = {}
+    for i in y.index:
+        if y[i] != yps[i]:
+            if y[i] not in ns:
+                ns[y[i]] = {}
+            if yps[i] not in ns[ y[i] ]:
+                ns[ y[i] ][ yps[i] ] = 0
+            ns[ y[i] ][ yps[i] ] +=1
+    print(ns)
+    #ns = pd.DataFrame( {"true":y[ns],"wrongPred":yps[ns]} )
 
 
 def main():
-    trainF = "../5.1.data/richTrain.txt"
-    valiF = "../5.1.data/richVali.txt"
-    testF = "../5.1.data/richTest.txt"
+    trainF = "../../3.quantify/6.data/richTrain.txt"
+    valiF = "../../3.quantify/6.data/richVali.txt"
+    testF = "../../3.quantify/6.data/richTest.txt"
     cp = "richModel.h5"
-    train(trainF, valiF, cp)
-    getFeatureImportance(cp, valiF, "vali")
-    getFeatureImportance(cp, testF, "test")
-    plotTrainning(trainF, valiF, testF, cp)
-    plotValiAUC(valiF, testF, cp)
-    plotFeatureImportance("vali_rich_feature_importance.txt", "vali")
-    plotFeatureImportance("test_rich_feature_importance.txt", "test")
+    #train(trainF, valiF, cp)
+    #plotTrainning(trainF, valiF, testF, cp)
+    #plotAUC(trainF,valiF, testF, cp)
+    #getFeatureImportance(cp, trainF, "train")
+    #getFeatureImportance(cp, valiF, "vali")
+    #getFeatureImportance(cp, testF, "test")
+    plotFeatureImportance("train_rich_feature_importance.txt", "train")
+    #plotFeatureImportance("vali_rich_feature_importance.txt", "vali")
+    #plotFeatureImportance("test_rich_feature_importance.txt", "test")
+    #getWrong(cp, valiF)
 
 
 if __name__ == "__main__":
