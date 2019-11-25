@@ -1,8 +1,6 @@
 #!/usr/bin/env python2.7
 #--coding:utf-8 --
 """
-subFamilyTFE.py
-Enrichment test for TF binding at TEs.
 """
 
 __author__ = "CAO Yaqiang"
