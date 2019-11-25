@@ -83,5 +83,3 @@ if __name__ == '__main__':
     start_time = datetime.now()
     main()
     elapsed = datetime.now() - start_time
-    print("The process is done")
-    print("Time used:", elapsed)
