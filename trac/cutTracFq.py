@@ -82,7 +82,7 @@ def filterSeq(fq1,fq2,sample,lencut=15):
                 continue
             fout1.write("@%s\n%s\n+\n%s\n" % (r1[0], r1[1], r1[2]))
             fout2.write("@%s\n%s\n+\n%s\n" % (r2[0], r2[1], r2[2]))
-    print("total %s pairs;\nfor read1, %.3f has adapter;\nfor read2, %.3f has adapter;\n%.3f pairs too short (any of them < 15bp)"%(total, float(r1a)/total,float(r2a)/total, float(short)/total ))
+    print("%s::\n\ttotal %s pairs;\n\tfor read1, %.3f has adapter;\n\tfor read2, %.3f has adapter;\n\t%.3f pairs too short (any of them < 15bp)"%(sample,total, float(r1a)/total,float(r2a)/total, float(short)/total ))
     fout1.close()
     fout2.close()
     return sample,total, float(r1a)/total,float(r2a)/total,float(short)/total
