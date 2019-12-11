@@ -46,12 +46,12 @@ def prepare_fastq(Fastq_Root="../2.reid/"):
     return data
 
 
-def filterSeq(fq1,fq2,pre,lencut=15): 
+def filterSeq(fq1,fq2,sample,lencut=15): 
     """
     Filtering target adapter/linker seq in sequencing data.
     """
-    fout1 = gzip.open(pre + "_1.fastq.gz","wt")
-    fout2 = gzip.open(pre + "_2.fastq.gz","wt")
+    fout1 = gzip.open(sample + "_1.fastq.gz","wt")
+    fout2 = gzip.open(sample + "_2.fastq.gz","wt")
     r1a = 0 
     r2a = 0
     short= 0
