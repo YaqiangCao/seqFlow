@@ -15,6 +15,7 @@ from glob import glob
 from datetime import datetime
 
 #3rd
+import pandas as pd
 from joblib import Parallel, delayed
 from Bio.SeqIO.QualityIO import FastqGeneralIterator
 
@@ -50,8 +51,9 @@ def filterSeq(fq1,fq2,sample,lencut=15):
     """
     Filtering target adapter/linker seq in sequencing data.
     """
-    fout1 = gzip.open(sample + "_1.fastq.gz","wt")
-    fout2 = gzip.open(sample + "_2.fastq.gz","wt")
+    print("start processing %s and %s"%(fq1,fq2))
+    fout1 = gzip.open(sample + "_R1.fastq.gz","wt")
+    fout2 = gzip.open(sample + "_R2.fastq.gz","wt")
     r1a = 0 
     r2a = 0
     short= 0
@@ -62,17 +64,17 @@ def filterSeq(fq1,fq2,sample,lencut=15):
             total += 1
             r1, r2 = list(r1), list(r2)
             if TARGET in r1[1]:
-                p = r1[1].find(TARGET) + len(TARGET)
-                r1[1] = r1[1][p+1:]
-                r1[2] = r1[2][p+1:]
+                p = r1[1].find(TARGET)
+                r1[1] = r1[1][5:p]
+                r1[2] = r1[2][5:p]
                 r1a +=1 
             else:
                 r1[1] = r1[1][5:]
                 r1[2] = r1[2][5:]
             if TARGET in r2[1]:
-                p = r2[1].find(TARGET) + len(TARGET)
-                r2[1] = r2[1][p+1:]
-                r2[2] = r2[2][p+1:]
+                p = r2[1].find(TARGET)
+                r2[1] = r2[1][5:p]
+                r2[2] = r2[2][5:p]
                 r2a += 1
             else:
                 r2[1] = r2[1][5:]
@@ -85,13 +87,14 @@ def filterSeq(fq1,fq2,sample,lencut=15):
     print("%s::\n\ttotal %s pairs;\n\tfor read1, %.3f has adapter;\n\tfor read2, %.3f has adapter;\n\t%.3f pairs too short (any of them < 15bp)"%(sample,total, float(r1a)/total,float(r2a)/total, float(short)/total ))
     fout1.close()
     fout2.close()
+    print("%s finished"%(sample))
     return sample,total, float(r1a)/total,float(r2a)/total,float(short)/total
 
 
 def main():
     data = prepare_fastq("../../1.fastq/")
-    jobs = min(10,len(data))
-    ds = Parallel(n_jobs=10)(delayed(filterSeq)(fqs[0],fqs[1],sample )
+    jobs = min(20,len(data))
+    ds = Parallel(n_jobs=jobs)(delayed(filterSeq)(fqs[0],fqs[1],sample )
                        for sample, fqs in data.items())
     data = {}
     for d in ds:
