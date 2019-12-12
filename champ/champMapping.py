@@ -84,8 +84,7 @@ def tracMapping(sample, fqs, ref, cpus=25):
         doBowtie = "bowtie2 -p {cpus} -5 4 -q -N 1 --local --very-sensitive -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(
             cpus=cpus, ref=ref, fq1=fqs[0], fq2=fqs[1], sam=sam)
     logger.info(doBowtie)
-    output = subprocess.run(doBowtie.split(), stdout=subprocess.PIPE)
-    output = output.stdout.decode("utf-8")
+    stat, output = subprocess.getstatusoutput(doBowtie)
     #trim with "Warning"
     output = output.split("\n")
     output = [t for t in output if not t.startswith("Warning")]
@@ -136,7 +135,7 @@ def parseBowtielog(logs=None):
 
 
 def main():
-    data = prepare_fastq("../1.fastq/")
+    data = prepare_fastq("../4.cut/")
     ref = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/3.index/2.bowtie2/hg38"
     Parallel(n_jobs=2)(delayed(tracMapping)(sample, fqs, ref, cpus=30)
                        for sample, fqs in data.items())
