@@ -1,17 +1,16 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 #--coding:utf-8--
 """
 tracMapping.py
-2019-05-20
+2019-05-20: estabilished
+2019-12-11: change to python3
 """
 
 __author__ = "CAO Yaqiang"
-__date__ = "2014-09-23"
-__modified__ = "2015-03-20"
 __email__ = "caoyaqiang0410@gmail.com"
 
 #systematic library
-import os, time, commands
+import os, time, subprocess
 from glob import glob
 from datetime import datetime
 
@@ -38,7 +37,7 @@ def prepare_fastq(Fastq_Root="../2.reid/"):
     data = {}
     for fq in fastqs:
         s = os.path.split(fq)[1]
-        s = s.replace("_001.fastq.gz", "")
+        s = s.replace(".fastq.gz", "")
         if s.endswith("_R1"):
             sample = s.replace("_R1", "")
             if sample not in data:
@@ -69,7 +68,7 @@ def sam2bam(sam, bam):
     callSys(cmds, logger)
 
 
-def tracMapping(sample, fqs, ref, cpus=10):
+def tracMapping(sample, fqs, ref, cpus=25):
     logger.info("Start mapping %s.\n" % sample)
     if not os.path.exists(sample):
         os.mkdir(sample)
@@ -82,10 +81,11 @@ def tracMapping(sample, fqs, ref, cpus=10):
         doBowtie = "bowtie2 -p {cpus} -q -N 1 --local --very-sensitive -x {ref} {fq} -S {sam}".format(
             cpus=cpus, ref=ref, fq=fqs[0], sam=sam)
     else:
-        doBowtie = "bowtie2 -p {cpus} -q -N 1 --local --very-sensitive -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(
+        doBowtie = "bowtie2 -p {cpus} -5 4 -q -N 1 --local --very-sensitive -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(
             cpus=cpus, ref=ref, fq1=fqs[0], fq2=fqs[1], sam=sam)
     logger.info(doBowtie)
-    status, output = commands.getstatusoutput(doBowtie)
+    output = subprocess.run(doBowtie.split(), stdout=subprocess.PIPE)
+    output = output.stdout.decode("utf-8")
     #trim with "Warning"
     output = output.split("\n")
     output = [t for t in output if not t.startswith("Warning")]
@@ -136,11 +136,9 @@ def parseBowtielog(logs=None):
 
 
 def main():
-    #change here
-    data = prepare_fastq("../1.Fastq/")
-    #change here
+    data = prepare_fastq("../1.fastq/")
     ref = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/3.index/2.bowtie2/hg38"
-    Parallel(n_jobs=3)(delayed(tracMapping)(sample, fqs, ref)
+    Parallel(n_jobs=2)(delayed(tracMapping)(sample, fqs, ref, cpus=30)
                        for sample, fqs in data.items())
     data = parseBowtielog()
     data.to_csv("MappingStat.txt", sep="\t", index_label="samples")
