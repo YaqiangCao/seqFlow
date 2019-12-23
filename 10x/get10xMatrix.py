@@ -93,7 +93,7 @@ def norm10x(mat, zscore=True, minmax=False):
     return mat  #each row a gene, each column a cell
 
 def main():
-    for f in glob("../2.count/*/outs/filtered_feature_bc_matrix.h5")
+    for f in glob("../2.count/*/outs/filtered_feature_bc_matrix.h5"):
         print(f)
         n = f.split("/")[-3]
         mat = get10xH5Matrix( f )
