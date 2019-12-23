@@ -1,7 +1,7 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 #--coding:utf-8--
 """
-champBam2Bedpe.py
+tracBam2Bedpe.py
 """
 
 __author__ = "CAO Yaqiang"
