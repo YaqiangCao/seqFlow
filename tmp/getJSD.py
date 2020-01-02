@@ -67,8 +67,6 @@ def getJSDs(f,ts,cs):
     mat = pd.read_table(f,index_col=0,sep="\t")
     mat = mat[cs]
     for key in ts.keys():
-        if key != "Epithelia":
-            continue
         print key
         ss = {}
         for ns in mat.itertuples():
