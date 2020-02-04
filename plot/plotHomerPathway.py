@@ -36,8 +36,8 @@ colors = brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors
 
 def preprocess(fs=None,
                pcut=np.log10(1e-5),
-               gcut=5,
-               tcut=3000,
+               gcut=10,
+               tcut=1000,
                root_dir="1.Parsed_GO"):
     if os.path.exists(root_dir) == False:
         os.mkdir(root_dir)
@@ -82,9 +82,16 @@ def termBarh(numbercut=10,
         os.mkdir(plot_dir)
     fs = glob.glob(root_dir + "/*/*.terms")
     for f in fs:
-        print(f)
         sample = f.split("/")[-2]
-        s = pd.Series.from_csv(f, sep="\t")
+        #s = pd.Series.from_csv(f, sep="\t")
+        #s = pd.read_csv(f, sep="\t",header=None)
+        s = {}
+        for line in open(f):
+            line = line.split("\n")[0].split("\t")
+            s[line[0]] = float(line[1])
+        s = pd.Series(s)
+        s = s.sort_values(inplace=False,ascending=False)
+        print(s)
         if s.shape[0] > numbercut:
             s = s[:numbercut]
         s = s[::-1]
@@ -103,8 +110,8 @@ def termBarh(numbercut=10,
         pylab.savefig(plot_dir + "/" + sample + ".pdf")
 
 
-root = "../1.HOMER/*/"
+root = "../../5.annotatePeaks/*_go/"
 fs = glob.glob(root + "biological_process.txt")
-preprocess(fs=fs)
-furthurparse()
+#preprocess(fs=fs)
+#furthurparse()
 termBarh( )
