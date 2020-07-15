@@ -205,6 +205,6 @@ def plotBench( fn = "bench_iDBSCAN.txt" ):
     #leg.get_frame(  ).set_alpha( 0.5 )
     pylab.savefig( "%s.pdf"%fn.split( "." )[ 0 ],dpi=1000,bbox_inches="tight" )
 
-#getDataD(r=2,samples=200)
-#bench(fn = "bench_cDBSCAN.txt")
+getDataD(r=2,samples=200)
+bench(fn = "bench_cDBSCAN.txt")
 plotBench( fn = "bench_cDBSCAN.txt" )

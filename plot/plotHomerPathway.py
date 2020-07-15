@@ -37,7 +37,7 @@ colors = brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors
 def preprocess(fs=None,
                pcut=np.log10(1e-5),
                gcut=10,
-               tcut=1000,
+               tcut=3000,
                root_dir="1.Parsed_GO"):
     if os.path.exists(root_dir) == False:
         os.mkdir(root_dir)
@@ -110,8 +110,8 @@ def termBarh(numbercut=10,
         pylab.savefig(plot_dir + "/" + sample + ".pdf")
 
 
-root = "../../5.annotatePeaks/*_go/"
-fs = glob.glob(root + "biological_process.txt")
+root = "../1.homer/*/"
+#fs = glob.glob(root + "biological_process.txt")
 #preprocess(fs=fs)
 #furthurparse()
 termBarh( )

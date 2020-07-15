@@ -76,7 +76,7 @@ def getFPKMcutoff(f):
             ns = s[s > 0.0]
             if len(ns) < len(s) / 2:
                 data.extend(list(ns))
-        print ss, len(data)
+        print(ss, len(data))
     data = np.array(data)
     data = data[data > 0]
     data = data[~np.isnan(data)]
@@ -99,7 +99,7 @@ def getFPKMcutoff(f):
 
 
 def getFilteredMatrix(cut=1):
-    fs = glob.glob("*.txt")
+    fs = glob("*.txt")
     for f in fs:
         mat = pd.read_table(f, index_col=0)
         #cut = getFPKMcutoff(f)
@@ -131,11 +131,10 @@ def callCuffnorm(fs, gtf, fo, cpu=40):
 
 
 def main():
-    fs = glob("../1.cuffquant/*/*.cxb")
-    fo = "AID1_WT"
-    GTF = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/2.annotations/gencode_v21_exons.gtf"
+    GTF="/home/caoy7/caoy7/Projects/0.Reference/2.mm10/6.10xReference/refdata-cellranger-mm10-3.0.0/genes/genes.gtf"
     #callCuffnorm(fs,GTF,fo)
-    #getFPKMMatrix( "%s/genes.fpkm_table"%fo,"%s/genes.attr_table"%fo,"%s/samples.table"%fo,pre=fo )
+    fo = "KI_Rx1KI_Exp"
+    getFPKMMatrix( "%s/genes.fpkm_table"%fo,"%s/genes.attr_table"%fo,"%s/samples.table"%fo,pre=fo )
     getFilteredMatrix()
     #seperateRNAs()
 
