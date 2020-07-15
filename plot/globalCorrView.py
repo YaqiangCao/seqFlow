@@ -144,6 +144,23 @@ def mds_plot(mat, pre="test"):
     plotEmbeding(mat, Y, "MDS", "MDS-1", "MDS-2", pre + "_mds")
 
 
+def rle_plot(mat,pre="test"):
+    """
+    Relative log expression. Mat should be raw counts matrix. 
+    """
+    mat = np.log2(mat+1)
+    for t in mat.itertuples():
+        s = np.array( t[1:] )
+        m = np.median( s )
+        s = s - m
+        mat.loc[t[0],] = s
+    fig, ax = pylab.subplots()
+    sns.boxplot( data=mat,ax=ax,color=colors[0],fliersize=0 )
+    ax.set_ylabel("Relative log expression")
+    #pylab.xticks(rotation=90)
+    ax.xaxis.set_tick_params(rotation=90)
+    pylab.savefig(pre+"_rle.pdf")
+
 def tsne_plot(mat, p=10, pre="test"):
     #tsne = manifold.TSNE(n_components=2, init="pca", perplexity=p,random_state=123)
     tsne = manifold.TSNE(n_components=2, perplexity=p)
@@ -184,19 +201,20 @@ def umap_shuffle_plot(mat, n=5, pre="test"):
 def main():
     #ps = range(5, 60, 5)  #parameters for tSNE
     #ns = [5, 10, 15, 20, 30]
-    for f in glob("*.txt"):
+    for f in glob("*counts.txt"):
         print(f)
         mat = pd.read_csv(f, index_col=0, sep="\t")
         n = f.split("/")[-1].split(".txt")[0]
-        pca_plot(mat, n)
-        mds_plot(mat, n)
+        rle_plot(mat,n)
+        #pca_plot(mat, n)
+        #mds_plot(mat, n)
         #Parallel(n_jobs=1)(delayed(tsne_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ps)
         #Parallel(n_jobs=1)(delayed(umap_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ns)
-        tsne_plot(mat,30,"%s_p_%s"%(n,30))
-        umap_plot(mat,30,"%s_p_%s"%(n,30))
-        umap_shuffle_plot(mat,30,"%s_p_%s"%(n,30))
-        plotCorrHeatmap(mat, n)
-        plotClusterHeatmap(mat, n)
+        #tsne_plot(mat,30,"%s_p_%s"%(n,30))
+        #umap_plot(mat,30,"%s_p_%s"%(n,30))
+        #umap_shuffle_plot(mat,30,"%s_p_%s"%(n,30))
+        #plotCorrHeatmap(mat, n)
+        #plotClusterHeatmap(mat, n)
 
 
 main()
