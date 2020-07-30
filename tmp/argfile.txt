@@ -1,0 +1,3 @@
+bowtieref = /home/caoyaqiang/caoyaqiang_han/1.Projects/17.Alu/1.GenomeReference/1.hg38/3.BowtieTophatIndex/1.Bowtie1/hg38
+bedtoolsgenome = /home/caoyaqiang/caoyaqiang_han/1.Projects/17.Alu/1.GenomeReference/1.hg38/1.hg38_Sequence/hg38.chrom.sizes
+gsize = 2.7e9

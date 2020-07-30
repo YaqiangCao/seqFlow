@@ -1,0 +1,4 @@
+chroms=chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,chr21,chr22,chrX
+Rscript /picb/molsysbio/usr/caoyaqiang/4.ENV/SG/sage-7.3-cyq/upstream/R/mango/mango.R --fastq1 tmp/test_1.fastq --fastq2 tmp/test_2.fastq --prefix HeLa_CTCF --stages 5 --outdir HeLa_CTCF --argsfile argfile.txt --shortreads FALSE --chrominclude $chroms --reportallpairs TRUE &
+Rscript /picb/molsysbio/usr/caoyaqiang/4.ENV/SG/sage-7.3-cyq/upstream/R/mango/mango.R --fastq1 tmp/test_1.fastq --fastq2 tmp/test_2.fastq --prefix GM12878_CTCF --stages 5 --outdir GM12878_CTCF --argsfile argfile.txt --shortreads FALSE --chrominclude $chroms --reportallpairs TRUE &
+#Rscript /picb/molsysbio/usr/caoyaqiang/4.ENV/SG/sage-7.3-cyq/upstream/R/mango/mango.R --fastq1 tmp/test_1.fastq --fastq2 tmp/test_2.fastq --prefix HeLa_RNAPII --stages 2:4 --outdir HeLa_RNAPII --argsfile argfile.txt --shortreads FALSE &
