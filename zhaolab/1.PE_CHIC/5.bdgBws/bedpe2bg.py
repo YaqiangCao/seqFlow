@@ -116,7 +116,7 @@ def bedpe2bdg(f, mapq=1):
     mapq: int, mapq cutoff
     """
     fo = f.split("/")[-1].replace(".bedpe.gz", ".bdg")
-    if os.path.isfile(fo):
+    if os.path.isfile(fo) or os.path.isfile(fo.replace(".bdg",".bw")):
         return
     t, model = bedpe2model(f, mapq)
     model2bedgraph(t, model, fo)

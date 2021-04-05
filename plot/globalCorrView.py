@@ -36,8 +36,8 @@ import numpy as np
 import pandas as pd
 import brewer2mpl
 colors = brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors
-#colors = brewer2mpl.get_map('Set1', 'qualitative', 9).mpl_colors
-#colors.extend(brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors)
+colors = brewer2mpl.get_map('Set1', 'qualitative', 9).mpl_colors
+colors.extend(brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors)
 #del colors[5]
 #del colors[10]
 from sklearn.decomposition import PCA
@@ -84,19 +84,22 @@ def plotClusterHeatmap(mat, pre):
     cs = [cs["_".join(c.split("_")[:-1])] for c in mat.columns]
     sample_colors = [colors[c] for c in cs]
     fig, ax = pylab.subplots(figsize=(4, 4))
-    sns.clustermap(
+    g=sns.clustermap(
         mat,
         #center=0.5,
         cmap="vlag",
         row_cluster=False,
         col_cluster=True,
         #z_score=1,
-        xticklabels=False,
-        yticklabels=False,
+        #xticklabels=False,
+        xticklabels=True,
+        #yticklabels=False,
+        yticklabels=True,
         #metric="manhattan",
         #row_colors=sample_colors,
         col_colors=sample_colors)
     #pylab.show()
+    pylab.setp(g.ax_heatmap.get_xticklabels(), rotation=90)
     pylab.savefig(pre + "_cluster_heat.pdf")
 
 
@@ -111,17 +114,18 @@ def plotCorrHeatmap(mat, pre):
     cs = [cs["_".join(c.split("_")[:-1])] for c in mat.columns]
     sample_colors = [colors[c] for c in cs]
     fig, ax = pylab.subplots(figsize=(4, 4))
-    sns.clustermap(
+    g = sns.clustermap(
         mat,
         #center=0.5,
         cmap="vlag",
         row_cluster=True,
         col_cluster=True,
         #z_score=1,
-        xticklabels=False,
-        yticklabels=False,
+        xticklabels=True,
+        yticklabels=True,
         row_colors=sample_colors,
         col_colors=sample_colors)
+    pylab.setp(g.ax_heatmap.get_xticklabels(), rotation=90)
     #pylab.show()
     pylab.savefig(pre + "_corr_heat.pdf")
 
@@ -201,11 +205,11 @@ def umap_shuffle_plot(mat, n=5, pre="test"):
 def main():
     #ps = range(5, 60, 5)  #parameters for tSNE
     #ns = [5, 10, 15, 20, 30]
-    for f in glob("*counts.txt"):
+    for f in glob("*txt"):
         print(f)
         mat = pd.read_csv(f, index_col=0, sep="\t")
         n = f.split("/")[-1].split(".txt")[0]
-        rle_plot(mat,n)
+        #rle_plot(mat,n)
         #pca_plot(mat, n)
         #mds_plot(mat, n)
         #Parallel(n_jobs=1)(delayed(tsne_plot)(mat,p,"%s_p_%s"%(n,p)) for p in ps)
@@ -213,7 +217,7 @@ def main():
         #tsne_plot(mat,30,"%s_p_%s"%(n,30))
         #umap_plot(mat,30,"%s_p_%s"%(n,30))
         #umap_shuffle_plot(mat,30,"%s_p_%s"%(n,30))
-        #plotCorrHeatmap(mat, n)
+        plotCorrHeatmap(mat, n)
         #plotClusterHeatmap(mat, n)
 
 

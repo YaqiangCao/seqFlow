@@ -33,7 +33,7 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
 
-def bedpe2model(bg, mapq=10,noRedu=True):
+def bedpe2model(bg, mapq=1,noRedu=True):
     """
     Convet BEDPE format file into HTSeq.GenomicArray to get the genomic coverage.
     Only non-redundant reads will be kept.
@@ -74,16 +74,12 @@ def bedpe2model(bg, mapq=10,noRedu=True):
         r = (pet.chromA, pet.mid, pet.mid + 1)
         if noRedu:
             if r not in rs:
-                iva = HTSeq.GenomicInterval(pet.chromA, pet.startA, pet.endA)
-                ivb = HTSeq.GenomicInterval(pet.chromB, pet.startB, pet.endB)
-                model[iva] += 1
-                model[ivb] += 1
+                iv = HTSeq.GenomicInterval(pet.chromA, pet.start, pet.end)
+                model[iv] += 1
                 rs.add(r)
         else:
-            iva = HTSeq.GenomicInterval(pet.chromA, pet.startA, pet.endA)
-            ivb = HTSeq.GenomicInterval(pet.chromB, pet.startB, pet.endB)
-            model[iva] += 1
-            model[ivb] += 1
+            iv = HTSeq.GenomicInterval(pet.chromA, pet.start, pet.end)
+            model[iv] += 1
     logger.info("%s:totalReads:%s;nonRedudant:%s" % (bg, t, len(rs)))
     if noRedu:
         return len(rs), model
@@ -112,7 +108,7 @@ def model2bedgraph(t, model, fout):
 
 def bedpe2bdg(f, mapq=1):
     """
-    Convert BEDPE file to BEDGRAPH file.
+    Convert BEDPE file to sorted BEDGRAPH file.
 
     Parameter
     ---
@@ -120,10 +116,13 @@ def bedpe2bdg(f, mapq=1):
     mapq: int, mapq cutoff
     """
     fo = f.split("/")[-1].replace(".bedpe.gz", ".bdg")
-    if os.path.isfile(fo):
+    if os.path.isfile(fo) or os.path.isfile(fo.replace(".bdg",".bw")):
         return
     t, model = bedpe2model(f, mapq)
     model2bedgraph(t, model, fo)
+    #cmd1 = "bedSort {bdg} {sbdg}".format(bdg=f, sbdg=n + ".bdg2")
+    #cmd2 = "mv {sbdg} {bdg}".format(sbds=n+".bdg2",bdg=f)
+    #callSys([cmd1,cmd2], logger)
 
 
 @click.command()

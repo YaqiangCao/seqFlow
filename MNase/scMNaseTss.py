@@ -32,6 +32,13 @@ from utils import *
 date = time.strftime(' %Y-%m-%d', time.localtime(time.time()))
 logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
+import brewer2mpl
+colors = brewer2mpl.get_map('Set1', 'qualitative', 9).mpl_colors
+colors.extend(brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors)
+del colors[5]
+del colors[10]
+
+
 
 #TSS file
 """
@@ -43,7 +50,7 @@ chr1	4490931	4497354	ENSMUSG00000025902	Sox17	-1
 TSS = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/2.annotations/mm10_biomart_tss_tts_proteinCoding.bed"
 
 
-def buildCovModel(readF, dfilter=[80, 80, 180], mapq=1):
+def buildCovModel(readF, dfilter=[80, 140, 180], mapq=1):
     """
     Building Genome Coverage profile for MNase-seq data based on HTSeq.
 
@@ -119,7 +126,6 @@ def getProfiles(t, model, gs=None, ext=2000, bin=1, skipZero=True):
         line = line.split("\n")[0].split("\t")
         if gs is not None and line[4] not in gs:
             continue
-        print(line[4])
         if line[-1] == "-1":
             m = int(line[2])
         else:
@@ -251,7 +257,6 @@ def plotProfile(fcn, fsp, fout):
     y = list(smooth(np.array(ss.values)))
     x = np.arange(np.min(x), np.max(x), (np.max(x) - np.min(x)) / float(len(y)))
     ax.plot(x,y,color=colors[0],linewidth=1)
-    #ax.plot(ss.index, ss, color=colors[0], linewidth=1)
     ax.set_ylabel("Nucleosome density")
     ax.set_xlabel("Distance from TSS")
     ax.spines['left'].set_color(colors[0])
@@ -263,29 +268,22 @@ def plotProfile(fcn, fsp, fout):
     x = list(ss.index)
     y = list(smooth(np.array(ss.values)))
     x = np.arange(np.min(x), np.max(x), (np.max(x) - np.min(x)) / float(len(y)))
-    ax.plot(x,y,color=colors[1],linewidth=1)
-    #ax2.plot(ss.index, ss, color=colors[1], linewidth=1)
+    ax2.plot(x,y,color=colors[1],linewidth=1)
     ax2.set_ylabel("Subnucl. density")
     for t in ax2.get_yticklabels():
         t.set_color(colors[1])
     ax2.spines['right'].set_color(colors[1])
+    ax.spines['left'].set_color(colors[0])
     fig.tight_layout()
     pylab.savefig(fout + ".pdf")
 
 
 def main():
     """
-    gs = set(open("../../0.DHSs/ELIP_average.list").read().split("\n"))
-    f = "../1.bedpe/WT_EILP.bedpe.gz"
-    getCnSpProfiles(f,gs=gs,bin=1)
-    gs = set(open("../../0.DHSs/ILCP_average.list").read().split("\n"))
-    f = "../1.bedpe/WT_ILCP.bedpe.gz"
-    getCnSpProfiles(f,gs=gs,bin=1)
-    #fs = glob("../1.bedpe/*.bedpe.gz")
-    #plotProfile( "data/KO_EILP_cn.txt","data/KO_EILP_sp.txt","KO_EILP" )
+    f = "../../1.bedpe/T_sel_pooled.bedpe.gz"
+    getCnSpProfiles(f,bin=1)
     """
-    plotProfile( "data/WT_EILP_cn.txt","data/WT_EILP_sp.txt","WT_EILP" )
-    plotProfile( "data/WT_ILCP_cn.txt","data/WT_ILCP_sp.txt","WT_ILCP" )
+    plotProfile( "data/T_sel_pooled_cn.txt","data/T_sel_pooled_sp.txt","naiveTPooled" )
 
 
 if __name__ == '__main__':
