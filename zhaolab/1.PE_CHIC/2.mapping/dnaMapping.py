@@ -142,7 +142,8 @@ def parseBowtielog(logs=None):
 
 def main():
     data = prepare_fastq("../1.fastq/")
-    ref = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10"
+    #ref = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10"
+    ref = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/3.index/2.bowtie2/hg38"
     Parallel(n_jobs=5)(delayed(mapping)(sample, fqs, ref, 15)
                         for sample, fqs in data.items())
     data = parseBowtielog()
