@@ -11,7 +11,7 @@ def getDegs(f, pre, pcut=1e-2, fccut=1):
         #if line[-1] == "yes" and abs(float( line[9])) >= fccut and float(line[7]) >=1 and float(line[8]) >= 1:
         if float(line[7]) < 1 and float(line[8]) < 1:
             continue
-        if line[-1] == "yes" and abs(float(line[9])) >=fccut:
+        if line[-1] == "yes" and abs(float(line[9])) >= fccut:
             t = "%s|%s|%s" % (line[0], line[2], line[3])
             ds[t] = {
                 line[4]: float(line[7]),
@@ -23,8 +23,8 @@ def getDegs(f, pre, pcut=1e-2, fccut=1):
     ds = pd.DataFrame(ds).T
     s = ds["log2(fold_change)"]
     s = s.sort_values(inplace=False, ascending=True)
-    ns = s.sort_values(inplace=False,ascending=False)
-    ns.to_csv("%s_fc.rnk"%pre, sep="\t",header=None)
+    ns = s.sort_values(inplace=False, ascending=False)
+    ns.to_csv("%s_fc.rnk" % pre, sep="\t", header=None)
     ds = ds.loc[s.index, ]
     ds.to_csv("%s_degs.txt" % pre, sep="\t")
 
@@ -35,7 +35,8 @@ def getDegs(f, pre, pcut=1e-2, fccut=1):
     with open("%s_down.list" % pre, "w") as f:
         f.write("\n".join(kodown))
 
+
 for f in glob("*/gene_exp.diff"):
     n = f.split("/")[-2]
-    print(f,n)
+    print(f, n)
     getDegs(f, n)

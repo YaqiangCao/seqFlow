@@ -39,6 +39,7 @@ def prepare_fastq(Fastq_Root="../2.reid/"):
     for fq in fastqs:
         s = os.path.split(fq)[1]
         s = s.replace(".fastq.gz", "")
+        """
         if s.endswith("_R1"):
             sample = s.replace("_R1", "")
             if sample not in data:
@@ -51,6 +52,8 @@ def prepare_fastq(Fastq_Root="../2.reid/"):
             data[sample][1] = fq
         if not s.endswith("_R1") and not s.endswith("_R2"):
             data[s] = [fq]
+        """
+        data[s] = [fq]
     #for key in data.keys():
     #    if 0 in data[key] or len(data[key]) != 2:
     #        del data[key]
@@ -142,7 +145,8 @@ def parseBowtielog(logs=None):
 
 def main():
     data = prepare_fastq("../1.fastq/")
-    ref = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10"
+    #ref = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10"
+    ref = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/3.index/2.bowtie2/hg38"
     Parallel(n_jobs=5)(delayed(mapping)(sample, fqs, ref, 15)
                         for sample, fqs in data.items())
     data = parseBowtielog()
