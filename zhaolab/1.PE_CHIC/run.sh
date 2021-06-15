@@ -1,6 +1,5 @@
 d=`pwd`
 echo $d
-conda activate ngs2
 
 cd $d/2.mapping/
 python dnaMapping.py
@@ -17,9 +16,9 @@ cd $d/5.bdgBws/
 #python bdg2bw.py -pattern '*.bdg' -org mm10 -cpu 10
 python getBw.py
 
-conda activate cLoops2
-cd $d/6.cLoops2/
-python run.py
+#conda activate cLoops2
+#cd $d/6.cLoops2/
+#python run.py
 
 cd $d/7.tss/
 python run.py
