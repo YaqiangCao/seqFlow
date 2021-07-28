@@ -7,7 +7,7 @@ def get(f):
     n = f.split("/")[-1].split(".bam")[0]
     if os.path.isfile(n+".bw"):
         return 
-    cmd = "bamCoverage -b %s -o %s.bw --ignoreDuplicates --normalizeUsing CPM"%(f, n)
+    cmd = "bamCoverage -b %s -o %s.bw --ignoreDuplicates --minMappingQuality 10 --normalizeUsing CPM"%(f, n)
     print(cmd)
     os.system(cmd)
 

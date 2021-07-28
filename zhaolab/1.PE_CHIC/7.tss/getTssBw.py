@@ -18,6 +18,8 @@ import pandas as pd
 from tqdm import tqdm
 from joblib import Parallel, delayed
 
+import matplotlib
+matplotlib.use('pdf')
 import brewer2mpl
 colors = brewer2mpl.get_map('Set1', 'qualitative', 9).mpl_colors
 colors.extend(brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors)

@@ -18,6 +18,8 @@ import pandas as pd
 from tqdm import tqdm
 from joblib import Parallel, delayed
 
+import matplotlib
+matplotlib.use('pdf')
 import brewer2mpl
 colors = brewer2mpl.get_map('Set1', 'qualitative', 9).mpl_colors
 colors.extend(brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors)
@@ -70,7 +72,8 @@ def getTss(bw,tssf,ext=2500,skipZeros=True):
 
 
 def main():
-    tssf = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/2.annotations/gencode_v30_pcRNA_tss.bed"
+    #tssf = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/2.annotations/gencode_v30_pcRNA_tss.bed"
+    tssf = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/2.annotations/gencode_vM21_pcRNA_tss.bed"
     fs = glob("../5.bdgBws/*.bw")
     Parallel(n_jobs=min(10,len(fs)))(delayed(getTss)(f,tssf) for f in fs)
 

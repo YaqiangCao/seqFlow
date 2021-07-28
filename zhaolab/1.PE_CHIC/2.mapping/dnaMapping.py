@@ -84,10 +84,10 @@ def mapping(sample, fqs, ref, cpus=5):
         logger.info("%s:%s exists! return." % (sample, bam))
         return
     if len(fqs) == 1:
-        doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} {fq} -S {sam}".format(
+        doBowtie = "bowtie2 --no-unal --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} {fq} -S {sam}".format(
             cpus=cpus, ref=ref, fq=fqs[0], sam=sam)
     else:
-        doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(
+        doBowtie = "bowtie2 --no-unal --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} -1 {fq1} -2 {fq2} -S {sam}".format(
             cpus=cpus, ref=ref, fq1=fqs[0], fq2=fqs[1], sam=sam)
     logger.info(doBowtie)
     status, output = commands.getstatusoutput(doBowtie)
@@ -144,7 +144,7 @@ def main():
     data = prepare_fastq("../1.fastq/")
     #ref = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10"
     ref = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/3.index/2.bowtie2/hg38"
-    Parallel(n_jobs=5)(delayed(mapping)(sample, fqs, ref, 15)
+    Parallel(n_jobs=10)(delayed(mapping)(sample, fqs, ref, 5)
                         for sample, fqs in data.items())
     data = parseBowtielog()
     data.to_csv("MappingStat.txt", sep="\t", index_label="samples")
