@@ -26,3 +26,9 @@ python getTssBw.py
 
 cd $d/1.fastq/
 rm *.fastq.gz
+
+cd $d/2.mapping/
+rm -fvr GC*
+
+cd $d/3.bedpe/
+rm *.bedpe.gz

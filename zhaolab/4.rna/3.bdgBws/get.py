@@ -7,3 +7,4 @@ for f in fs:
     cmd = "ln -s %s %s.bdg"%(f,n)
     print(cmd)
     os.system(cmd)
+os.system("python bdg2bw.py -pattern './*.bdg' -org mm10")
