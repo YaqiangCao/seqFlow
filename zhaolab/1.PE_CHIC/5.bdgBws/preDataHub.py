@@ -2,9 +2,10 @@ import json
 from glob import glob
 from copy import deepcopy
 
+
 meta = {
     "type":"bigwig",
-    "url":"https://hpc.nih.gov/~caoy7/",
+    "url":"http://137.187.134.252/data/caoy7/",
     "name":"",
     "options":{
             "color":"black",
@@ -16,7 +17,7 @@ meta = {
 }
 
 
-def pre(rot="1.Trac/tmp/8.20210514_KZ2228/1.atac_mouse",sample="mouse",assay="ATAC-seq"):
+def pre(rot="1.ShuaiLiu_Hi-TrAC/1.20210909_KZ2320/3.mouseTestATAC",sample="mouse",assay="ATAC-seq"):
     fs = glob("*.bw")
     fs.sort()
     data = []
@@ -28,7 +29,7 @@ def pre(rot="1.Trac/tmp/8.20210514_KZ2228/1.atac_mouse",sample="mouse",assay="AT
         m["metadata"]["sample"] = sample
         m["metadata"]["assay"] = assay
         data.append( m )
-    with open("20210514_KZ2228_mouse_atac.json","w") as fo:
+    with open("20210909_KZ2320_atac.json","w") as fo:
         json.dump(data,fo)
 
 pre()
