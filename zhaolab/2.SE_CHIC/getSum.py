@@ -1,7 +1,7 @@
 import pandas as pd
 
 fa = "2.mapping/MappingStat.txt"
-fb = "3.bedpe/bedpeStat.txt"
+fb = "3.beds/bedStat.txt"
 fo = "summary.txt"
 
 mata = pd.read_csv(fa,index_col=0,sep="\t")

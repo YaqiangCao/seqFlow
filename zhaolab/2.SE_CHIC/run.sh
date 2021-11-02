@@ -21,7 +21,7 @@ python getBw.py
 #python run.py
 
 cd $d/6.tss/
-python run.py
+python getTssBw.py
 
 #cd $d/1.fastq/
 #rm *.fastq.gz
