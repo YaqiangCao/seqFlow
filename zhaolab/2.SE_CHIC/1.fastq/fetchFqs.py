@@ -16,8 +16,8 @@ def main(f,cpu):
     cmds = []
     ds = pd.read_csv(f,index_col=0,sep="\t")
     for t in ds.itertuples():
-        gb = t[0]
-        fs = t[5].split(",")
+        gb = t[0]+"_"+t[11].replace("-","_")
+        fs = t[-1].split(",")
         if len(fs) == 1:
             cmd = "rsync -aP caoy7@137.187.135.165:%s %s.fastq.gz"%(fs[0],gb)
             cmds.append(cmd)

@@ -9,7 +9,8 @@ python run.py
 
 cd $d/4.tss
 python run.py 
+rm *.txt
 
 rm $d/2.tracPre2/*/*.fastq.gz
-rm $d/2.tracPre2/*/*all*
+#rm $d/2.tracPre2/*/*all*
 rm $d/2.tracPre2/*/*.bam
