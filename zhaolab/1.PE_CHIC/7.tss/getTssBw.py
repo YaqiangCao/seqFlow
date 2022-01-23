@@ -72,8 +72,8 @@ def getTss(bw,tssf,ext=2500,skipZeros=True):
 
 
 def main():
-    #tssf = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/2.annotations/gencode_v30_pcRNA_tss.bed"
-    tssf = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/2.annotations/gencode_vM21_pcRNA_tss.bed"
+    tssf = "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/2.annotations/gencode_v30_pcRNA_tss.bed"
+    #tssf = "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/2.annotations/gencode_vM21_pcRNA_tss.bed"
     fs = glob("../5.bdgBws/*.bw")
     Parallel(n_jobs=min(10,len(fs)))(delayed(getTss)(f,tssf) for f in fs)
 

@@ -4,7 +4,7 @@ from copy import deepcopy
 
 metaL = {
     "type":"longrange",
-    "url":"http://137.187.134.252/data/caoy7/",
+    "url":"http://137.187.134.252:8081/data/caoy7/",
     "name":"",
     "options":{
             "color":"black",
@@ -18,7 +18,7 @@ metaL = {
 
 metaW = {
     "type":"bigwig",
-    "url":"http://137.187.134.252/data/caoy7/",
+    "url":"http://137.187.134.252:8081/data/caoy7/",
     "name":"",
     "options":{
             "color":"black",
@@ -29,7 +29,7 @@ metaW = {
         }
 }
 
-def pre(rot="2.GuangzheGe_scDNase/2.20211021_KZ2232/2.mouse/",sample="mouse"):
+def pre(rot="1.ShuaiLiu_Hi-TrAC/13.20220105_KZ2355/1.RNA",sample="human"):
     data = []
 
     fs = glob("*_PETs_washU.txt.gz")
@@ -51,9 +51,9 @@ def pre(rot="2.GuangzheGe_scDNase/2.20211021_KZ2232/2.mouse/",sample="mouse"):
         m["name"] = n
         m["url"] = m["url"]+rot+"/"+f
         m["metadata"]["sample"] = sample
-        m["metadata"]["assay"] = "Hi-TrAC 1D"
+        m["metadata"]["assay"] = "RNA"
         data.append( m )
-    with open("20211021_KZ2232_mouse_R1.json","w") as fo:
+    with open("20220105_KZ2355_RNA.json","w") as fo:
         json.dump(data,fo)
 
 pre()

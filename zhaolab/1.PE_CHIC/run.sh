@@ -24,6 +24,9 @@ cd $d/7.tss/
 #python run.py
 python getTssBw.py 
 
+cd $d/
+python getSum.py
+
 cd $d/1.fastq/
 rm *.fastq.gz
 
