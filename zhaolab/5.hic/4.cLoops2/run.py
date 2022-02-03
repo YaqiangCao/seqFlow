@@ -17,7 +17,7 @@ for d in glob("*"):
     if os.path.isdir(d):
         if os.path.isfile(d+".hic"):
             continue
-        #cmd = "cLoops2 dump -hic -hic_org hg38 -hic_res 200000,50000,20000,5000,1000 -d %s -o %s"%(d,d)
-        cmd = "cLoops2 dump -washU -d %s -o %s &"%(d,d)
+        cmd = "cLoops2 dump -hic -hic_org hg38 -hic_res 200000,50000,20000,5000,1000 -d %s -o %s"%(d,d)
+        #cmd = "cLoops2 dump -washU -d %s -o %s &"%(d,d)
         print(cmd)
         os.system(cmd)

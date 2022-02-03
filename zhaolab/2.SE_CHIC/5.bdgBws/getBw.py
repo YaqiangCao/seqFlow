@@ -12,4 +12,4 @@ def get(f):
     os.system(cmd)
 
 fs = glob("../2.mapping/*/*.bam")
-Parallel(n_jobs=min(len(fs),10))(delayed(get)(f) for f in fs)
+Parallel(n_jobs=min(len(fs),20))(delayed(get)(f) for f in fs)
