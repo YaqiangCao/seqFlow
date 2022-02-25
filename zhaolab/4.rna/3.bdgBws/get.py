@@ -8,3 +8,4 @@ for f in fs:
     print(cmd)
     os.system(cmd)
 os.system("python bdg2bw.py -pattern './*.bdg' -org mm10")
+os.system("rm *.bdg")

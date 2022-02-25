@@ -31,3 +31,6 @@ rm -fvr GC*
 
 cd $d/3.beds/
 rm -fvr GC*.bed.gz
+
+cd $d/
+python getSum.py
