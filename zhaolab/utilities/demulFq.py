@@ -17,12 +17,20 @@ from joblib import Parallel, delayed
 from Bio.Seq import Seq
 from Bio.SeqIO.QualityIO import FastqGeneralIterator
 
+
+def getRCSeq(seq):
+    """
+    Get the reverse complementary sequence
+    """
+    tab = str.maketrans("ACTG","TGAC")
+    return seq.translate( tab )[::-1]
+
 def parseMeta(f):
     mat = pd.read_csv(f,index_col=0,sep="\t")
     ds = {}
     for t in mat.itertuples():
-        ind = t[6]+"+"+t[10]
-        s = t[0]+"_"+t[11]+"_"+t[8]
+        ind = t[6]+"+"+getRCSeq(t[7])
+        s = t[0]+"_"+t[11].replace(" ","_").replace("-","_")
         ds[ind] = s
     return ds
 
@@ -47,4 +55,4 @@ def get(fq1,fq2,metaf):
                 fo1.write("@%s\n%s\n+\n%s\n" % (rid, r1[1], r1[2]))
                 fo2.write("@%s\n%s\n+\n%s\n" % (rid, r2[1], r2[2]))
 
-get("../0.und/Undetermined_S0_L001_R1_001.fastq.gz","../0.und/Undetermined_S0_L001_R2_001.fastq.gz","181_20220225_KZ2406_4C.txt")
+get("../0.undertimed/Undetermined_S0_L001_R1_001.fastq.gz","../0.undertimed/Undetermined_S0_L001_R2_001.fastq.gz","191_20220414_KZ2422_fq.txt")
