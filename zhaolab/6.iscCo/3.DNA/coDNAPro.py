@@ -26,10 +26,10 @@ logger = getLogger(fn=os.getcwd() + "/" + date.strip() + "_" +
                    os.path.basename(__file__) + ".log")
 
 
-def get(name,key="DNA"):
-    fs = glob("../2.sepSingleDNARNA/*%s_R1.fastq.gz"%key)
+def get(name, key="DNA"):
+    fs = glob("../2.sepSingleDNARNA/*%s_R1.fastq.gz" % key)
     fs.sort()
-    cmd = "cat %s > %s_%s_R1.fastq.gz"%(" ".join(fs),name,key)
+    cmd = "cat %s > %s_%s_R1.fastq.gz" % (" ".join(fs), name, key)
     callSys([cmd], logger)
 
 
@@ -40,7 +40,7 @@ def doMapping(sample, fq, ref, outdir, cpus=25):
     od = outdir
     sam = od + "/" + sample + ".sam"
     bam = od + "/" + sample + ".bam"
-        #cpus=cpus, ref=ref, fq1=fqs[0], fq2=fqs[1], sam=sam)
+    #cpus=cpus, ref=ref, fq1=fqs[0], fq2=fqs[1], sam=sam)
     doBowtie = "bowtie2 --no-mixed --no-discordant -p {cpus} -q --local --very-sensitive -x {ref} {fq} -S {sam}".format(
         cpus=cpus, ref=ref, fq=fq, sam=sam)
     logger.info(doBowtie)
@@ -59,7 +59,7 @@ def sam2bamBed(sample, sam, mapq=10):
     """
     n = os.path.splitext(sam)[0]
     bam = n + ".bam"
-    bedAll = n + "_all.bed"
+    bedAll = n + ".bed"
     #sam to bam, filtering mapq
     samview = "samtools view -b -F 4 -@ 2 -q {mapq} -o {bam} {sam}".format(
         mapq=mapq, bam=bam, sam=sam)
@@ -75,38 +75,37 @@ def sam2bamBed(sample, sam, mapq=10):
     stat, output = subprocess.getstatusoutput(bam2bed)
     cmd = "gzip %s" % (bedAll)
     callSys([cmd], logger)
-    cmd = "samtools index {bam} {bai}".format(bam=bam,bai=bam.replace(".bam",".bai"))
+    cmd = "samtools index {bam} {bai}".format(bam=bam,
+                                              bai=bam.replace(".bam", ".bai"))
     callSys([cmd], logger)
-    cmd = "bamCoverage -b {bam} -o {bw} -p 10 --ignoreDuplicates --minMappingQuality 10 --normalizeUsing CPM".format(bam=bam,bw=bam.replace(".bam",".bw"))
+    cmd = "bamCoverage -b {bam} -o {bw} -p 10 --ignoreDuplicates --minMappingQuality 10 --normalizeUsing CPM".format(
+        bam=bam, bw=bam.replace(".bam", ".bw"))
     callSys([cmd], logger)
     return bedAll + ".gz"
 
+
 @click.command()
-@click.option("-name",
-              required=True,
-              help="Sample name/id for the data.")
+@click.option("-name", required=True, help="Sample name/id for the data.")
 @click.option("-org",
               required=True,
               help="Organism for the data.",
               type=click.Choice(["hg38", "mm10"]))
-def main(name,org):
-    get(name,key="DNA")
-    fq = "%s_DNA_R1.fastq.gz"%name
+def main(name, org):
+    get(name, key="DNA")
+    fq = "%s_DNA_R1.fastq.gz" % name
     refData = {
-        "hg38": "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/3.index/2.bowtie2/hg38",
-        "mm10": "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10",
-        }
+        "hg38":
+        "/home/caoy7/caoy7/Projects/0.Reference/1.hg38/3.index/2.bowtie2/hg38",
+        "mm10":
+        "/home/caoy7/caoy7/Projects/0.Reference/2.mm10/3.index/2.bowtie2/mm10",
+    }
     ref = refData[org]
-    sample, sam = doMapping("%s_DNA"%name,
-                            fq,
-                            ref,
-                            "./",
-                            cpus=25)
+    sample, sam = doMapping("%s_DNA" % name, fq, ref, "./", cpus=25)
 
     #step 3, convert to bam and bedpe files
     #sam to bam and bedpe
-    bed = sam2bamBed("%s_DNA"%name, "%s_DNA.sam"%name)
+    bed = sam2bamBed("%s_DNA" % name, "%s_DNA.sam" % name)
 
-    
+
 if __name__ == '__main__':
     main()

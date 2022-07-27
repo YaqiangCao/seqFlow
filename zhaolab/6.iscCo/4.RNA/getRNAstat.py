@@ -48,7 +48,7 @@ def getStat(f):
 @click.command()
 @click.option("-name", required=True, help="Sample name/id for the data.")
 def main(name):
-    getStat(name + "_DNA.bed.gz")
+    getStat(name + "_RNA.bed.gz")
 
 
 if __name__ == '__main__':
