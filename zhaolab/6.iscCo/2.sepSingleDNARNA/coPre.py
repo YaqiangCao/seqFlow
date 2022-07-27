@@ -44,14 +44,15 @@ def match(s1, s2, mismatch=2):
 def sep(sample, f1, f2):
     print(sample)
     dfq1 = sample + "_DNA_R1.fastq.gz"
-    dfq2 = sample + "_DNA_R2.fastq.gz"
+    #dfq2 = sample + "_DNA_R2.fastq.gz"
     rfq1 = sample + "_RNA_R1.fastq.gz"
-    rfq2 = sample + "_RNA_R2.fastq.gz"
+    #rfq2 = sample + "_RNA_R2.fastq.gz"
     total, dna, rna = 0, 0, 0
     withBarcode = 0
     withLinker = 0
     i = 0
-    with gzip.open(dfq1, "wt") as dfq1, gzip.open(dfq2, "wt") as dfq2, gzip.open(rfq1,"wt") as rfq1, gzip.open(rfq2,"wt") as rfq2:
+    #with gzip.open(dfq1, "wt") as dfq1, gzip.open(dfq2, "wt") as dfq2, gzip.open(rfq1,"wt") as rfq1, gzip.open(rfq2,"wt") as rfq2:
+    with gzip.open(dfq1, "wt") as dfq1, gzip.open(rfq1,"wt") as rfq1:
         with gzip.open(f1, "rt") as f1, gzip.open(f2, "rt") as f2:
             for r1, r2 in zip(FastqGeneralIterator(f1), FastqGeneralIterator(f2)):
                 total += 1
@@ -84,12 +85,14 @@ def sep(sample, f1, f2):
                 if np == -1:
                     continue
                 withLinker += 1
+                """
                 #get varialbel C regions
                 p = np + len(linker)
                 for j in range(np+len(linker), len(r2[1])):
                     if r2[1][j] != "C":
                         p = j
                         break
+                """
                     
                 #asiign read number id,sample,barcode cell id,and a number, to make sure unique id
                 rid = "_".join([sample, b,umi,str(i)])
@@ -101,12 +104,12 @@ def sep(sample, f1, f2):
                 if e == TSEQ:
                     rna += 1
                     rfq1.write("@%s\n%s\n+\n%s\n" % (rid, r1[1][14:], r1[2][14:]))
-                    rfq2.write("@%s\n%s\n+\n%s\n" % (rid, r2[1][p:], r1[2][p:]))
+                    #rfq2.write("@%s\n%s\n+\n%s\n" % (rid, r2[1][p:], r1[2][p:]))
                 #DNA
                 else:
                     dna += 1
                     dfq1.write("@%s\n%s\n+\n%s\n" % (rid, r1[1][6:], r1[2][6:]))
-                    dfq2.write("@%s\n%s\n+\n%s\n" % (rid, r2[1][p:], r1[2][p:]))
+                    #dfq2.write("@%s\n%s\n+\n%s\n" % (rid, r2[1][p:], r1[2][p:]))
     return sample, total, withBarcode, withLinker, dna, rna
 
 
