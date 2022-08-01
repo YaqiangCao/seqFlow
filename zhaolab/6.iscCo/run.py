@@ -37,8 +37,11 @@ def main(name, org):
     c12 = "cd %s/6.uniqueDNA/"%wd
     c13 = "python getUniqueDNA.py -name %s"%name
     c14 = "python getBw.py -name %s -org %s"%(name,org)
+    c15 = "cd %s/7.uniqueRNA/"%wd
+    c16 = "python getUniqueRNA.py -name %s"%name
+    c17 = "python getBwQc.py -name %s -org %s"%(name,org)
     with open("run.sh","w") as fo:
-        for c in [c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14]:
+        for c in [c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17]:
             fo.write(c+"\n")
     os.system("bash run.sh")
 
