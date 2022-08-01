@@ -33,10 +33,10 @@ def main(name, org):
     c8 = "python coRNAPro.py -name %s -org %s"%(name,org)
     c9 = "python getRNAstat.py -name %s"%name
     c10 = "cd %s/5.statFilter/"%wd
-    c11 = "python getSumRaw.py" 
+    c11 = "python getSumRaw.py -name %s"%name 
     c12 = "cd %s/6.uniqueDNA/"%wd
     c13 = "python getUniqueDNA.py -name %s"%name
-    c14 = "python getBw.py -name %s"%name
+    c14 = "python getBw.py -name %s -org %s"%(name,org)
     with open("run.sh","w") as fo:
         for c in [c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14]:
             fo.write(c+"\n")

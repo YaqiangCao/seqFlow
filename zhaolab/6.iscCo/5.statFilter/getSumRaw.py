@@ -17,7 +17,7 @@ def get(fa="../2.sepSingleDNARNA/cellStat.txt",
     mat["3_mappedDNA(mapq>=10)"] = matb["totalMapped(mapq>=10)"]
     mat["4_uniqueDNA"] = matb["uniqueMapped"]
     mat["5_DNARedundancy"] = matb["redundancy"]
-    mat["6_mappedRNA"] = matc["totalMapped"]
+    mat["6_mappedRNA"] = matc["totalMapped(mapq>=10)"]
     mat["7_uniqueRNA"] = matc["uniqueMapped"]
     mat["8_RNARedundancy"] = matc["redundancy"]
     mat = pd.DataFrame(mat)
