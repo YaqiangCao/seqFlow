@@ -1,6 +1,9 @@
 d=`pwd`
 echo $d
 
+cd $d/1.fastq/
+python fetchFqs2.py
+
 cd $d/2.tracPre2/ 
 sh run.sh
 

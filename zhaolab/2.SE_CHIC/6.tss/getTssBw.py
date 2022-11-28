@@ -11,7 +11,6 @@ __email__ = "caoyaqiang0410@gmail.com"
 from glob import glob
 
 #3rd library
-import pylab
 import pyBigWig
 import numpy as np
 import pandas as pd
@@ -26,6 +25,7 @@ colors.extend(brewer2mpl.get_map('Set2', 'qualitative', 8).mpl_colors)
 del colors[5]
 del colors[10]
 
+import pylab
 
 
 

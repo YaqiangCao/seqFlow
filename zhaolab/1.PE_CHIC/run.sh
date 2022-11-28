@@ -14,6 +14,7 @@ python getReduBedpe.py
 cd $d/5.bdgBws/ 
 python bedpe2bg.py -pattern '../4.reduBedpe/*.bedpe.gz' -mapq 10 -cpu 10
 python bdg2bw.py -pattern '*.bdg' -org hg38 -cpu 10
+rm -fvr *.bdg 
 #python getBw.py
 
 #conda activate cLoops2

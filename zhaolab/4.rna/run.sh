@@ -1,6 +1,9 @@
 d=`pwd`
 echo $d
 
+cd $d/1.fastq/
+python fetchFqs2.py
+
 cd $d/2.mapping/ 
 python rnaMapping.py
 
