@@ -13,6 +13,7 @@ for f in glob("../2.tracPre2/*/*unique.bedpe.gz"):
     print(cmd)
     os.system(cmd)
 
+"""
 for d in glob("*"):
     if os.path.isdir(d):
         if os.path.isfile(d+".hic"):
@@ -21,3 +22,4 @@ for d in glob("*"):
         cmd = "cLoops2 dump -washU -d %s -o %s &"%(d,d)
         print(cmd)
         os.system(cmd)
+"""
