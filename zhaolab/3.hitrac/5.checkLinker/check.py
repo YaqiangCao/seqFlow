@@ -99,19 +99,25 @@ def checkLinkerStart(fq1,
     fig, ax = pylab.subplots()
     p1s = pd.Series(Counter(p1s))
     p2s = pd.Series(Counter(p2s))
-    #sns.kdeplot(p1s, label="R1 linker position",ax=ax)
-    #sns.kdeplot(p2s, label="R2 linker position",ax=ax)
-    #ax.set_xlim([0,50])
-    ax.scatter(p1s.index, p1s.values, color="red", label="R1 linker")
-    ax.scatter(p2s.index, p2s.values, color="blue", label="R2 linker")
-    ax.set_yscale("log")
-    ax.set_ylabel("read counts")
+    sns.kdeplot(p1s, label="R1 linker position",ax=ax)
+    sns.kdeplot(p2s, label="R2 linker position",ax=ax)
+    #ax.scatter(p1s.index, p1s.values, color="red", label="R1 linker")
+    #ax.scatter(p2s.index, p2s.values, color="blue", label="R2 linker")
+    #ax.set_yscale("log")
+    #ax.set_ylabel("read counts")
     ax.legend()
     ax.set_title(
         "total:%s;R1 linker:%.3f; R2 liner:%.3f; both:%.3f\n R1 right starts: %.3f;R2 right starts:%.3f; both:%.3f"
         % (tot, float(l1s) / tot, float(l2s) / tot, float(l12s) / tot,
            float(r1s) / tot, float(r2s) / tot, float(r12s) / tot))
     pylab.savefig(pre + "_linkers.pdf")
+    t1s = 0
+    t2s = 0
+    for i in range(0,4):
+        if i in p1s.index:
+            t1s+=p1s[i]
+        if i in p2s.index:
+            t2s+=p2s[i]
     s = {
         "total PETs": tot,
         "R1 with linker": l1s,
@@ -119,6 +125,10 @@ def checkLinkerStart(fq1,
         "R1 linker ratio": float(l1s) / tot,
         "R2 linker ratio": float(l2s) / tot,
         "both R1 and R2 linker ratio": float(r12s) / tot,
+        "R1 linker beginning": p1s[0],
+        "R2 linker beginning": p2s[0],
+        "R1 linker beginning (<=4bp)": t1s,
+        "R2 linker beginning (<=4bp)": t2s,
         "R1 with right start": r1s,
         "R2 with right start": r2s,
         "R1 with right start ratio": float(r1s) / tot,
