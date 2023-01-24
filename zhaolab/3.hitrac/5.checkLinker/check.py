@@ -97,8 +97,6 @@ def checkLinkerStart(fq1,
             if r1pos != -1 and r2pos != -1:
                 l12s += 1
     fig, ax = pylab.subplots()
-    p1s = pd.Series(Counter(p1s))
-    p2s = pd.Series(Counter(p2s))
     sns.kdeplot(p1s, label="R1 linker position",ax=ax)
     sns.kdeplot(p2s, label="R2 linker position",ax=ax)
     #ax.scatter(p1s.index, p1s.values, color="red", label="R1 linker")
@@ -111,6 +109,8 @@ def checkLinkerStart(fq1,
         % (tot, float(l1s) / tot, float(l2s) / tot, float(l12s) / tot,
            float(r1s) / tot, float(r2s) / tot, float(r12s) / tot))
     pylab.savefig(pre + "_linkers.pdf")
+    p1s = pd.Series(Counter(p1s))
+    p2s = pd.Series(Counter(p2s))
     t1s = 0
     t2s = 0
     for i in range(0,4):
