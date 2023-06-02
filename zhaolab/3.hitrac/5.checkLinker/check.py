@@ -40,17 +40,30 @@ def preFqs(fastqRoot):
     return data
 
 
+def getRCSeq(seq):
+    """
+    Get the reverse complementary sequence
+    """
+    tab = str.maketrans("ACTG","TGAC")
+    return seq.translate( tab )[::-1]
+
+
 def findLinker(seq, linker):
     """
     Match the linker in the read sequence.
     """
+    linkerrc = getRCSeq(linker)
     pos = -1
     for i in range(len(seq) - 9):
         seed = seq[i:i + 9]
         if linker.startswith(seed):
             pos = i
             break
+        if linkerrc.startswith(seed):
+            pos = i
+            break
     return pos
+
 
 
 def checkLinkerStart(fq1,
@@ -94,7 +107,7 @@ def checkLinkerStart(fq1,
             if r2pos != -1:
                 p2s.append(r1pos)
                 l2s += 1
-            if r1pos != -1 and r2pos != -1:
+            if r1pos != -1 or r2pos != -1:
                 l12s += 1
     fig, ax = pylab.subplots()
     sns.kdeplot(p1s, label="R1 linker position",ax=ax)
@@ -105,7 +118,7 @@ def checkLinkerStart(fq1,
     #ax.set_ylabel("read counts")
     ax.legend()
     ax.set_title(
-        "total:%s;R1 linker:%.3f; R2 liner:%.3f; both:%.3f\n R1 right starts: %.3f;R2 right starts:%.3f; both:%.3f"
+        "total:%s;R1 linker:%.3f; R2 liner:%.3f; any:%.3f\n R1 right starts: %.3f;R2 right starts:%.3f; both:%.3f"
         % (tot, float(l1s) / tot, float(l2s) / tot, float(l12s) / tot,
            float(r1s) / tot, float(r2s) / tot, float(r12s) / tot))
     pylab.savefig(pre + "_linkers.pdf")
@@ -124,7 +137,7 @@ def checkLinkerStart(fq1,
         "R2 with linker": l2s,
         "R1 linker ratio": float(l1s) / tot,
         "R2 linker ratio": float(l2s) / tot,
-        "both R1 and R2 linker ratio": float(r12s) / tot,
+        "any R1 and R2 linker ratio": float(l12s) / tot,
         "R1 linker beginning": p1s[0],
         "R2 linker beginning": p2s[0],
         "R1 linker beginning (<=4bp)": t1s,

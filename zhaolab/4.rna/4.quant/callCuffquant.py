@@ -32,6 +32,7 @@ def callCuffquant(bam,gtf,cpu=3):
     fo = bam.split("/")[-2]
     if os.path.exists(fo):
         logger.info("%s has been generated to %s"%(bam,fo))
+        return 
     cmd = "cuffquant -p {cpu} -o {fout} {gtf} {bam}".format(cpu=cpu,fout=fo,gtf=gtf,bam=bam)
     callSys([cmd],logger)
 

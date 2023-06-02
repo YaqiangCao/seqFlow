@@ -1,0 +1,673 @@
+Library ID	Sample ID	Sample Concentration (ng/ul)	Length range (bp)	Sequencing Modality (e.g. 50-6-50)	Library ID	 index (i7)	index(i5)	Instrument (miseq/Hiseq)	Library Type	Reference Genome		i5	i7				
+GC4654001	KZ2627	0.294	350	100-6-8-100	GC4654001	CGTGAT	GACCGTAT	nova	scMNase	mice	"scMNase library from WT mice na夫e CD4 T cells;  20K FA+ DSG input cells; Take 4 aliquotes(80K cells), MNase digested separately, pool them when first cell barcodes ligation;  Mnase: 1:1500, 37 degree 5min in 100ul reaction in total for each aliquote;  T4PNK to repair DNA end, 50min; TdT 1h 50min; 600g 5min; 40uM filter cells before sorting single cells in 96 well plate by FSC SSC; get 7 plates in total;  15 cells/well;  dA/LA in one tube, 1.8X beads to purify DNA after LA; LA: 3h; 8+5=13 cycles, i5-10#;   Split-seq;   Mice Thymus;  add 0.5% BSA before spin down cells;    2023-5-10;      Thymus-new-Plate1# ;         plates have been sequenced in KZ2624;                                                                                                                                                                            "	i5-10#		GGZ			
+GC4654002					GC4654002	ACATCG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654003					GC4654003	GCCTAA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654004					GC4654004	TGGTCA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654005					GC4654005	CACTGT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654006					GC4654006	ATTGGC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654007					GC4654007	GATCTG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654008					GC4654008	TCAAGT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654009					GC4654009	CTGATC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654010					GC4654010	AAGCTA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654011					GC4654011	GTAGCC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654012					GC4654012	TACAAG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654013					GC4654013	GGAACT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654014					GC4654014	GCGGAC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654015					GC4654015	CCACTC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654016					GC4654016	ATCAGT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654017					GC4654017	AGGAAT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654018					GC4654018	TAGTTG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654019					GC4654019	ATTCCG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654020					GC4654020	TCTGAG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654021					GC4654021	CGATTA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654022					GC4654022	GAATGA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654023					GC4654023	TCGGGA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654024					GC4654024	CTTCGA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654025					GC4654025	TTGACT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654026					GC4654026	CTCTAC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654027					GC4654027	CGAAAC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654028					GC4654028	GCTCAT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654029					GC4654029	CCGGTG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654030					GC4654030	ATCGTG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654031					GC4654031	AAAATG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654032					GC4654032	AGCTAG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654033					GC4654033	TAGCGC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654034					GC4654034	GCTGTA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654035					GC4654035	ATTATA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654036					GC4654036	TGCCGA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654037					GC4654037	GTACGT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654038					GC4654038	CAGCCT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654039					GC4654039	ACGTAT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654040					GC4654040	CTATGG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654041					GC4654041	CTGCAG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654042					GC4654042	ATACAG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654043					GC4654043	CATGTC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654044					GC4654044	GACGTC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654045					GC4654045	TATACC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654046					GC4654046	AGCATA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654047					GC4654047	GTCGGA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654048					GC4654048	CATGCA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654049					GC4654049	TATGTT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654050					GC4654050	GCGTGT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654051					GC4654051	AGAGGT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654052					GC4654052	TGATGG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654053					GC4654053	CTGTCG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654054					GC4654054	ACGCAG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654055					GC4654055	TGCGTC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654056					GC4654056	TGCGCC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654057					GC4654057	ACTACC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654058					GC4654058	CACATA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654059					GC4654059	TCTACA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654060					GC4654060	TTACAA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654061					GC4654061	CGTACC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654062					GC4654062	GCCACG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654063					GC4654063	GATGGC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654064					GC4654064	CAGTGA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654065					GC4654065	AAGTCT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654066					GC4654066	CTAGCT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654067					GC4654067	ACTGGT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654068					GC4654068	AGTGTC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654069					GC4654069	GGATCG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654070					GC4654070	CAGGTT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654071					GC4654071	CGTATG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654072					GC4654072	AGTCGT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654073					GC4654073	GGCTAT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654074					GC4654074	ACTGTG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654075					GC4654075	GACAAT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654076					GC4654076	AGTCTG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654077					GC4654077	TGCAAC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654078					GC4654078	GTTATC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654079					GC4654079	CTTGAG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654080					GC4654080	GTTAGG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654081					GC4654081	CTGGGT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654082					GC4654082	GCTCGA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654083					GC4654083	CCTAGT	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654084					GC4654084	AAGTGC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654085					GC4654085	CGGTGC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654086					GC4654086	ACTTGG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654087					GC4654087	CAATCC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654088					GC4654088	TGTGCA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654089					GC4654089	GAATAC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654090					GC4654090	CCTACG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654091					GC4654091	CTAAGA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654092					GC4654092	AGGTCC	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654093					GC4654093	ACGGTA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654094					GC4654094	GACCCA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654095					GC4654095	TTAGCG	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4654096					GC4654096	AGTCTA	GACCGTAT	nova	scMNase	mice		i5-10#		GGZ			
+GC4655001					GC4655001	CGTGAT	TCAGTAGG	nova	scMNase	mice	"scMNase library from WT mice na夫e CD4 T cells;  20K FA+ DSG input cells; Take 4 aliquotes(80K cells), MNase digested separately, pool them when first cell barcodes ligation;  Mnase: 1:1500, 37 degree 5min in 100ul reaction in total for each aliquote;  T4PNK to repair DNA end, 50min; TdT 1h 50min; 600g 5min; 40uM filter cells before sorting single cells in 96 well plate by FSC SSC; get 7 plates in total;  15 cells/well;  dA/LA in one tube, 1.8X beads to purify DNA after LA; LA: 3h; 8+5=13 cycles, i5-11#;   Split-seq;   Mice Thymus;  add 0.5% BSA before spin down cells;    2023-5-10;      Thymus-new-Plate2#;   plates have been sequenced in KZ2624;                                                                                                                                                                              "	i5-11#		GGZ			
+GC4655002					GC4655002	ACATCG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655003					GC4655003	GCCTAA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655004					GC4655004	TGGTCA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655005					GC4655005	CACTGT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655006					GC4655006	ATTGGC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655007					GC4655007	GATCTG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655008					GC4655008	TCAAGT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655009					GC4655009	CTGATC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655010					GC4655010	AAGCTA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655011					GC4655011	GTAGCC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655012					GC4655012	TACAAG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655013					GC4655013	GGAACT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655014					GC4655014	GCGGAC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655015					GC4655015	CCACTC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655016					GC4655016	ATCAGT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655017					GC4655017	AGGAAT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655018					GC4655018	TAGTTG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655019					GC4655019	ATTCCG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655020					GC4655020	TCTGAG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655021					GC4655021	CGATTA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655022					GC4655022	GAATGA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655023					GC4655023	TCGGGA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655024					GC4655024	CTTCGA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655025					GC4655025	TTGACT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655026					GC4655026	CTCTAC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655027					GC4655027	CGAAAC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655028					GC4655028	GCTCAT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655029					GC4655029	CCGGTG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655030					GC4655030	ATCGTG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655031					GC4655031	AAAATG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655032					GC4655032	AGCTAG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655033					GC4655033	TAGCGC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655034					GC4655034	GCTGTA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655035					GC4655035	ATTATA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655036					GC4655036	TGCCGA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655037					GC4655037	GTACGT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655038					GC4655038	CAGCCT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655039					GC4655039	ACGTAT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655040					GC4655040	CTATGG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655041					GC4655041	CTGCAG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655042					GC4655042	ATACAG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655043					GC4655043	CATGTC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655044					GC4655044	GACGTC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655045					GC4655045	TATACC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655046					GC4655046	AGCATA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655047					GC4655047	GTCGGA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655048					GC4655048	CATGCA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655049					GC4655049	TATGTT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655050					GC4655050	GCGTGT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655051					GC4655051	AGAGGT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655052					GC4655052	TGATGG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655053					GC4655053	CTGTCG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655054					GC4655054	ACGCAG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655055					GC4655055	TGCGTC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655056					GC4655056	TGCGCC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655057					GC4655057	ACTACC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655058					GC4655058	CACATA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655059					GC4655059	TCTACA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655060					GC4655060	TTACAA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655061					GC4655061	CGTACC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655062					GC4655062	GCCACG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655063					GC4655063	GATGGC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655064					GC4655064	CAGTGA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655065					GC4655065	AAGTCT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655066					GC4655066	CTAGCT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655067					GC4655067	ACTGGT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655068					GC4655068	AGTGTC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655069					GC4655069	GGATCG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655070					GC4655070	CAGGTT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655071					GC4655071	CGTATG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655072					GC4655072	AGTCGT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655073					GC4655073	GGCTAT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655074					GC4655074	ACTGTG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655075					GC4655075	GACAAT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655076					GC4655076	AGTCTG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655077					GC4655077	TGCAAC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655078					GC4655078	GTTATC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655079					GC4655079	CTTGAG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655080					GC4655080	GTTAGG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655081					GC4655081	CTGGGT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655082					GC4655082	GCTCGA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655083					GC4655083	CCTAGT	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655084					GC4655084	AAGTGC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655085					GC4655085	CGGTGC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655086					GC4655086	ACTTGG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655087					GC4655087	CAATCC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655088					GC4655088	TGTGCA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655089					GC4655089	GAATAC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655090					GC4655090	CCTACG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655091					GC4655091	CTAAGA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655092					GC4655092	AGGTCC	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655093					GC4655093	ACGGTA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655094					GC4655094	GACCCA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655095					GC4655095	TTAGCG	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4655096					GC4655096	AGTCTA	TCAGTAGG	nova	scMNase	mice		i5-11#		GGZ			
+GC4656001					GC4656001	CGTGAT	CCCGTGGT	nova	scMNase	mice	"scMNase library from WT mice na夫e CD4 T cells;  20K FA+ DSG input cells; Take 4 aliquotes(80K cells), MNase digested separately, pool them when first cell barcodes ligation;  Mnase: 1:1500, 37 degree 5min in 100ul reaction in total for each aliquote;  T4PNK to repair DNA end, 50min; TdT 1h 50min; 600g 5min; 40uM filter cells before sorting single cells in 96 well plate by FSC SSC; get 7 plates in total;  15 cells/well;  dA/LA in one tube, 1.8X beads to purify DNA after LA; LA: 3h; 8+5=13 cycles, i5-12#;   Split-seq;   Mice Thymus;  add 0.5% BSA before spin down cells;    2023-5-10;      Thymus-new-Plate3#;    plates have been sequenced in KZ2624;                                                                                                                                                                              "	i5-12#		GGZ			
+GC4656002					GC4656002	ACATCG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656003					GC4656003	GCCTAA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656004					GC4656004	TGGTCA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656005					GC4656005	CACTGT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656006					GC4656006	ATTGGC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656007					GC4656007	GATCTG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656008					GC4656008	TCAAGT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656009					GC4656009	CTGATC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656010					GC4656010	AAGCTA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656011					GC4656011	GTAGCC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656012					GC4656012	TACAAG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656013					GC4656013	GGAACT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656014					GC4656014	GCGGAC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656015					GC4656015	CCACTC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656016					GC4656016	ATCAGT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656017					GC4656017	AGGAAT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656018					GC4656018	TAGTTG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656019					GC4656019	ATTCCG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656020					GC4656020	TCTGAG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656021					GC4656021	CGATTA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656022					GC4656022	GAATGA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656023					GC4656023	TCGGGA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656024					GC4656024	CTTCGA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656025					GC4656025	TTGACT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656026					GC4656026	CTCTAC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656027					GC4656027	CGAAAC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656028					GC4656028	GCTCAT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656029					GC4656029	CCGGTG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656030					GC4656030	ATCGTG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656031					GC4656031	AAAATG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656032					GC4656032	AGCTAG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656033					GC4656033	TAGCGC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656034					GC4656034	GCTGTA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656035					GC4656035	ATTATA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656036					GC4656036	TGCCGA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656037					GC4656037	GTACGT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656038					GC4656038	CAGCCT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656039					GC4656039	ACGTAT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656040					GC4656040	CTATGG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656041					GC4656041	CTGCAG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656042					GC4656042	ATACAG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656043					GC4656043	CATGTC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656044					GC4656044	GACGTC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656045					GC4656045	TATACC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656046					GC4656046	AGCATA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656047					GC4656047	GTCGGA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656048					GC4656048	CATGCA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656049					GC4656049	TATGTT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656050					GC4656050	GCGTGT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656051					GC4656051	AGAGGT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656052					GC4656052	TGATGG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656053					GC4656053	CTGTCG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656054					GC4656054	ACGCAG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656055					GC4656055	TGCGTC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656056					GC4656056	TGCGCC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656057					GC4656057	ACTACC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656058					GC4656058	CACATA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656059					GC4656059	TCTACA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656060					GC4656060	TTACAA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656061					GC4656061	CGTACC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656062					GC4656062	GCCACG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656063					GC4656063	GATGGC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656064					GC4656064	CAGTGA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656065					GC4656065	AAGTCT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656066					GC4656066	CTAGCT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656067					GC4656067	ACTGGT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656068					GC4656068	AGTGTC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656069					GC4656069	GGATCG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656070					GC4656070	CAGGTT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656071					GC4656071	CGTATG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656072					GC4656072	AGTCGT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656073					GC4656073	GGCTAT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656074					GC4656074	ACTGTG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656075					GC4656075	GACAAT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656076					GC4656076	AGTCTG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656077					GC4656077	TGCAAC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656078					GC4656078	GTTATC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656079					GC4656079	CTTGAG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656080					GC4656080	GTTAGG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656081					GC4656081	CTGGGT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656082					GC4656082	GCTCGA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656083					GC4656083	CCTAGT	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656084					GC4656084	AAGTGC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656085					GC4656085	CGGTGC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656086					GC4656086	ACTTGG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656087					GC4656087	CAATCC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656088					GC4656088	TGTGCA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656089					GC4656089	GAATAC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656090					GC4656090	CCTACG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656091					GC4656091	CTAAGA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656092					GC4656092	AGGTCC	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656093					GC4656093	ACGGTA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656094					GC4656094	GACCCA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656095					GC4656095	TTAGCG	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4656096					GC4656096	AGTCTA	CCCGTGGT	nova	scMNase	mice		i5-12#		GGZ			
+GC4657001					GC4657001	CGTGAT	AAACCTGA	nova	scMNase	mice	"scMNase library from WT mice na夫e CD4 T cells;  20K FA+ DSG input cells; Take 4 aliquotes(80K cells), MNase digested separately, pool them when first cell barcodes ligation;  Mnase: 1:1500, 37 degree 5min in 100ul reaction in total for each aliquote;  T4PNK to repair DNA end, 50min; TdT 1h 50min; 600g 5min; 40uM filter cells before sorting single cells in 96 well plate by FSC SSC; get 7 plates in total;  15 cells/well;  dA/LA in one tube, 1.8X beads to purify DNA after LA; LA: 3h; 8+5=13 cycles, i5-13#;   Split-seq;   Mice Thymus;  add 0.5% BSA before spin down cells;    2023-5-10;      Thymus-new-Plate4#;   plates have been sequenced in KZ2624;                                                                                                                                                                              "	i5-13#					
+GC4657002					GC4657002	ACATCG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657003					GC4657003	GCCTAA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657004					GC4657004	TGGTCA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657005					GC4657005	CACTGT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657006					GC4657006	ATTGGC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657007					GC4657007	GATCTG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657008					GC4657008	TCAAGT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657009					GC4657009	CTGATC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657010					GC4657010	AAGCTA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657011					GC4657011	GTAGCC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657012					GC4657012	TACAAG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657013					GC4657013	GGAACT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657014					GC4657014	GCGGAC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657015					GC4657015	CCACTC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657016					GC4657016	ATCAGT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657017					GC4657017	AGGAAT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657018					GC4657018	TAGTTG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657019					GC4657019	ATTCCG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657020					GC4657020	TCTGAG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657021					GC4657021	CGATTA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657022					GC4657022	GAATGA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657023					GC4657023	TCGGGA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657024					GC4657024	CTTCGA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657025					GC4657025	TTGACT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657026					GC4657026	CTCTAC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657027					GC4657027	CGAAAC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657028					GC4657028	GCTCAT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657029					GC4657029	CCGGTG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657030					GC4657030	ATCGTG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657031					GC4657031	AAAATG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657032					GC4657032	AGCTAG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657033					GC4657033	TAGCGC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657034					GC4657034	GCTGTA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657035					GC4657035	ATTATA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657036					GC4657036	TGCCGA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657037					GC4657037	GTACGT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657038					GC4657038	CAGCCT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657039					GC4657039	ACGTAT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657040					GC4657040	CTATGG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657041					GC4657041	CTGCAG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657042					GC4657042	ATACAG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657043					GC4657043	CATGTC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657044					GC4657044	GACGTC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657045					GC4657045	TATACC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657046					GC4657046	AGCATA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657047					GC4657047	GTCGGA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657048					GC4657048	CATGCA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657049					GC4657049	TATGTT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657050					GC4657050	GCGTGT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657051					GC4657051	AGAGGT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657052					GC4657052	TGATGG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657053					GC4657053	CTGTCG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657054					GC4657054	ACGCAG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657055					GC4657055	TGCGTC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657056					GC4657056	TGCGCC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657057					GC4657057	ACTACC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657058					GC4657058	CACATA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657059					GC4657059	TCTACA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657060					GC4657060	TTACAA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657061					GC4657061	CGTACC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657062					GC4657062	GCCACG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657063					GC4657063	GATGGC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657064					GC4657064	CAGTGA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657065					GC4657065	AAGTCT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657066					GC4657066	CTAGCT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657067					GC4657067	ACTGGT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657068					GC4657068	AGTGTC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657069					GC4657069	GGATCG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657070					GC4657070	CAGGTT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657071					GC4657071	CGTATG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657072					GC4657072	AGTCGT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657073					GC4657073	GGCTAT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657074					GC4657074	ACTGTG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657075					GC4657075	GACAAT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657076					GC4657076	AGTCTG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657077					GC4657077	TGCAAC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657078					GC4657078	GTTATC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657079					GC4657079	CTTGAG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657080					GC4657080	GTTAGG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657081					GC4657081	CTGGGT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657082					GC4657082	GCTCGA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657083					GC4657083	CCTAGT	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657084					GC4657084	AAGTGC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657085					GC4657085	CGGTGC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657086					GC4657086	ACTTGG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657087					GC4657087	CAATCC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657088					GC4657088	TGTGCA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657089					GC4657089	GAATAC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657090					GC4657090	CCTACG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657091					GC4657091	CTAAGA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657092					GC4657092	AGGTCC	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657093					GC4657093	ACGGTA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657094					GC4657094	GACCCA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657095					GC4657095	TTAGCG	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4657096					GC4657096	AGTCTA	AAACCTGA	nova	scMNase	mice		i5-13#					
+GC4658001					GC4658001	CGTGAT	ATCTCGAG	nova	scMNase	mice	"scMNase library from WT mice na夫e CD4 T cells;  20K FA+ DSG input cells; Take 4 aliquotes(80K cells), MNase digested separately, pool them when first cell barcodes ligation;  Mnase: 1:1500, 37 degree 5min in 100ul reaction in total for each aliquote;  T4PNK to repair DNA end, 50min; TdT 1h 50min; 600g 5min; 40uM filter cells before sorting single cells in 96 well plate by FSC SSC; get 7 plates in total;  15 cells/well;  dA/LA in one tube, 1.8X beads to purify DNA after LA; LA: 3h; 8+5=13 cycles, i5-14#;   Split-seq;   Mice Thymus;  add 0.5% BSA before spin down cells;    2023-5-10;      Thymus-new-Plate5#;   plates have been sequenced in KZ2624;                                                                                                                                                                              "	i5-14#		GGZ			
+GC4658002					GC4658002	ACATCG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658003					GC4658003	GCCTAA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658004					GC4658004	TGGTCA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658005					GC4658005	CACTGT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658006					GC4658006	ATTGGC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658007					GC4658007	GATCTG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658008					GC4658008	TCAAGT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658009					GC4658009	CTGATC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658010					GC4658010	AAGCTA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658011					GC4658011	GTAGCC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658012					GC4658012	TACAAG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658013					GC4658013	GGAACT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658014					GC4658014	GCGGAC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658015					GC4658015	CCACTC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658016					GC4658016	ATCAGT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658017					GC4658017	AGGAAT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658018					GC4658018	TAGTTG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658019					GC4658019	ATTCCG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658020					GC4658020	TCTGAG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658021					GC4658021	CGATTA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658022					GC4658022	GAATGA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658023					GC4658023	TCGGGA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658024					GC4658024	CTTCGA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658025					GC4658025	TTGACT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658026					GC4658026	CTCTAC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658027					GC4658027	CGAAAC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658028					GC4658028	GCTCAT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658029					GC4658029	CCGGTG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658030					GC4658030	ATCGTG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658031					GC4658031	AAAATG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658032					GC4658032	AGCTAG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658033					GC4658033	TAGCGC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658034					GC4658034	GCTGTA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658035					GC4658035	ATTATA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658036					GC4658036	TGCCGA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658037					GC4658037	GTACGT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658038					GC4658038	CAGCCT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658039					GC4658039	ACGTAT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658040					GC4658040	CTATGG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658041					GC4658041	CTGCAG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658042					GC4658042	ATACAG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658043					GC4658043	CATGTC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658044					GC4658044	GACGTC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658045					GC4658045	TATACC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658046					GC4658046	AGCATA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658047					GC4658047	GTCGGA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658048					GC4658048	CATGCA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658049					GC4658049	TATGTT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658050					GC4658050	GCGTGT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658051					GC4658051	AGAGGT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658052					GC4658052	TGATGG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658053					GC4658053	CTGTCG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658054					GC4658054	ACGCAG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658055					GC4658055	TGCGTC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658056					GC4658056	TGCGCC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658057					GC4658057	ACTACC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658058					GC4658058	CACATA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658059					GC4658059	TCTACA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658060					GC4658060	TTACAA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658061					GC4658061	CGTACC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658062					GC4658062	GCCACG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658063					GC4658063	GATGGC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658064					GC4658064	CAGTGA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658065					GC4658065	AAGTCT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658066					GC4658066	CTAGCT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658067					GC4658067	ACTGGT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658068					GC4658068	AGTGTC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658069					GC4658069	GGATCG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658070					GC4658070	CAGGTT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658071					GC4658071	CGTATG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658072					GC4658072	AGTCGT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658073					GC4658073	GGCTAT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658074					GC4658074	ACTGTG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658075					GC4658075	GACAAT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658076					GC4658076	AGTCTG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658077					GC4658077	TGCAAC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658078					GC4658078	GTTATC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658079					GC4658079	CTTGAG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658080					GC4658080	GTTAGG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658081					GC4658081	CTGGGT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658082					GC4658082	GCTCGA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658083					GC4658083	CCTAGT	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658084					GC4658084	AAGTGC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658085					GC4658085	CGGTGC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658086					GC4658086	ACTTGG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658087					GC4658087	CAATCC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658088					GC4658088	TGTGCA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658089					GC4658089	GAATAC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658090					GC4658090	CCTACG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658091					GC4658091	CTAAGA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658092					GC4658092	AGGTCC	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658093					GC4658093	ACGGTA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658094					GC4658094	GACCCA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658095					GC4658095	TTAGCG	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4658096					GC4658096	AGTCTA	ATCTCGAG	nova	scMNase	mice		i5-14#		GGZ			
+GC4659001					GC4659001	CGTGAT	CGGGCATC	nova	scMNase	mice	"scMNase library from WT mice na夫e CD4 T cells;  20K FA+ DSG input cells; Take 4 aliquotes(80K cells), MNase digested separately, pool them when first cell barcodes ligation;  Mnase: 1:1500, 37 degree 5min in 100ul reaction in total for each aliquote;  T4PNK to repair DNA end, 50min; TdT 1h 50min; 600g 5min; 40uM filter cells before sorting single cells in 96 well plate by FSC SSC; get 7 plates in total;  15 cells/well;  dA/LA in one tube, 1.8X beads to purify DNA after LA; LA: 3h; 8+5=13 cycles, i5-15#;   Split-seq;   Mice Thymus;  add 0.5% BSA before spin down cells;    2023-5-10;      Thymus-new-Plate6#;   plates have been sequenced in KZ2624;                                                                                                                                                                              "	i5-15#					
+GC4659002					GC4659002	ACATCG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659003					GC4659003	GCCTAA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659004					GC4659004	TGGTCA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659005					GC4659005	CACTGT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659006					GC4659006	ATTGGC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659007					GC4659007	GATCTG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659008					GC4659008	TCAAGT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659009					GC4659009	CTGATC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659010					GC4659010	AAGCTA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659011					GC4659011	GTAGCC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659012					GC4659012	TACAAG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659013					GC4659013	GGAACT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659014					GC4659014	GCGGAC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659015					GC4659015	CCACTC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659016					GC4659016	ATCAGT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659017					GC4659017	AGGAAT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659018					GC4659018	TAGTTG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659019					GC4659019	ATTCCG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659020					GC4659020	TCTGAG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659021					GC4659021	CGATTA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659022					GC4659022	GAATGA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659023					GC4659023	TCGGGA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659024					GC4659024	CTTCGA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659025					GC4659025	TTGACT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659026					GC4659026	CTCTAC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659027					GC4659027	CGAAAC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659028					GC4659028	GCTCAT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659029					GC4659029	CCGGTG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659030					GC4659030	ATCGTG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659031					GC4659031	AAAATG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659032					GC4659032	AGCTAG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659033					GC4659033	TAGCGC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659034					GC4659034	GCTGTA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659035					GC4659035	ATTATA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659036					GC4659036	TGCCGA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659037					GC4659037	GTACGT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659038					GC4659038	CAGCCT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659039					GC4659039	ACGTAT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659040					GC4659040	CTATGG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659041					GC4659041	CTGCAG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659042					GC4659042	ATACAG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659043					GC4659043	CATGTC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659044					GC4659044	GACGTC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659045					GC4659045	TATACC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659046					GC4659046	AGCATA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659047					GC4659047	GTCGGA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659048					GC4659048	CATGCA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659049					GC4659049	TATGTT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659050					GC4659050	GCGTGT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659051					GC4659051	AGAGGT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659052					GC4659052	TGATGG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659053					GC4659053	CTGTCG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659054					GC4659054	ACGCAG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659055					GC4659055	TGCGTC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659056					GC4659056	TGCGCC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659057					GC4659057	ACTACC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659058					GC4659058	CACATA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659059					GC4659059	TCTACA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659060					GC4659060	TTACAA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659061					GC4659061	CGTACC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659062					GC4659062	GCCACG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659063					GC4659063	GATGGC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659064					GC4659064	CAGTGA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659065					GC4659065	AAGTCT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659066					GC4659066	CTAGCT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659067					GC4659067	ACTGGT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659068					GC4659068	AGTGTC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659069					GC4659069	GGATCG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659070					GC4659070	CAGGTT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659071					GC4659071	CGTATG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659072					GC4659072	AGTCGT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659073					GC4659073	GGCTAT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659074					GC4659074	ACTGTG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659075					GC4659075	GACAAT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659076					GC4659076	AGTCTG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659077					GC4659077	TGCAAC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659078					GC4659078	GTTATC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659079					GC4659079	CTTGAG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659080					GC4659080	GTTAGG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659081					GC4659081	CTGGGT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659082					GC4659082	GCTCGA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659083					GC4659083	CCTAGT	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659084					GC4659084	AAGTGC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659085					GC4659085	CGGTGC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659086					GC4659086	ACTTGG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659087					GC4659087	CAATCC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659088					GC4659088	TGTGCA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659089					GC4659089	GAATAC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659090					GC4659090	CCTACG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659091					GC4659091	CTAAGA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659092					GC4659092	AGGTCC	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659093					GC4659093	ACGGTA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659094					GC4659094	GACCCA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659095					GC4659095	TTAGCG	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4659096					GC4659096	AGTCTA	CGGGCATC	nova	scMNase	mice		i5-15#					
+GC4660001					GC4660001	CGTGAT	GATGTCCA	nova	scMNase	mice	"scMNase library from WT mice na夫e CD4 T cells;  20K FA+ DSG input cells; Take 4 aliquotes(80K cells), MNase digested separately, pool them when first cell barcodes ligation;  Mnase: 1:1500, 37 degree 5min in 100ul reaction in total for each aliquote;  T4PNK to repair DNA end, 50min; TdT 1h 50min; 600g 5min; 40uM filter cells before sorting single cells in 96 well plate by FSC SSC; get 7 plates in total;  15 cells/well;  dA/LA in one tube, 1.8X beads to purify DNA after LA; LA: 3h; 8+5=13 cycles, i5-16#;   Split-seq;   Mice Thymus;  add 0.5% BSA before spin down cells;    2023-5-10;      Thymus-new-Plate7#;   plates have been sequenced in KZ2624;                                                                                                                                                                              "	i5-16#		GGZ			
+GC4660002					GC4660002	ACATCG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660003					GC4660003	GCCTAA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660004					GC4660004	TGGTCA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660005					GC4660005	CACTGT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660006					GC4660006	ATTGGC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660007					GC4660007	GATCTG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660008					GC4660008	TCAAGT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660009					GC4660009	CTGATC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660010					GC4660010	AAGCTA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660011					GC4660011	GTAGCC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660012					GC4660012	TACAAG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660013					GC4660013	GGAACT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660014					GC4660014	GCGGAC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660015					GC4660015	CCACTC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660016					GC4660016	ATCAGT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660017					GC4660017	AGGAAT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660018					GC4660018	TAGTTG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660019					GC4660019	ATTCCG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660020					GC4660020	TCTGAG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660021					GC4660021	CGATTA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660022					GC4660022	GAATGA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660023					GC4660023	TCGGGA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660024					GC4660024	CTTCGA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660025					GC4660025	TTGACT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660026					GC4660026	CTCTAC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660027					GC4660027	CGAAAC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660028					GC4660028	GCTCAT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660029					GC4660029	CCGGTG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660030					GC4660030	ATCGTG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660031					GC4660031	AAAATG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660032					GC4660032	AGCTAG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660033					GC4660033	TAGCGC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660034					GC4660034	GCTGTA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660035					GC4660035	ATTATA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660036					GC4660036	TGCCGA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660037					GC4660037	GTACGT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660038					GC4660038	CAGCCT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660039					GC4660039	ACGTAT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660040					GC4660040	CTATGG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660041					GC4660041	CTGCAG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660042					GC4660042	ATACAG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660043					GC4660043	CATGTC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660044					GC4660044	GACGTC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660045					GC4660045	TATACC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660046					GC4660046	AGCATA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660047					GC4660047	GTCGGA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660048					GC4660048	CATGCA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660049					GC4660049	TATGTT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660050					GC4660050	GCGTGT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660051					GC4660051	AGAGGT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660052					GC4660052	TGATGG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660053					GC4660053	CTGTCG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660054					GC4660054	ACGCAG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660055					GC4660055	TGCGTC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660056					GC4660056	TGCGCC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660057					GC4660057	ACTACC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660058					GC4660058	CACATA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660059					GC4660059	TCTACA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660060					GC4660060	TTACAA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660061					GC4660061	CGTACC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660062					GC4660062	GCCACG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660063					GC4660063	GATGGC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660064					GC4660064	CAGTGA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660065					GC4660065	AAGTCT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660066					GC4660066	CTAGCT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660067					GC4660067	ACTGGT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660068					GC4660068	AGTGTC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660069					GC4660069	GGATCG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660070					GC4660070	CAGGTT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660071					GC4660071	CGTATG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660072					GC4660072	AGTCGT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660073					GC4660073	GGCTAT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660074					GC4660074	ACTGTG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660075					GC4660075	GACAAT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660076					GC4660076	AGTCTG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660077					GC4660077	TGCAAC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660078					GC4660078	GTTATC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660079					GC4660079	CTTGAG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660080					GC4660080	GTTAGG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660081					GC4660081	CTGGGT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660082					GC4660082	GCTCGA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660083					GC4660083	CCTAGT	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660084					GC4660084	AAGTGC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660085					GC4660085	CGGTGC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660086					GC4660086	ACTTGG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660087					GC4660087	CAATCC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660088					GC4660088	TGTGCA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660089					GC4660089	GAATAC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660090					GC4660090	CCTACG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660091					GC4660091	CTAAGA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660092					GC4660092	AGGTCC	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660093					GC4660093	ACGGTA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660094					GC4660094	GACCCA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660095					GC4660095	TTAGCG	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			
+GC4660096					GC4660096	AGTCTA	GATGTCCA	nova	scMNase	mice		i5-16#		GGZ			

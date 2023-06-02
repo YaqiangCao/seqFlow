@@ -51,7 +51,6 @@ def getStat(f, dfilter=[120, 140, 180]):
                 "sP": 0,
                 "cN": 0,
                 "other": 0,
-                "ds": [],
             }
 
     for line in gzip.open(f,"rt"):
@@ -72,9 +71,15 @@ def getStat(f, dfilter=[120, 140, 180]):
     plotDis(ds, n)
     #stat = pd.DataFrame(stat).T
     stat = pd.Series(stat)
-    stat.to_csv(n + "_stat.txt", sep="\t")
+    return n, stat
+    #stat.to_csv(n + "_stat.txt", sep="\t")
 
 
 if __name__ == '__main__':
     fs = glob("*bedpe.gz")
-    Parallel(n_jobs=min(len(fs), 10))(delayed(getStat)(f) for f in fs)
+    ds = Parallel(n_jobs=min(len(fs), 10))(delayed(getStat)(f) for f in fs)
+    data = {}
+    for d in ds:
+        data[ d[0] ] = d[1]
+    data = pd.DataFrame(data).T
+    data.to_csv("NuSpStat.txt",sep="\t")
