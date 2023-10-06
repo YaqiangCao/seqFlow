@@ -34,14 +34,15 @@ def getFqPaths():
 
 @click.command()
 @click.option("-f", required=True, help="Samples related meta information.")
-@click.option("-cpu", default=10, help="CPU numbers to fetch fastqs.")
+@click.option("-cpu", default=50, help="CPU numbers to fetch fastqs.")
 def main(f, cpu):
     fqPaths = getFqPaths()
     cmds = []
     ds = pd.read_csv(f, index_col=0, sep="\t")
     for t in ds.itertuples():
-        #sample = t[0] + "_" + t[11].replace("-", "_").replace(" ", "_")
-        sample = t[1] + "_" + t[0] + "_" + t[2]
+        sample = t[0] + "_" + t[11].replace("-", "_").replace(" ", "_")
+        #sample = t[0] + "_ChIP-seq_" + t[5]
+        #sample = t[12]
         if t[0] not in fqPaths:
             continue
         fs = fqPaths[t[0]]
@@ -49,11 +50,6 @@ def main(f, cpu):
             #cmd = "rsync -aP caoy7@137.187.135.165:%s %s.fastq.gz"%(fs[0],gb)
             cmd = "cp %s %s.fastq.gz" % (fs[0], sample)
             cmds.append(cmd)
-        elif len(fs) == 2:
-            cmd1 = "cp %s %s_R1.fastq.gz" % (fs[0], sample)
-            cmd2 = "cp %s %s_R2.fastq.gz" % (fs[1], sample)
-            cmds.append(cmd1)
-            cmds.append(cmd2)
         else:
             flag = False
             for f in fs:

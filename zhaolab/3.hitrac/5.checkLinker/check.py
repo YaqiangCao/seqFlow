@@ -74,6 +74,7 @@ def checkLinkerStart(fq1,
     """
     Cut linkers and filter too short reads
     """
+    print(pre)
     p1s = []
     p2s = []
     tot = 0
@@ -105,7 +106,7 @@ def checkLinkerStart(fq1,
                 p1s.append(r1pos)
                 l1s += 1
             if r2pos != -1:
-                p2s.append(r1pos)
+                p2s.append(r2pos)
                 l2s += 1
             if r1pos != -1 or r2pos != -1:
                 l12s += 1
@@ -124,6 +125,8 @@ def checkLinkerStart(fq1,
     pylab.savefig(pre + "_linkers.pdf")
     p1s = pd.Series(Counter(p1s))
     p2s = pd.Series(Counter(p2s))
+    print(p1s)
+    print(p2s)
     t1s = 0
     t2s = 0
     for i in range(0,4):
@@ -131,6 +134,14 @@ def checkLinkerStart(fq1,
             t1s+=p1s[i]
         if i in p2s.index:
             t2s+=p2s[i]
+    if 0 in p1s.index:
+        p1s_0 = p1s[0]
+    else:
+        p1s_0 = 0
+    if 0 in p2s.index:
+        p2s_0 = p2s[0]
+    else:
+        p2s_0 = 0
     s = {
         "total PETs": tot,
         "R1 with linker": l1s,
@@ -138,8 +149,8 @@ def checkLinkerStart(fq1,
         "R1 linker ratio": float(l1s) / tot,
         "R2 linker ratio": float(l2s) / tot,
         "any R1 and R2 linker ratio": float(l12s) / tot,
-        "R1 linker beginning": p1s[0],
-        "R2 linker beginning": p2s[0],
+        "R1 linker beginning": p1s_0,
+        "R2 linker beginning": p2s_0,
         "R1 linker beginning (<=4bp)": t1s,
         "R2 linker beginning (<=4bp)": t2s,
         "R1 with right start": r1s,

@@ -5,12 +5,14 @@ cd $d/1.fastq/
 python fetchFqs.py
 
 cd $d/2.pre/ 
-sh run.sh
+python run.py
 
 cd $d/3.tsvStat/
-python tsvStat.py
+python run.py
 
 cd $d/4.nucleosomeProfiles/
-python get.py
+python run.py
 
-rm $d/1.fastq/*.gz
+rm $d/1.fastq/*/*.gz
+rm $d/2.pre/*/*.bam 
+rm $d/2.pre/*/*.fastq.gz

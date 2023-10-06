@@ -33,36 +33,29 @@ def getFqPaths():
 
 
 @click.command()
-@click.option("-cpu", default=20, help="CPU numbers to fetch fastqs.")
+@click.option("-cpu", default=50, help="CPU numbers to fetch fastqs.")
 def main(cpu):
     f = glob("*.txt")[0]
     fqPaths = getFqPaths()
     cmds = []
     ds = pd.read_csv(f, index_col=0, sep="\t")
+    d = "WT_mESC"
     for t in ds.itertuples():
         sample = t[0]
-        d = ""
-        if sample.startswith("GC4654"):
-            d = "WT_Thymus-plate1_naiveCD4_"
-            sample = "WT_Thymus-plate1_naiveCD4_"+sample
-        elif sample.startswith("GC4655"):
-            d = "WT_Thymus-plate2_naiveCD4_"
-            sample = "WT_Thymus-plate2_naiveCD4_"+sample
-        elif sample.startswith("GC4656"):
-            d = "WT_Thymus-plate3_naiveCD4_"
-            sample = "WT_Thymus-plate3_naiveCD4_"+sample
-        elif sample.startswith("GC4657"):
-            d = "WT_Thymus-plate4_naiveCD4_"
-            sample = "WT_Thymus-plate4_naiveCD4_"+sample
-        elif sample.startswith("GC4658"):
-            d = "WT_Thymus-plate5_naiveCD4_"
-            sample = "WT_Thymus-plate5_naiveCD4_"+sample
-        elif sample.startswith("GC4659"):
-            d = "WT_Thymus-plate6_naiveCD4_"
-            sample = "WT_Thymus-plate6_naiveCD4_"+sample
-        elif sample.startswith("GC4660"):
-            d = "WT_Thymus-plate7_naiveCD4_"
-            sample = "WT_Thymus-plate7_naiveCD4_"+sample
+        if sample.startswith("GC81010"):
+            sample = "WT_plate1_mESC_"+sample
+        elif sample.startswith("GC81020"):
+            sample = "WT_plate2_mESC_"+sample
+        elif sample.startswith("GC81030"):
+            sample = "WT_plate3_mESC_"+sample
+        elif sample.startswith("GC81040"):
+            sample = "WT_plate4_mESC_"+sample
+        elif sample.startswith("GC81050"):
+            sample = "WT_plate5_mESC_"+sample
+        elif sample.startswith("GC81060"):
+            sample = "WT_plate6_mESC_"+sample
+        else:
+            continue
         if t[0] not in fqPaths:
             continue
         if not os.path.exists(d):
