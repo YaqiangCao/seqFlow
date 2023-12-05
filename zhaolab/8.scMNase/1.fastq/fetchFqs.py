@@ -39,21 +39,29 @@ def main(cpu):
     fqPaths = getFqPaths()
     cmds = []
     ds = pd.read_csv(f, index_col=0, sep="\t")
-    d = "WT_mESC"
+    d = "WT_LN_NaiveT"
     for t in ds.itertuples():
         sample = t[0]
-        if sample.startswith("GC81010"):
-            sample = "WT_plate1_mESC_"+sample
-        elif sample.startswith("GC81020"):
-            sample = "WT_plate2_mESC_"+sample
-        elif sample.startswith("GC81030"):
-            sample = "WT_plate3_mESC_"+sample
-        elif sample.startswith("GC81040"):
-            sample = "WT_plate4_mESC_"+sample
-        elif sample.startswith("GC81050"):
-            sample = "WT_plate5_mESC_"+sample
-        elif sample.startswith("GC81060"):
-            sample = "WT_plate6_mESC_"+sample
+        if sample.startswith("GC4661"):
+            sample = "WT_LN-plate1_NaiveT_"+sample
+        elif sample.startswith("GC4662"):
+            sample = "WT_LN-plate2_NaiveT_"+sample
+        elif sample.startswith("GC4663"):
+            sample = "WT_LN-plate3_NaiveT_"+sample
+        elif sample.startswith("GC4664"):
+            sample = "WT_LN-plate4_NaiveT_"+sample
+        elif sample.startswith("GC4665"):
+            sample = "WT_LN-plate5_NaiveT_"+sample
+        elif sample.startswith("GC4666"):
+            sample = "WT_LN-plate6_NaiveT_"+sample
+        elif sample.startswith("GC4667"):
+            sample = "WT_LN-plate7_NaiveT_"+sample
+        elif sample.startswith("GC4647"):
+            sample = "WT_LN-plate8_NaiveT_"+sample
+        elif sample.startswith("GC4649"):
+            sample = "WT_LN-plate9_NaiveT_"+sample
+        elif sample.startswith("GC4628"):
+            sample = "WT_LN-plate0_NaiveT_"+sample
         else:
             continue
         if t[0] not in fqPaths:

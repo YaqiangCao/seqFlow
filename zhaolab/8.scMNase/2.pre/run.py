@@ -10,3 +10,6 @@ for d in glob("../1.fastq/*"):
         cmd = f"preIscSeq.py -d {d} -o {n} -barcode barcodes.txt -blacklist {bk} -ref {ref} -p 40"
         print(cmd)
         os.system(cmd)
+        c = f"rm -fvr {d}/*.fastq.gz"
+        print(c)
+        os.system(c)
